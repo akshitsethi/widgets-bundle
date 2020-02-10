@@ -1,45 +1,63 @@
 <?php
 
 /**
- * Plugin Name: WooDash
- * Description: WooDash creates a store-focused sidebar menu and home dashboard to make it easier to access the common WooCommerce features.
+ * Plugin Name: Widgets Bundle
+ * Description: The Widgets Bundle plugin allows you to add powerful collection of beautifully crafted widgets to your website.
  * Version:     @##VERSION##@
  * Runtime:     5.6+
- * Author:      WooCart
- * Text Domain: woodash
+ * Author:      akshitsethi
+ * Text Domain: widgets-bundle
  * Domain Path: i18n
- * Author URI:  www.woocart.com
+ * Author URI:  https://akshitsethi.com
+ * License: 		GPLv3
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-namespace Niteo\WooCart\WooDash {
+namespace AkshitSethi\Plugins\WidgetsBundle {
 
-	// composer autoloader
+	// Stop execution if the file is called directly.
+	defined( 'ABSPATH' ) || exit;
+
+	// Composer autoloder file.
 	require_once __DIR__ . '/vendor/autoload.php';
 
-	use Niteo\WooCart\WooDash\Config;
-	use Niteo\WooCart\WooDash\Admin;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
+
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Ads;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Facebook;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Instagram;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Personal;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Posts;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Quote;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Social;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Subscribe;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Twitter;
+	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Video;
 
 
 	/**
-	 * WooDash class where all the action happens.
+	 * Plugin class where all the action happens.
 	 *
 	 * @category   Plugins
-	 * @package    Niteo\WooCart\WooDash
-	 * @since      1.0.0
+	 * @package    AkshitSethi\Plugins\WidgetsBundle
+	 * @since      2.0.0
 	 */
-	class WooDash {
-
-		protected $admin;
-		protected $dashboard;
-
+	class WidgetsBundle {
 
 		/**
 		 * Class Constructor.
 		 */
 		public function __construct() {
-			// initialize admin
-			$this->admin = new Admin();
-
+			new Ads();
+			new Facebook();
+			new Instagram();
+			new Personal();
+			new Posts();
+			new Quote();
+			new Social();
+			new Subscribe();
+			new Twitter();
+			new Video();
 		}
 
 
@@ -47,14 +65,8 @@ namespace Niteo\WooCart\WooDash {
 		 * Attached to the activation hook.
 		 */
 		public function activate() {
-			// add to `wp_options` table
-			update_option( Config::DB_OPTION, Config::DEFAULT_STATUS );
-
-			// Add plugin activation notice
-			set_transient( Config::PREFIX . 'plugin-activation-notice', true, 60 * 60 * 24 );
-
-			// update usermeta table for dashboard widgets
-			$this->admin->dashboard_meta_order();
+			// Add to `wp_options` table
+			update_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
 		}
 
 
@@ -62,29 +74,19 @@ namespace Niteo\WooCart\WooDash {
 		 * Attached to the de-activation hook.
 		 */
 		public function deactivate() {
-			// remove from `wp_options` table
+			// Remove from `wp_options` table
 			delete_option( Config::DB_OPTION );
-
-			// reverse usermeta table for dashboard widgets
-			$this->admin->reverse_dashboard_meta_order();
-
-			// also, remove the usermeta backup
-			$this->admin->remove_meta_backup();
 		}
 
 	}
 
+	// Initialize plugin.
+	$widgets_bundle = new WidgetsBundle();
 
-	// stop if the request is coming directly
-	if ( defined( 'ABSPATH' ) ) {
-		// initialize plugin
-		$woodash = new WooDash();
+	/**
+	 * Hooks for plugin activation & deactivation
+	 */
+	register_activation_hook( __FILE__, [ $widgets_bundle, 'activate' ] );
+	register_deactivation_hook( __FILE__, [ $widgets_bundle, 'deactivate' ] );
 
-
-		/**
-		 * Hooks for plugin activation & deactivation
-		 */
-		register_activation_hook( __FILE__, [ $woodash, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ $woodash, 'deactivate' ] );
-	}
 }

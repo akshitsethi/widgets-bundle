@@ -12,7 +12,8 @@
   },
   "autoload": {
     "psr-4": {
-      "AkshitSethi\\Plugins\\WidgetsBundle\\": "classes"
+      "AkshitSethi\\Plugins\\WidgetsBundle\\": "classes",
+      "AkshitSethi\\Plugins\\WidgetsBundle\\Widgets\\": "classes/widgets"
     }
   }
 }
