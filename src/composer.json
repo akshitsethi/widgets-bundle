@@ -1,10 +1,10 @@
 {
-  "name": "WooDash",
-  "description": "",
+  "name": "Widgets Bundle",
+  "description": "Collection of useful Widgets for WordPress blog or website.",
   "keywords": [
-    "WordPress",
+    "wordpress",
     "plugin",
-    "WooDash"
+    "widgets"
   ],
   "type": "wordpress-plugin",
   "require": {
@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Niteo\\WooCart\\WooDash\\": "classes"
+      "AkshitSethi\\Plugins\\WidgetsBundle\\": "classes"
     }
   }
 }
