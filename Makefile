@@ -1,5 +1,5 @@
-VERSION := 1.2.0
-PLUGINSLUG := woodash
+VERSION := 2.0.0
+PLUGINSLUG := widgets-bundle
 SRCPATH := $(shell pwd)/src
 
 bin/linux/amd64/github-release:
@@ -25,8 +25,8 @@ src/vendor:
 	cd src && composer dump-autoload -a
 
 build: ensure
-	sed -i "s/@##VERSION##@/${VERSION}/" src/woodash.php
-	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/woodash.pot
+	sed -i "s/@##VERSION##@/${VERSION}/" src/$(PLUGINSLUG).php
+	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/$(PLUGINSLUG).pot
 	mkdir -p build
 	rm -rf src/vendor
 	cd src && composer install --no-dev
@@ -35,23 +35,23 @@ build: ensure
 	zip -r $(PLUGINSLUG).zip $(PLUGINSLUG)
 	rm -rf $(PLUGINSLUG)
 	mv $(PLUGINSLUG).zip build/
-	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
-	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
+	sed -i "s/${VERSION}/@##VERSION##@/" src/$(PLUGINSLUG).php
+	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/$(PLUGINSLUG).pot
 
 dist: ensure
-	sed -i "s/@##VERSION##@/${VERSION}/" src/woodash.php
-	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/woodash.pot
+	sed -i "s/@##VERSION##@/${VERSION}/" src/$(PLUGINSLUG).php
+	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/$(PLUGINSLUG).pot
 	mkdir -p dist
 	rm -rf src/vendor
 	cd src && composer install --no-dev
 	cd src && composer dump-autoload -a
 	cp -r $(SRCPATH)/. dist/
-	sed -i "s/${VERSION}/@##VERSION##@/" src/woodash.php
-	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/woodash.pot
+	sed -i "s/${VERSION}/@##VERSION##@/" src/$(PLUGINSLUG).php
+	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/$(PLUGINSLUG).pot
 
 publish: build bin/linux/amd64/github-release
 	bin/linux/amd64/github-release upload \
-		--user woocart \
+		--user akshitsethi \
 		--repo $(PLUGINSLUG) \
 		--tag "v$(VERSION)" \
 		--name $(PLUGINSLUG)-$(VERSION).zip \
@@ -65,7 +65,6 @@ release:
 	git tag v$(VERSION)
 	git push origin v$(VERSION)
 	git pull -r
-	@echo "Go to the https://github.com/woocart/woodash/releases/new?tag=v$(VERSION) and publish the release in order to build the package for distribution!"
 
 fmt: ensure
 	bin/phpcbf --standard=WordPress src --ignore=src/vendor
@@ -80,7 +79,7 @@ psr: src/vendor
 	cd src && composer dump-autoload -a
 
 i18n: src/vendor
-	wp i18n make-pot src src/i18n/woodash.pot
+	wp i18n make-pot src src/i18n/$(PLUGINSLUG).pot
 
 cover: vendor
 	bin/coverage-check clover.xml 100
