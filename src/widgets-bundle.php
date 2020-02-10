@@ -84,7 +84,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 	$widgets_bundle = new WidgetsBundle();
 
 	/**
-	 * Hooks for plugin activation & deactivation
+	 * Hooks for plugin activation & deactivation.
 	 */
 	register_activation_hook( __FILE__, [ $widgets_bundle, 'activate' ] );
 	register_deactivation_hook( __FILE__, [ $widgets_bundle, 'deactivate' ] );

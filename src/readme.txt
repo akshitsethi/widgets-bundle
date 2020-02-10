@@ -1,59 +1,72 @@
-=== WooDash ===
-Contributors: woocart
-Tags: woocart, woocommerce, woodash, woo dashboard
-Requires at least: 4.6
+=== Widgets Bundle ===
+Contributors: akshitsethi
+Donate link: https://akshitsethi.com/
+Tags: widgets, wordpress widgets, wp widgets, wp widgets plugin
+Requires at least: 4.8
 Tested up to: 5.3.2
-Stable tag: 1.2.0
-Requires PHP: 5.6
-License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Stable tag: 2.0.0
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Simple Dashboard for WooCommerce
+The Widgets Bundle plugin allows you to add powerful collection of beautifully crafted widgets to your website.
+
 
 == Description ==
 
-WooDash creates a store-focused sidebar menu and home dashboard for easier access to the common WooCommerce features.
+Widgets are great and add more power to your website. Widgets Bundle comes powerpacked with 10 awesome widgets to power up your website and add more features to it which you always desired. It contains the following widgets:
 
-Instead of the unending sidebar menu of different plugin options, WooDash shows only the relevant buttons for a WooCommerce store.
+* Ads Widget - for having sponsored section on your website
+* Posts Widget - for displaying posts with thumbnails
+* Personal Widget - it's like having an about me section
+* Instagram Widget - showcase those lovely photos from Instagram
+* Facebook Widget - helps you showcase your Facebook page feed
+* Twitter Widget - beautifully showcase your twitter profile feed
+* Social Widget - display your social media links with icons
+* Subscribe Widget - do you use MailChimp as your newsletter service? If yes, then this widget let's you have a beautiful subscribe form on the website
+* Video Widget - embed beautiful videos from YouTube, Vimeo, etc
+* Quote Widget - write quotes and show them in a beautiful format
 
-- My Store
-- Orders
-- Stock
-- Customers
-- Products
-- Taxes
-- Reports
-- Posts
-- Pages
-- Media
-- Users
+**About**
 
-You can switch to the regular dashboard by clicking Switch Dashboard in the sidebar menu.
+I'm **Akshit Sethi**, Designer + Developer by profession & Entrepreneur by passion. In love with WWW and Spanish. I create premium WordPress themes & plugins. Building some crazy stuff these days.
 
-WooDash makes onboarding new clients to WooCommerce a lot easier and simplifies the store administration for the store managers.
+[Website](https://akshitsethi.com) | [WordPress Themes](https://akshitsethi.com/themes) | [WordPress Plugins](https://akshitsethi.com/plugins)
+
 
 == Installation ==
 
-1. Upload the entire woodash folder to the /wp-content/plugins/ directory.
-2. Activate the plugin through the ‘Plugins’ menu in WordPress.
+To manually install this plugin, please follow the instructions below.
 
-Switch to regular dashboard by clicking Switch Dashboard in the sidebar menu.
+1. Upload `widgets-bundle` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Go to the 'Widgets Bundle' under 'Admin' panel.
+4. Configure the plugin and start enjoying it.
 
-https://github.com/woocart/woodash
 
 == Frequently Asked Questions ==
 
+= Having issues with the plugin? =
 
-== Screenshots ==
+Getting help is just a click away now. Report your issues using the support form in the plugin options panel and I will get back to you at the earliest possible. If the support form is not working for you, kindly send me an email at **akshitsethi@gmail.com** explaining the issue you are facing with the plugin.
 
 
 == Changelog ==
-= v1.2.0 =
-- Shows admin notice on plugin activation
-- Taxes in the admin menu are hidden if the option is not enabled in WooCommerce
 
-= v1.1.3 =
-- Fixed conflict with WooCommerce Admin plugin
+= 2.0.0 =
+
+* Code has been completely refactored
+* Supports the latest version of WordPress
+* New plugins added
+
+= 1.1 =
+* Fixed issue with the Instagram widget
+* Added Facebook & Twitter widgets
+* Few bugs have been fixed
+
+= 1.0 =
+* Initial release
+
 
 == Upgrade Notice ==
 
+Code has been refactored and the plugin is now compatible with the latest version of WordPress.
