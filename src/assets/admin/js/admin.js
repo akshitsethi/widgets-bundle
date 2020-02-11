@@ -1,15 +1,12 @@
 /**
- * Js-Cookie v2.2.0
- * -----------------------------------------------------
+ * Js-Cookie v2.2.1
  * https://github.com/js-cookie/js-cookie/
  */
 
-!function(e){var n=!1;if("function"==typeof define&&define.amd&&(define(e),n=!0),"object"==typeof exports&&(module.exports=e(),n=!0),!n){var o=window.Cookies,t=window.Cookies=e();t.noConflict=function(){return window.Cookies=o,t}}}(function(){function e(){for(var e=0,n={};e<arguments.length;e++){var o=arguments[e];for(var t in o)n[t]=o[t]}return n}function n(o){function t(n,r,i){var c;if("undefined"!=typeof document){if(arguments.length>1){if(i=e({path:"/"},t.defaults,i),"number"==typeof i.expires){var a=new Date;a.setMilliseconds(a.getMilliseconds()+864e5*i.expires),i.expires=a}i.expires=i.expires?i.expires.toUTCString():"";try{c=JSON.stringify(r),/^[\{\[]/.test(c)&&(r=c)}catch(s){}r=o.write?o.write(r,n):encodeURIComponent(String(r)).replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),n=encodeURIComponent(String(n)),n=n.replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent),n=n.replace(/[\(\)]/g,escape);var f="";for(var p in i)i[p]&&(f+="; "+p,i[p]!==!0&&(f+="="+i[p]));return document.cookie=n+"="+r+f}n||(c={});for(var d=document.cookie?document.cookie.split("; "):[],u=/(%[0-9A-Z]{2})+/g,l=0;l<d.length;l++){var C=d[l].split("="),g=C.slice(1).join("=");this.json||'"'!==g.charAt(0)||(g=g.slice(1,-1));try{var m=C[0].replace(u,decodeURIComponent);if(g=o.read?o.read(g,m):o(g,m)||g.replace(u,decodeURIComponent),this.json)try{g=JSON.parse(g)}catch(s){}if(n===m){c=g;break}n||(c[m]=g)}catch(s){}}return c}}return t.set=t,t.get=function(e){return t.call(t,e)},t.getJSON=function(){return t.apply({json:!0},[].slice.call(arguments))},t.defaults={},t.remove=function(n,o){t(n,"",e(o,{expires:-1}))},t.withConverter=n,t}return n(function(){})});
-
+!function(a){var b;if("function"==typeof define&&define.amd&&(define(a),b=!0),"object"==typeof exports&&(module.exports=a(),b=!0),!b){var c=window.Cookies,d=window.Cookies=a();d.noConflict=function(){return window.Cookies=c,d}}}(function(){function a(){for(var a=0,b={};a<arguments.length;a++){var c=arguments[a];for(var d in c)b[d]=c[d]}return b}function b(a){return a.replace(/(%[0-9A-Z]{2})+/g,decodeURIComponent)}function c(d){function e(){}function f(b,c,f){if("undefined"!=typeof document){f=a({path:"/"},e.defaults,f),"number"==typeof f.expires&&(f.expires=new Date(1*new Date+864e5*f.expires)),f.expires=f.expires?f.expires.toUTCString():"";try{var g=JSON.stringify(c);/^[\{\[]/.test(g)&&(c=g)}catch(j){}c=d.write?d.write(c,b):encodeURIComponent(c+"").replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,decodeURIComponent),b=encodeURIComponent(b+"").replace(/%(23|24|26|2B|5E|60|7C)/g,decodeURIComponent).replace(/[\(\)]/g,escape);var h="";for(var i in f)f[i]&&(h+="; "+i,!0!==f[i]&&(h+="="+f[i].split(";")[0]));return document.cookie=b+"="+c+h}}function g(a,c){if("undefined"!=typeof document){for(var e={},f=document.cookie?document.cookie.split("; "):[],g=0;g<f.length;g++){var h=f[g].split("="),i=h.slice(1).join("=");c||'"'!==i.charAt(0)||(i=i.slice(1,-1));try{var j=b(h[0]);if(i=(d.read||d)(i,j)||b(i),c)try{i=JSON.parse(i)}catch(k){}if(e[j]=i,a===j)break}catch(k){}}return a?e[a]:e}}return e.set=f,e.get=function(a){return g(a,!1)},e.getJSON=function(a){return g(a,!0)},e.remove=function(b,c){f(b,"",a(c,{expires:-1}))},e.defaults={},e.withConverter=c,e}return c(function(){})});
 
 /**
  * Jquery blockUI v2.66
- * -----------------------------------------------------
  * http://malsup.com/jquery/block/
  */
 
@@ -18,7 +15,6 @@
 
 /**
  * Toastr
- * -------------------------------------------------
  * https://github.com/CodeSeven/toastr
  */
 
@@ -27,7 +23,6 @@
 
 /**
  * Sticky Kit v1.1.2
- * -------------------------------------------------
  * http://leafo.net
  */
 
@@ -41,7 +36,6 @@ y),b(document.body).on("sticky_kit:recalc",y),a.on("sticky_kit:detach",H),setTim
 
 /**
  * Switchery
- * -----------------------------------------------------
  * https://github.com/abpetkov/switchery
  */
 
@@ -49,9 +43,8 @@ y),b(document.body).on("sticky_kit:recalc",y),a.on("sticky_kit:detach",H),setTim
 
 
 /**
- * Application
- * -----------------------------------------------------
- * http://www.akshitsethi.com
+ * Custom
+ * https://akshitsethi.com
  */
 
 // Toastr : Default Options
@@ -75,23 +68,18 @@ toastr.options = {
 
 	'use strict';
 
-	// DOM Ready
-	// ------------------------------------------------------------
-
+	// On DOM ready.
 	$( document ).ready( function() {
 
-		// IOS Switches
-		// ------------------------------------------------------------
-
+		// IOS switches.
 		var elements = Array.prototype.slice.call(document.querySelectorAll('.as-form-ios'));
-	    elements.forEach(function(html) {
-    		var switchery = new Switchery(html);
-	    });
+
+		elements.forEach(function(html) {
+			var switchery = new Switchery(html);
+		});
 
 
-		// Header : Sticky
-		// ------------------------------------------------------------
-
+		// Sticky header.
 		if( $( window ).width() <= 600 ) {
 			$( '.as-header' ).stick_in_parent( { bottoming: false, offset_top: 0 } );
 		} else if ( $( window ).width() > 600 && $( window ).width() < 783 ) {
@@ -100,23 +88,21 @@ toastr.options = {
 			$( '.as-header' ).stick_in_parent( { bottoming: false, offset_top: 32 } );
 		}
 
-		// Submission
-		// ------------------------------------------------------------
+		// Submission.
+		$( document ).on( 'click', '#as_wb_submit', function() {
 
-		$( document ).on( 'click', '#widgetsbundle_submit', function() {
-
-			// ID
+			// ID.
 			var as_ID 		= $( this ).attr( 'data-tab' ).replace( '#', '' );
 
-			// Form : Data
+			// Form data.
 			var as_data 	= new FormData( $( '#' + as_ID + ' form' )[0] );
 
-			// Append : Action
-			as_data.append( 'action', 'widgetsbundle_' + as_ID );
+			// Append action.
+			as_data.append( 'action', 'as_wb_' + as_ID );
 
 			console.log( as_data );
 
-			// AJAX
+			// AJAX.
 			$.ajax( {
 				type: 'POST',
 				url: ajaxurl,
@@ -125,7 +111,7 @@ toastr.options = {
 				contentType: false,
 				beforeSend: function() {
 					$( '#' + as_ID ).block( {
-						message: '<div class="as-strong" style="background: #ecf0f1; padding: 6px; color: #000;">Processing..</div>',
+						message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
 						css: {
 							border: 'none',
 							backgroundColor: 'none'
@@ -138,36 +124,32 @@ toastr.options = {
 					} );
 				}
 			} ).done( function( data ) {
-				// Unblock
+				// Unblock.
 				$( '#' + as_ID ).unblock();
 
-				// Success
+				// Success.
 				if( data.code == 'success' ) {
 					toastr.success( '<strong>Hey!</strong> ' + data.response );
 
-					// Remove : Input Class
+					// Remove input class.
 					$( 'input, textarea, select' ).removeClass( 'changed-input' );
 				} else {
-					// Error
+					// Error.
 					toastr.error( '<strong>Oops!</strong> ' + data.response );
 				}
 			} );
 		} );
 
 
-		// Hack : Support
-		// ------------------------------------------------------------
-
+		// Hack : Support.
 		$( document ).on( 'submit', '.as-support-form', function( e ) {
 			e.preventDefault();
 		} );
 
 
-		// Change : Form
-		// ------------------------------------------------------------
-
+		// On form change.
 		$( 'form' ).on( 'change keyup keydown', 'input, textarea, select', function( e ) {
-			// Cookie :State
+			// Cookie state.
 			var $state = Cookies.get( 'as_wb_menu' );
 
 			if ( $state ) {
@@ -179,12 +161,12 @@ toastr.options = {
 			}
 		} );
 
-		// Cookie : State
+		// Cookie state.
 		var $state = Cookies.get( 'as_wb_menu' );
 
-		// Check : Menu Position
+		// Check menu position.
 		if( $state ) {
-			// Button
+			// Button.
 			var $as_button = $( '#as_wb_submit' );
 
 			$( '.as-main-menu li a' ).removeClass( 'active' );
@@ -193,36 +175,36 @@ toastr.options = {
 			// Add : Button (data-tab)
 			$( '#as_wb_submit' ).attr( 'data-tab', $state );
 
-			// Modifications
-			// Hack : About
+			// Modifications.
+			// Hack : About.
 			if ( $state == '#about' ) {
 				$as_button.hide();
 			} else {
 				$as_button.show();
 			}
 
-			// Hack : Support
+			// Hack : Support.
 			if ( $state == '#support' ) {
 				$as_button.val( 'Ask for Support' );
 			} else {
 				$as_button.val( 'Save Changes' );
 			}
 
-			// Load
+			// Load.
 			$( $state ).fadeIn();
 		} else {
 			$( '.as-main-menu li:first a' ).addClass( 'active' );
 			$( '.as-tile:first' ).fadeIn();
 
-			// Add : Options (data-tab)
+			// Add options (data-tab).
 			$( '#as_wb_submit' ).attr( 'data-tab', '#options' );
 		}
 
-		// Menu
+		// Menu.
 		$( '.as-main-menu li a' ).click( function(e) {
 			e.preventDefault();
 
-			// Remove : Cookie
+			// Remove cookie.
 			Cookies.remove( 'as_wb_menu', { path: '/' } );
 
 			var $selector 		= $( this );
@@ -232,31 +214,31 @@ toastr.options = {
 			if ( $( '.changed-input' ).length ) {
 				toastr.error( '<strong>Hey!</strong> You haven\'t saved your changes.' );
 			} else {
-				// Change : Menu Selection
+				// Change menu selection.
 				$( '.as-main-menu li a' ).removeClass( 'active' );
 				$selector.addClass( 'active' );
 
-				// Hide Tabs
+				// Hide tabs.
 				$( '.as-tile' ).hide();
 
-				// Load : Selected Tab
+				// Load selected tab.
 				$( $tab ).fadeIn();
 
-				// Set Cookie
+				// Set cookie.
 				Cookies.set( 'as_wb_menu', $tab, { path: '/' } );
 
-				// State : Button (add)
+				// State button (add).
 				$( '#as_wb_submit' ).attr( 'data-tab', $tab );
 
-				// Modifications
-				// Hack : About
+				// Modifications.
+				// Hack : About.
 				if ( $tab == '#about' ) {
 					$as_button.hide();
 				} else {
 					$as_button.show();
 				}
 
-				// Hack : Support
+				// Hack : Support.
 				if ( $tab == '#support' ) {
 					$as_button.val( 'Ask for Support' );
 				} else {
@@ -265,7 +247,7 @@ toastr.options = {
 			}
 		} );
 
-		// Mobile Navigation
+		// Mobile navigation.
 		$( '.as-mobile-menu a' ).click( function() {
 			$( '.as-main-menu' ).slideToggle();
 		} );
