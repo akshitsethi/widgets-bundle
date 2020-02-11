@@ -8,5 +8,4 @@
 
 ?>
 
-	</div><!-- .as-fix-wp38 -->
 </div><!-- .as-cnt-fix -->

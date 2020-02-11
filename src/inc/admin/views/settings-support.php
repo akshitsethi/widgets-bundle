@@ -11,7 +11,7 @@
 <div class="as-tile" id="support">
 	<form method="post" class="as-support-form">
 		<div class="as-tile-body">
-			<div class="as-tile-title"><?php esc_html_e( 'SUPPORT', 'widgets-bundle' ); ?></div>
+			<h2 class="as-tile-title"><?php esc_html_e( 'SUPPORT', 'widgets-bundle' ); ?></h2>
 			<p><?php esc_html_e( 'Getting help is just a click away now. Report the issue you are facing with the plugin using the form below and we will get back to you at the email address provided.', 'widgets-bundle' ); ?></p>
 
 			<div class="as-section-content">
@@ -24,7 +24,7 @@
 
 				<div class="as-form-group">
 					<label for="as_support_issue" class="as-strong"><?php esc_html_e( 'Issue / Feedback', 'widgets-bundle' ); ?></label>
-					<textarea name="as_support_issue" id="as_support_issue" class="as-block" rows="10" placeholder="<?php esc_html_e( 'Please explain the issue you are facing with the plugin. Provide as much detail as possible.', 'widgets-bundle' ); ?>"></textarea>
+					<textarea name="as_support_issue" id="as_support_issue" class="as-block as-form-control" rows="10" placeholder="<?php esc_html_e( 'Please explain the issue you are facing with the plugin. Provide as much detail as possible.', 'widgets-bundle' ); ?>"></textarea>
 
 					<p class="as-form-help-block"><?php esc_html_e( 'Please explain the issue you are facing with the plugin. Provide as much detail as possible.', 'widgets-bundle' ); ?></p>
 				</div>

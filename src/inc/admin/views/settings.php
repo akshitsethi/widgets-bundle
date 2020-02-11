@@ -21,7 +21,6 @@ require_once 'header.php';
 		<ul class="as-main-menu">
 			<li><a href="#options"><?php esc_html_e( 'Options', 'widgets-bundle' ); ?></a></li>
 			<li><a href="#support"><?php esc_html_e( 'Support', 'widgets-bundle' ); ?></a></li>
-			<li><a href="#license"><?php esc_html_e( 'License', 'widgets-bundle' ); ?></a></li>
 			<li><a href="#about"><?php esc_html_e( 'About', 'widgets-bundle' ); ?></a></li>
 		</ul>
 	</div><!-- .as-float-left -->
@@ -29,13 +28,10 @@ require_once 'header.php';
 	<div class="as-float-right">
 		<?php
 
-			// Tabs
-			// -------------------------------------------------
-
-			require_once 'settings-options.php';	// options
-			require_once 'settings-support.php';	// support
-			require_once 'settings-license.php';	// license
-			require_once 'settings-about.php';		// about
+			// Tabs.
+			require_once 'settings-options.php';
+			require_once 'settings-support.php';
+			require_once 'settings-about.php';
 
 		?>
 	</div><!-- .as-float-right -->
