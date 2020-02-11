@@ -7,6 +7,8 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Quote extends WP_Widget {
 
 		public function __construct() {

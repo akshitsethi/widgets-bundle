@@ -1,0 +1,21 @@
+/**
+ * admin.css
+ */
+
+.as-clearfix {
+	*zoom: 1;
+}
+.as-clearfix:before,
+.as-clearfix:after {
+	display: table;
+	content: "";
+}
+.as-clearfix:after {
+	clear: both;
+}
+.as-hide {
+	display: none;
+}
+.as-strong {
+	font-weight: bold;
+}

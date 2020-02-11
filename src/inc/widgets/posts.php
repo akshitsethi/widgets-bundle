@@ -7,15 +7,15 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Posts extends WP_Widget {
 
 		public function __construct() {
-
 			parent::__construct( 'as_wb_posts', esc_html__( 'Posts', 'widgets-bundle' ), array(
 				'classname'   => 'as_wb_posts',
 				'description' => esc_html__( 'Widget that displays your latest posts.', 'widgets-bundle' )
 			) );
-
 		}
 
 
