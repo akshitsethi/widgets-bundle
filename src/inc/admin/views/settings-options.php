@@ -11,7 +11,7 @@
 <div class="as-tile" id="options">
 	<form method="post" class="as-options-form">
 		<div class="as-tile-body">
-			<div class="as-tile-title"><?php esc_html_e( 'OPTIONS', 'widgets-bundle' ); ?></div>
+			<h2 class="as-tile-title"><?php esc_html_e( 'OPTIONS', 'widgets-bundle' ); ?></h2>
 			<p><?php esc_html_e( 'Configure the widgets in this section. You can enable or disable widgets as per your preference. You can turn off the widgets you do not wish to use and it will not be shown on the "Widgets" page.', 'widgets-bundle' ); ?></p>
 
 			<div class="as-section-content">

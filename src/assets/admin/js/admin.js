@@ -121,7 +121,7 @@ toastr.options = {
 		// Submission
 		// ------------------------------------------------------------
 
-		$( document ).on( 'click', '#as_wb_submit', function() {
+		$( document ).on( 'click', '#widgetsbundle_submit', function() {
 
 			// ID
 			var as_ID 		= $( this ).attr( 'data-tab' ).replace( '#', '' );
@@ -130,7 +130,7 @@ toastr.options = {
 			var as_data 	= new FormData( $( '#' + as_ID + ' form' )[0] );
 
 			// Append : Action
-			as_data.append( 'action', 'as_wb_' + as_ID );
+			as_data.append( 'action', 'widgetsbundle_' + as_ID );
 
 			console.log( as_data );
 
@@ -286,65 +286,6 @@ toastr.options = {
 		// Mobile Navigation
 		$( '.as-mobile-menu a' ).click( function() {
 			$( '.as-main-menu' ).slideToggle();
-		} );
-
-
-		// Registration
-		// -------------------------------------------------
-
-		$( document ).on( 'submit', '.as-register-form', function( e ) {
-			e.preventDefault();
-
-			// Form : Data
-			var as_data = new FormData( $( this )[0] );
-
-			// Append : Action
-			as_data.append( 'action', 'as_wb_register' );
-
-			// AJAX
-			$.ajax( {
-				type: 'POST',
-				url: ajaxurl,
-				data: as_data,
-				processData: false,
-				contentType: false,
-				beforeSend: function() {
-					$( '.as-product-register' ).block( {
-						message: '<div class="as-strong" style="background: #ecf0f1; padding: 6px; color: #000;">Processing..</div>',
-						css: {
-							border: 'none',
-							backgroundColor: 'none'
-						},
-						overlayCSS: {
-							backgroundColor: '#eeeeee',
-							opacity: '0.5',
-							cursor: 'wait'
-						}
-					} );
-				}
-			} ).done( function( data ) {
-				// Unblock
-				$( '.as-product-register' ).unblock();
-
-				if( data.type == 'success' ) {					
-					// Notification
-					toastr.success( '<strong>Hey!</strong> ' + data.message );
-
-					// HTML
-					$( '#as-ajax-response' ).html( '<div class="as-notice as-success"><strong>Hey!</strong> ' + data.message + '</div>' );
-
-					// Reload
-					setTimeout( function() {
-						window.location.reload(false);
-					}, 5000 );
-				} else {
-					// Notification
-					toastr.error( '<strong>Oops!</strong> ' + data.message );
-
-					// HTML
-					$( '#as-ajax-response' ).html( '<div class="as-notice as-error"><strong>Oops!</strong> ' + data.message + '</div>' );
-				}
-			} );
 		} );
 
 	} );
