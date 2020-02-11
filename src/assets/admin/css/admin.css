@@ -45,10 +45,10 @@
 	align-items: center;
 	background: #ffffff;
 	padding: 15px;
-	box-shadow: 1px 2px 5px rgba(0,0,0,0.025);
+	box-shadow: 1px 2px 5px rgba(0,0,0,0.100);
 }
 .as-header.is_stuck {
-	z-index: 999999;
+	z-index: 9999;
 }
 .as-header p {
 	float: left;
