@@ -7,15 +7,15 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Subscribe extends WP_Widget {
 
 		public function __construct() {
-
 			parent::__construct( 'as_wb_subscribe', esc_html__( 'Subscribe', 'widgets-bundle' ), array(
 				'classname'   => 'as_wb_subscribe',
 				'description' => esc_html__( 'Widget for subscription form utilising the MailChimp API.', 'widgets-bundle' )
 			) );
-
 		}
 
 

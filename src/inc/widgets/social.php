@@ -7,15 +7,15 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Social extends WP_Widget {
 
 		public function __construct() {
-
 			parent::__construct( 'as_wb_social', esc_html__( 'Social', 'widgets-bundle' ), array(
 				'classname'   => 'as_wb_social',
 				'description' => esc_html__( 'Widget for showing Social Media profile links with icons.', 'widgets-bundle' )
 			) );
-
 		}
 
 

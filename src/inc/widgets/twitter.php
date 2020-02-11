@@ -7,6 +7,8 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Twitter extends WP_Widget {
 
 		// Theme Options

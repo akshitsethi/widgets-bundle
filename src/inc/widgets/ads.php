@@ -7,13 +7,19 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Ads extends WP_Widget {
 
 		public function __construct() {
-			parent::__construct( 'as_wb_ads', esc_html__( 'Ads', 'widgets-bundle' ), array(
-				'classname'   => 'as_wb_ads',
-				'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format', 'widgets-bundle' )
-			) );
+			parent::__construct(
+				'as_wb_ads',
+				esc_html__( 'Ads', 'widgets-bundle' ),
+				[
+					'classname'   => 'as_wb_ads',
+					'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format', 'widgets-bundle' )
+				]
+			);
 		}
 
 
@@ -27,7 +33,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @return void Echoes its output.
 		 */
 		public function widget( $args, $instance ) {
-			$instance 	= wp_parse_args( (array) $instance, self::defaults() );
+			$instance = wp_parse_args( (array) $instance, self::defaults() );
 			$title 		= apply_filters( 'widget_title', $instance['title'] );
 			$image 		= $instance['image'];
 			$link 		= $instance['link'];
@@ -42,27 +48,27 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 			echo '<div class="as-wb-ads">';
 
-			// Photo & Link.
+			// Photo & link.
 			if ( ! empty( $image ) && ! empty( $link ) && ! empty( $target ) ) {
-				echo '<div class="as-wb-ads-image">';
+				echo '<div class="as-wb-ads--image">';
 				echo '<a href="' . esc_url( $link ) . '" target="' . esc_attr( $target ) . '">';
 				echo '<img src="' . esc_url( $image ) . '" alt="' . esc_attr( $title ) . '" />';
 				echo '</a>';
-				echo '</div><!-- .as-wb-ads-image -->';
+				echo '</div><!-- .as-wb-ads--image -->';
 			}
 
 			// Text.
 			if ( ! empty( $text ) ) {
 				echo '<p>';
-				echo wp_kses( $text, array(
-						'a' 		=> array(
-							'href' 	=> array(),
-							'title' => array()
-						),
-						'br' 		=> array(),
-						'em' 		=> array(),
-						'strong' 	=> array()
-					)
+				echo wp_kses( $text, [
+						'a' 			=> [
+							'href' 	=> [],
+							'title' => []
+						],
+						'br' 			=> [],
+						'em' 			=> [],
+						'strong' 	=> []
+					]
 				);
 				echo '</p>';
 			}
@@ -81,20 +87,20 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @return array Updated widget instance.
 		 */
 		public function update( $new_instance, $instance ) {
-			$new_instance 		= wp_parse_args( (array) $new_instance, self::defaults() );
+			$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
 			$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
 			$instance['image'] 	= sanitize_text_field( $new_instance['image'] );
 			$instance['link'] 	= sanitize_text_field( esc_url( $new_instance['link'] ) );
 			$instance['target'] = sanitize_text_field( $new_instance['target'] );
-			$instance['text'] 	= wp_kses( stripslashes( $new_instance['text'] ), array(
-					'a' 		=> array(
-						'href' 	=> array(),
-						'title' => array()
-					),
-					'br' 		=> array(),
-					'em' 		=> array(),
-					'strong' 	=> array()
-				)
+			$instance['text'] 	= wp_kses( stripslashes( $new_instance['text'] ), [
+					'a' 			=> [
+						'href' 	=> [],
+						'title' => []
+					],
+					'br' 			=> [],
+					'em' 			=> [],
+					'strong' 	=> []
+				]
 			);
 
 			return $instance;

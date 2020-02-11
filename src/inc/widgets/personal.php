@@ -7,15 +7,15 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Personal extends WP_Widget {
 
 		public function __construct() {
-
 			parent::__construct( 'as_wb_personal', esc_html__( 'Personal', 'widgets-bundle' ), array(
 				'classname'   => 'as_wb_personal',
 				'description' => esc_html__( 'Widget for showing personal image along with short bio.', 'widgets-bundle' )
 			) );
-
 		}
 
 

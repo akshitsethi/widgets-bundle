@@ -22,17 +22,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 	require_once __DIR__ . '/vendor/autoload.php';
 
 	use AkshitSethi\Plugins\WidgetsBundle\Config;
-
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Ads;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Facebook;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Instagram;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Personal;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Posts;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Quote;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Social;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Subscribe;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Twitter;
-	use AkshitSethi\Plugins\WidgetsBundle\Widgets\Video;
+	use AkshitSethi\Plugins\WidgetsBundle\Admin;
 
 
 	/**
@@ -48,16 +38,24 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 * Class Constructor.
 		 */
 		public function __construct() {
-			new Ads();
-			new Facebook();
-			new Instagram();
-			new Personal();
-			new Posts();
-			new Quote();
-			new Social();
-			new Subscribe();
-			new Twitter();
-			new Video();
+			// Initialize admin.
+			new Admin();
+
+			add_action( 'widgets_init', [ $this, 'register_widgets' ] );
+		}
+
+
+		public function register_widgets() {
+			register_widget( __NAMESPACE__ . '\Widgets\Ads' );
+			register_widget( __NAMESPACE__ . '\Widgets\Facebook' );
+			register_widget( __NAMESPACE__ . '\Widgets\Instagram' );
+			register_widget( __NAMESPACE__ . '\Widgets\Personal' );
+			register_widget( __NAMESPACE__ . '\Widgets\Posts' );
+			register_widget( __NAMESPACE__ . '\Widgets\Quote' );
+			register_widget( __NAMESPACE__ . '\Widgets\Social' );
+			register_widget( __NAMESPACE__ . '\Widgets\Subscribe' );
+			register_widget( __NAMESPACE__ . '\Widgets\Twitter' );
+			register_widget( __NAMESPACE__ . '\Widgets\Video' );
 		}
 
 
@@ -65,7 +63,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 * Attached to the activation hook.
 		 */
 		public function activate() {
-			// Add to `wp_options` table
+			// Add to `wp_options` table.
 			update_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
 		}
 
@@ -74,7 +72,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 * Attached to the de-activation hook.
 		 */
 		public function deactivate() {
-			// Remove from `wp_options` table
+			// Remove from `wp_options` table.
 			delete_option( Config::DB_OPTION );
 		}
 

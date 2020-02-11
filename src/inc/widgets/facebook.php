@@ -7,13 +7,19 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
+	use WP_Widget;
+
 	class Facebook extends WP_Widget {
 
 		public function __construct() {
-			parent::__construct( 'as_wb_facebook', esc_html__( 'Facebook', 'widgets-bundle' ), array(
-				'classname'   => 'as_wb_facebook',
-				'description' => esc_html__( 'Widget that displays your Facebook page feed.', 'widgets-bundle' )
-			) );
+			parent::__construct(
+				'as_wb_facebook',
+				esc_html__( 'Facebook', 'widgets-bundle' ),
+				[
+					'classname'   => 'as_wb_facebook',
+					'description' => esc_html__( 'Widget that displays your Facebook page feed.', 'widgets-bundle' )
+				]
+			);
 		}
 
 
@@ -27,18 +33,18 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @return void Echoes its output.
 		 */
 		public function widget( $args, $instance ) {
-			$instance 			= wp_parse_args( (array) $instance, self::defaults() );
-			$title 				= apply_filters( 'widget_title', $instance['title'] );
-			$app_id 			= $instance['app_id'];
-			$url 				= $instance['url'];
-			$width 				= $instance['width'];
-			$height 			= $instance['height'];
+			$instance 				= wp_parse_args( (array) $instance, self::defaults() );
+			$title 						= apply_filters( 'widget_title', $instance['title'] );
+			$app_id 					= $instance['app_id'];
+			$url 							= $instance['url'];
+			$width 						= $instance['width'];
+			$height 					= $instance['height'];
 			$small_header 		= !empty( $instance['small_header'] ) ? 'true' : 'false';
 			$container_width 	= !empty( $instance['container_width'] ) ? 'true' : 'false';
-			$hide_cover 		= !empty( $instance['hide_cover'] ) ? 'true' : 'false';
+			$hide_cover 			= !empty( $instance['hide_cover'] ) ? 'true' : 'false';
 			$show_facepile 		= !empty( $instance['show_facepile'] ) ? 'true' : 'false';
-			$show_posts 		= !empty( $instance['show_posts'] ) ? 'true' : 'false';
-			$language 			= $instance['language'];
+			$show_posts 			= !empty( $instance['show_posts'] ) ? 'true' : 'false';
+			$language 				= $instance['language'];
 
 			echo $args['before_widget'];
 
@@ -46,12 +52,10 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
 
-			/**
-			 * Scripts
-			 */
+			// Scripts.
 			wp_register_script( 'as-wb-fb', AS_WB_URL . '/framework/public/js/facebook.js', array( 'jquery' ), AS_WB_VERSION );
 
-			// Localize
+			// Localize.
 			$localize = array(
 				'app_id' 	=> $app_id,
 				'language' 	=> $language
@@ -60,7 +64,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			wp_localize_script( 'as-wb-fb', 'as_wb_fb', $localize );
 			wp_enqueue_script( 'as-wb-fb' );
 
-			// HTML
+			// HTML.
 			echo '<div class="as-wb-facebook">';
 			echo '<div class="as-wb-fb-loader"><img src="' . AS_WB_URL . '/framework/public/img/loading.gif" /></div><!-- .as-wb-fb-loader -->';
 			echo '<div id="fb-root"></div>';
@@ -81,18 +85,18 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @return array Updated widget instance.
 		 */
 		public function update( $new_instance, $instance ) {
-			$new_instance 					= wp_parse_args( (array) $new_instance, self::defaults() );
-			$instance['title'] 				= sanitize_text_field( $new_instance['title'] );
-			$instance['app_id'] 			= sanitize_text_field( $new_instance['app_id'] );
-			$instance['url'] 				= sanitize_text_field( $new_instance['url'] );
-			$instance['width'] 				= sanitize_text_field( $new_instance['width'] );
-			$instance['height'] 			= sanitize_text_field( $new_instance['height'] );
+			$new_instance 								= wp_parse_args( (array) $new_instance, self::defaults() );
+			$instance['title'] 						= sanitize_text_field( $new_instance['title'] );
+			$instance['app_id'] 					= sanitize_text_field( $new_instance['app_id'] );
+			$instance['url'] 							= sanitize_text_field( $new_instance['url'] );
+			$instance['width'] 						= sanitize_text_field( $new_instance['width'] );
+			$instance['height'] 					= sanitize_text_field( $new_instance['height'] );
 			$instance['small_header'] 		= !empty( $new_instance['small_header'] ) ? 1 : 0;
 			$instance['container_width'] 	= !empty( $new_instance['container_width'] ) ? 1 : 0;
-			$instance['hide_cover'] 		= !empty( $new_instance['hide_cover'] ) ? 1 : 0;
+			$instance['hide_cover'] 			= !empty( $new_instance['hide_cover'] ) ? 1 : 0;
 			$instance['show_facepile'] 		= !empty( $new_instance['show_facepile'] ) ? 1 : 0;
-			$instance['show_posts'] 		= !empty( $new_instance['show_posts'] ) ? 1 : 0;
-			$instance['language'] 			= sanitize_text_field( $new_instance['language'] );
+			$instance['show_posts'] 			= !empty( $new_instance['show_posts'] ) ? 1 : 0;
+			$instance['language'] 				= sanitize_text_field( $new_instance['language'] );
 
 			return $instance;
 		}
