@@ -21,10 +21,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 	// Composer autoloder file.
 	require_once __DIR__ . '/vendor/autoload.php';
 
-	use AkshitSethi\Plugins\WidgetsBundle\Config;
-	use AkshitSethi\Plugins\WidgetsBundle\Admin;
-
-
 	/**
 	 * Plugin class where all the action happens.
 	 *

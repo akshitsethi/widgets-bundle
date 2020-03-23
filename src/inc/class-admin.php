@@ -137,15 +137,18 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			$options['ads'] 			= isset( $_POST[Config::PREFIX . 'ads'] ) 				? true : false;
 			$options['personal'] 	= isset( $_POST[Config::PREFIX . 'personal'] ) 		? true : false;
 			$options['posts'] 		= isset( $_POST[Config::PREFIX . 'posts'] ) 			? true : false;
-			$options['quote'] 		= isset( $_POST[Config::PREFIX . 'quote'] ) 			? true : false;
-			$options['social'] 		= isset( $_POST[Config::PREFIX . 'social'] ) 			? true : false;
-			$options['subscribe'] = isset( $_POST[Config::PREFIX . 'subscribe'] ) 	? true : false;
-			$options['instagram'] = isset( $_POST[Config::PREFIX . 'instagram'] ) 	? true : false;
-			$options['facebook'] 	= isset( $_POST[Config::PREFIX . 'facebook'] ) 		? true : false;
-			$options['twitter'] 	= isset( $_POST[Config::PREFIX . 'twitter'] ) 		? true : false;
+			$options['quote'] 		= isset( $_POST[Config::PREFIX . 'quote'] )				? true : false;
+			$options['social'] 		= isset( $_POST[Config::PREFIX . 'social'] )			? true : false;
+			$options['subscribe'] = isset( $_POST[Config::PREFIX . 'subscribe'] )		? true : false;
+			$options['instagram'] = isset( $_POST[Config::PREFIX . 'instagram'] )		? true : false;
+			$options['facebook'] 	= isset( $_POST[Config::PREFIX . 'facebook'] )		? true : false;
+			$options['twitter'] 	= isset( $_POST[Config::PREFIX . 'twitter'] )			? true : false;
+
+			update_option( Config::DB_OPTION, $options );
+			print_r($options);
+			exit;
 
 			// Update options
-			update_option( Config::DB_OPTION, $options );
 
 			// Headers for JSON format
 			header( "Content-Type: application/json" );
@@ -205,6 +208,13 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 * Displays settings page for the plugin.
 		 */
 		public function settings() {
+			// Plugin options
+			$options 			= get_option( Config::DB_OPTION );
+
+			// Admin email
+			$admin_email 	= get_option( 'admin_email', '' );
+
+			// Settings page
 			require_once Config::$plugin_path . 'inc/admin/views/settings.php';
 		}
 
