@@ -78,11 +78,11 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 
 			wp_localize_script( Config::SHORT_SLUG . '-widgets', Config::PREFIX . 'js', $localize );
 
-			// Scripts.
+			// Scripts
 			wp_enqueue_script( Config::SHORT_SLUG . '-widgets' );
 			
 			if ( 'widgets' == $screen->id ) {
-				// Media Uploader.
+				// Media uploader
 				wp_enqueue_media();
 			}	
 		}

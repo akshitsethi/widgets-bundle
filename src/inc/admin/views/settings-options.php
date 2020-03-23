@@ -12,7 +12,7 @@
 	<form method="post" class="as-options-form">
 		<div class="as-tile-body">
 			<h2 class="as-tile-title"><?php esc_html_e( 'OPTIONS', 'widgets-bundle' ); ?></h2>
-			<p><?php esc_html_e( 'Configure the widgets in this section. You can enable or disable widgets as per your preference. You can turn off the widgets you do not wish to use and it will not be shown on the "Widgets" page.', 'widgets-bundle' ); ?></p>
+			<p><?php esc_html_e( 'Configure the widgets in this section. You can enable or disable widgets as per your preference. You can turn off the widgets you do not wish to use and it will not be shown on the Widgets page.', 'widgets-bundle' ); ?></p>
 
 			<div class="as-section-content">
 				<div class="as-double-group as-clearfix">
@@ -24,10 +24,10 @@
 					</div>
 
 					<div class="as-form-group">
-						<label for="as_wb_empty" class="as-strong"><?php esc_html_e( 'Empty Widget', 'widgets-bundle' ); ?></label>
-						<input type="checkbox" class="as-form-ios" name="as_wb_empty" value="1"<?php checked( '1', $options['empty'] ); ?>>
+						<label for="as_wb_facebook" class="as-strong"><?php esc_html_e( 'Facebook Widget', 'widgets-bundle' ); ?></label>
+						<input type="checkbox" class="as-form-ios" name="as_wb_facebook" value="1"<?php checked( '1', $options['facebook'] ); ?>>
 
-						<p class="as-form-help-block"><?php esc_html_e( 'Widget for showing empty space between widgets.', 'widgets-bundle' ); ?></p>
+						<p class="as-form-help-block"><?php esc_html_e( 'This widget helps you display your Facebook page feed.', 'widgets-bundle' ); ?></p>
 					</div>
 				</div>
 
@@ -72,26 +72,10 @@
 					</div>
 
 					<div class="as-form-group">
-						<label for="as_wb_video" class="as-strong"><?php esc_html_e( 'Video Widget', 'widgets-bundle' ); ?></label>
-						<input type="checkbox" class="as-form-ios" name="as_wb_video" value="1"<?php checked( '1', $options['video'] ); ?>>
-
-						<p class="as-form-help-block"><?php esc_html_e( 'Embed videos on your website with the help of this widget.', 'widgets-bundle' ); ?></p>
-					</div>
-				</div>
-
-				<div class="as-double-group as-clearfix">
-					<div class="as-form-group">
 						<label for="as_wb_instagram" class="as-strong"><?php esc_html_e( 'Instagram Widget', 'widgets-bundle' ); ?></label>
 						<input type="checkbox" class="as-form-ios" name="as_wb_instagram" value="1"<?php checked( '1', $options['instagram'] ); ?>>
 
 						<p class="as-form-help-block"><?php esc_html_e( 'This widget helps you display your photos from Instagram.', 'widgets-bundle' ); ?></p>
-					</div>
-
-					<div class="as-form-group">
-						<label for="as_wb_facebook" class="as-strong"><?php esc_html_e( 'Facebook Widget', 'widgets-bundle' ); ?></label>
-						<input type="checkbox" class="as-form-ios" name="as_wb_facebook" value="1"<?php checked( '1', $options['facebook'] ); ?>>
-
-						<p class="as-form-help-block"><?php esc_html_e( 'This widget helps you display your Facebook page feed.', 'widgets-bundle' ); ?></p>
 					</div>
 				</div>
 
