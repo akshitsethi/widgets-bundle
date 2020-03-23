@@ -63,6 +63,9 @@ toastr.options = {
 	'use strict';
 
 	function hacks($tab) {
+		// Submit button
+		var $as_button = $('#' + widgetsbundle_admin.prefix + 'submit');
+
 		// About
 		if ($tab == '#about') {
 			$as_button.hide();
@@ -72,9 +75,9 @@ toastr.options = {
 
 		// Support
 		if ($tab == '#support') {
-			$as_button.val(widgetsbundle_admin.prefix + widgetsbundle_admin.support_text);
+			$as_button.val(widgetsbundle_admin.support_text);
 		} else {
-			$as_button.val(widgetsbundle_admin.prefix + widgetsbundle_admin.support_text);
+			$as_button.val(widgetsbundle_admin.save_text);
 		}
 	}
 
@@ -135,16 +138,18 @@ toastr.options = {
 				// Unblock
 				$('#' + id).unblock();
 
-				// Success
-				if (data.code == 'success') {
-					toastr.success('<strong>Hey!</strong> ' + data.response);
+				console.log(data);
 
-					// Remove input class
-					$('input, textarea, select').removeClass('changed-input');
-				} else {
-					// Error
-					toastr.error('<strong>Oops!</strong> ' + data.response);
-				}
+				// // Success
+				// if (data.code == 'success') {
+				// 	toastr.success('<strong>Hey!</strong> ' + data.response);
+
+				// 	// Remove input class
+				// 	$('input, textarea, select').removeClass('changed-input');
+				// } else {
+				// 	// Error
+				// 	toastr.error('<strong>Oops!</strong> ' + data.response);
+				// }
 			});
 		});
 
@@ -167,9 +172,6 @@ toastr.options = {
 
 		// Check menu position
 		if ($state) {
-			// Submit button
-			var $as_button = $('#' + widgetsbundle_admin.prefix + 'submit');
-
 			$('.as-main-menu li a').removeClass('active');
 			$('a[href="' + $state + '"]').addClass('active');
 
