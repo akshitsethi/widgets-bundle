@@ -16,19 +16,16 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		const PLUGIN_SLUG 		= 'widgets-bundle';
 		const SHORT_SLUG 			= 'as-wb';
 		const VERSION 				= '@##VERSION##@';
-
 		const DB_OPTION      	= 'as_widgetsbundle';
 		const PREFIX         	= 'widgetsbundle_';
 
 		const DEFAULT_OPTIONS = [
 			'ads' 			=> true,
-			'empty' 		=> true,
 			'personal' 	=> true,
 			'posts' 		=> true,
 			'quote' 		=> true,
 			'social' 		=> true,
 			'subscribe' => true,
-			'video' 		=> true,
 			'instagram' => true,
 			'facebook'  => true,
 			'twitter' 	=> true

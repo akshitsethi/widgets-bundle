@@ -8,14 +8,20 @@
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 	use WP_Widget;
+	use WP_Query;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
 
 	class Posts extends WP_Widget {
 
 		public function __construct() {
-			parent::__construct( 'as_wb_posts', esc_html__( 'Posts', 'widgets-bundle' ), array(
-				'classname'   => 'as_wb_posts',
-				'description' => esc_html__( 'Widget that displays your latest posts.', 'widgets-bundle' )
-			) );
+			parent::__construct(
+				Config::PREFIX . 'posts',
+				esc_html__( 'Posts', 'widgets-bundle' ),
+				[
+					'classname'   => Config::PREFIX . 'posts',
+					'description' => esc_html__( 'Widget that displays your latest posts along with a featured image.', 'widgets-bundle' )
+				]
+			);
 		}
 
 
@@ -27,25 +33,22 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $args     An array of standard parameters for widgets in this theme.
 		 * @param array $instance An array of settings for this widget instance.
 		 * @return void Echoes its output.
-		 * -------------------------------------------------
 		 */
-
 		public function widget( $args, $instance ) {
-
 			$instance 		= wp_parse_args( (array) $instance, self::defaults() );
-			$title 			= apply_filters( 'widget_title', $instance['title'] );
+			$title 				= apply_filters( 'widget_title', $instance['title'] );
 			$categories 	= $instance['categories'];
-			$number 		= $instance['number'];
-			$as_args 		= array(
-								'showposts' 			=> $number,
-								'nopaging' 				=> 0,
-								'post_status' 			=> 'publish',
-								'ignore_sticky_posts' 	=> 1,
-								'cat' 					=> $categories,
-								'order' 				=> 'ASC',
-								'orderby' 				=> 'date'
-							);
-			$as_query 		= new WP_Query( $as_args );
+			$number 			= $instance['number'];
+			$args 				= array(
+				'showposts' 					=> $number,
+				'nopaging' 						=> 0,
+				'post_status' 				=> 'publish',
+				'ignore_sticky_posts' => 1,
+				'cat' 								=> $categories,
+				'order' 							=> 'ASC',
+				'orderby' 						=> 'date'
+			);
+			$query 				= new WP_Query( $args );
 
 			echo $args['before_widget'];
 
@@ -53,12 +56,11 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
 
-			if ( $as_query->have_posts() ) :
+			if ( $query->have_posts() ) :
 				echo '<div class="as-wb-posts">';
 				echo '<ul>';
 
-				while ( $as_query->have_posts() ) : $as_query->the_post();
-
+				while ( $query->have_posts() ) : $query->the_post();
 	?>
 
 					<li>
@@ -86,7 +88,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			endif;
 
 			echo $args['after_widget'];
-
 		}
 
 
@@ -97,31 +98,24 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $new_instance New widget instance.
 		 * @param array $instance     Original widget instance.
 		 * @return array Updated widget instance.
-		 * -------------------------------------------------
 		 */
-
-		function update( $new_instance, $instance ) {
-
+		public function update( $new_instance, $instance ) {
 			$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
 			$instance['title'] 		= sanitize_text_field( $new_instance['title'] );
 			$instance['categories'] = sanitize_text_field( $new_instance['categories'] );
 			$instance['number'] 	= absint( $new_instance['number'] );
 
 			return $instance;
-
 		}
 
 
 		/**
-		 * Widget Form.
+		 * Widget form.
 		 *
 		 * @param array $instance
 		 * @return void
-		 * -------------------------------------------------
 		 */
-
-		function form( $instance ) {
-
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, self::defaults() );
 
 	?>
@@ -148,26 +142,21 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			</p>
 
 	<?php
-
 		}
 
 
 		/**
-		 * Default Options.
+		 * Default options.
 		 * @access private
-		 * -------------------------------------------------
 		 */
-
 		private static function defaults() {
-
 			$defaults = array(
-				'title' 		=> esc_html__( 'Recent', 'widgets-bundle' ),
+				'title' 			=> esc_html__( 'Recent', 'widgets-bundle' ),
 				'categories' 	=> '',
-				'number' 		=> '4'
+				'number' 			=> '4'
 			);
 
 			return $defaults;
-
 		}
 
 	}

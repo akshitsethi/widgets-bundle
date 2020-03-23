@@ -8,25 +8,31 @@
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 	use WP_Widget;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
 
 	class Twitter extends WP_Widget {
 
-		// Theme Options
+		/**
+		 * @var array
+		 */
 		protected $theme;
 
 		public function __construct() {
 
-			parent::__construct( 'as_wb_twitter', esc_html__( 'Twitter', 'widgets-bundle' ), array(
-				'classname'   => 'as_wb_twitter',
-				'description' => esc_html__( 'Widget that displays your Twitter feed.', 'widgets-bundle' )
-			) );
-
-			// Set Theme Options
-			$this->theme = array (
-				'light' => esc_html__( 'Light', 'widgets-bundle' ),
-				'dark'  => esc_html__( 'Dark', 'widgets-bundle' )
+			parent::__construct(
+				Config::PREFIX . 'twitter',
+				esc_html__( 'Twitter', 'widgets-bundle' ),
+				[
+					'classname'   => Config::PREFIX . 'twitter',
+					'description' => esc_html__( 'Widget that displays your Twitter feed.', 'widgets-bundle' )
+				]
 			);
 
+			// Set theme option
+			$this->theme = [
+				'light' => esc_html__( 'Light', 'widgets-bundle' ),
+				'dark'  => esc_html__( 'Dark', 'widgets-bundle' )
+			];
 		}
 
 
@@ -38,14 +44,10 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $args     An array of standard parameters for widgets in this theme.
 		 * @param array $instance An array of settings for this widget instance.
 		 * @return void Echoes its output.
-		 * -------------------------------------------------
 		 */
-
 		public function widget( $args, $instance ) {
-
-			$instance 		= wp_parse_args( (array) $instance, self::defaults() );
-			$title 			= apply_filters( 'widget_title', $instance['title'] );
-			
+			$instance = wp_parse_args( (array) $instance, self::defaults() );
+			$title 		= apply_filters( 'widget_title', $instance['title'] );
 
 			echo $args['before_widget'];
 
@@ -63,7 +65,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 			$timeline = '<a class="twitter-timeline"';
 
-			// Data Attributes
+			// Data attributes
 			$data_attributes = array(
 				'width'        => 'width',
 				'height'       => 'height',
@@ -79,7 +81,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				}
 			}
 
-			// Chrome Settings
+			// Chrome settings
 			if ( ! empty( $instance['chrome'] ) && is_array( $instance['chrome'] ) ) {
 				$timeline .= ' data-chrome="' . esc_attr( join ( ' ', $instance['chrome'] ) ) . '"';
 			}
@@ -87,20 +89,19 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			// Username
 			$timeline .= ' href="https://twitter.com/' . esc_attr( $instance['username'] ) . '"';
 
-			// Close Twitter Markup
+			// Close markup
 			$timeline .= '>';
 			$timeline .= esc_html__( 'Tweets by @', 'widgets-bundle' ) . $instance['username'];
 			$timeline .= '</a>';
 
-			// Output Markup
+			// Output
 			echo $timeline;
 
 			echo '</div><!-- .as-wb-twitter -->';
 			echo $args['after_widget'];
 
 			// Script
-			wp_enqueue_script( 'as-wb-twitter', AS_WB_URL . '/framework/public/js/twitter.js', array( 'jquery' ), AS_WB_VERSION );
-
+			wp_enqueue_script( 'as-wb-twitter', Config::plugin_url . '/framework/public/js/twitter.js', [ 'jquery' ], Config::VERSION );
 		}
 
 
@@ -111,17 +112,21 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $new_instance New widget instance.
 		 * @param array $instance     Original widget instance.
 		 * @return array Updated widget instance.
-		 * -------------------------------------------------
 		 */
+		public function update( $new_instance, $instance ) {
+			$new_instance 						= wp_parse_args( (array) $new_instance, self::defaults() );
+			$instance['title'] 				= sanitize_text_field( $new_instance['title'] );
+			$instance['username'] 		= sanitize_text_field( $new_instance['username'] );
+			$instance['tweet_limit'] 	= ( $tweet_limit ? $tweet_limit : null );
+			$instance['theme'] 				= $new_instance['theme'];
+			$instance['link_color']   = sanitize_hex_color( $new_instance['link_color'] );
+			$instance['border_color'] = sanitize_hex_color( $new_instance['border_color'] );
+			$instance['chrome'] 			= [];
 
-		function update( $new_instance, $instance ) {
+			$width 				= absint( $new_instance['width'] );
+			$height 			= absint( $new_instance['height'] );
+			$tweet_limit 	= absint( $new_instance['tweet_limit'] );
 
-			$new_instance 				= wp_parse_args( (array) $new_instance, self::defaults() );
-			$instance['title'] 			= sanitize_text_field( $new_instance['title'] );
-
-			$instance['username'] = sanitize_text_field( $new_instance['username'] );
-
-			$width = absint( $new_instance['width'] );
 			if ( $width ) {
 				// From publish.twitter.com: 220 <= width <= 1200
 				$instance['width'] = min ( max ( $width, 220 ), 1200 );
@@ -129,7 +134,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				$instance['width'] = '';
 			}
 
-			$height = absint( $new_instance['height'] );
 			if ( $height ) {
 				// From publish.twitter.com: height >= 200
 				$instance['height'] = max ( $height, 200 );
@@ -137,25 +141,17 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				$instance['height'] = '';
 			}
 
-			$tweet_limit = absint( $new_instance['tweet_limit'] );
-			$instance['tweet_limit'] = ( $tweet_limit ? $tweet_limit : null );
-
-			$instance['theme'] = $new_instance['theme'];
 			if ( ! array_key_exists( $instance['theme'], $this->theme ) ) {
 				$instance['theme'] = $this->default_instance['theme'];
 			}
 
-			$instance['link_color']   = sanitize_hex_color( $new_instance['link_color'] );
-			$instance['border_color'] = sanitize_hex_color( $new_instance['border_color'] );
-
-			$instance['chrome'] = array();
-			$chrome_settings = array(
+			$chrome_settings = [
 				'noheader',
 				'nofooter',
 				'noborders',
 				'noscrollbar',
 				'transparent'
-			);
+			];
 
 			if ( isset( $new_instance['chrome'] ) ) {
 				foreach ( $new_instance['chrome'] as $chrome ) {
@@ -166,22 +162,17 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			}
 
 			return $instance;
-
 		}
 
 
 		/**
-		 * Widget Form.
+		 * Widget form.
 		 *
 		 * @param array $instance
 		 * @return void
-		 * -------------------------------------------------
 		 */
-
-		function form( $instance ) {
-
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, self::defaults() );
-
 		?>
 
 			<p>
@@ -262,32 +253,27 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			</p>
 
 		<?php
-
 		}
 
 
 		/**
-		 * Default Options.
+		 * Default options.
 		 * @access private
-		 * -------------------------------------------------
 		 */
-
 		private static function defaults() {
-
-			$defaults = array(
-				'title' 		=> esc_html__( 'Follow Me', 'widgets-bundle' ),
-				'username'     => 'akshitsethi',
-				'width'        => '',
-				'height'       => 400,
-				'tweet_limit'  => null,
-				'theme'        => 'light',
-				'link_color'   => '#3b94d9',
-				'border_color' => '#f5f5f5',
-				'chrome'       => array()
-			);
+			$defaults = [
+				'title' 				=> esc_html__( 'Follow Me', 'widgets-bundle' ),
+				'username'     	=> 'akshitsethi',
+				'width'        	=> '',
+				'height'       	=> 400,
+				'tweet_limit'  	=> null,
+				'theme'        	=> 'light',
+				'link_color'   	=> '#3b94d9',
+				'border_color' 	=> '#f5f5f5',
+				'chrome'       	=> []
+			];
 
 			return $defaults;
-
 		}
 
 	}

@@ -8,16 +8,17 @@
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 	use WP_Widget;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
 
 	class Ads extends WP_Widget {
 
 		public function __construct() {
 			parent::__construct(
-				'as_wb_ads',
+				Config::PREFIX . 'ads',
 				esc_html__( 'Ads', 'widgets-bundle' ),
 				[
-					'classname'   => 'as_wb_ads',
-					'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format', 'widgets-bundle' )
+					'classname'   => Config::PREFIX . 'ads',
+					'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format.', 'widgets-bundle' )
 				]
 			);
 		}
@@ -108,7 +109,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 
 		/**
-		 * Widget Form.
+		 * Widget form.
 		 *
 		 * @param array $instance
 		 * @return void
@@ -165,7 +166,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 
 		/**
-		 * Default Options.
+		 * Default options.
 		 * @access private
 		 */
 		private static function defaults() {

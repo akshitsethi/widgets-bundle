@@ -8,14 +8,20 @@
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 	use WP_Widget;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
+	use AkshitSethi\Plugins\WidgetsBundle\Providers\MailChimp;
 
 	class Subscribe extends WP_Widget {
 
 		public function __construct() {
-			parent::__construct( 'as_wb_subscribe', esc_html__( 'Subscribe', 'widgets-bundle' ), array(
-				'classname'   => 'as_wb_subscribe',
-				'description' => esc_html__( 'Widget for subscription form utilising the MailChimp API.', 'widgets-bundle' )
-			) );
+			parent::__construct(
+				Config::PREFIX . 'subscribe',
+				esc_html__( 'Subscribe', 'widgets-bundle' ),
+				[
+					'classname'   => Config::PREFIX . 'subscribe',
+					'description' => esc_html__( 'Widget for subscription form utilising the MailChimp API.', 'widgets-bundle' )
+				]
+			);
 		}
 
 
@@ -27,22 +33,18 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $args     An array of standard parameters for widgets in this theme.
 		 * @param array $instance An array of settings for this widget instance.
 		 * @return void Echoes its output.
-		 * -------------------------------------------------
 		 */
-
 		public function widget( $args, $instance ) {
-
-			$instance 	= wp_parse_args( (array) $instance, self::defaults() );
+			$instance = wp_parse_args( (array) $instance, self::defaults() );
 			$title 		= apply_filters( 'widget_title', $instance['title'] );
 			$text 		= $instance['text'];
 			$api_key 	= $instance['api_key'];
 			$list_id 	= $instance['list_id'];
 
-			// Submission Checks
+			// Submission check
 			if ( ! empty( $api_key ) && ! empty( $list_id ) ) {
 				if ( isset( $_POST['as-subscribe-email'] ) ) {
-					// Looks Good
-					// Start Processing
+					// Process information
 					$email =  sanitize_text_field( $_POST['as-subscribe-email'] );
 
 					if ( '' === $email ) {
@@ -52,10 +54,8 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 						$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
 						if ( strpos( $email, '@' ) ) {
-							require AS_WB_PATH . 'framework/public/include/classes/class-mailchimp.php';
-
-							// API Call
-							$mailchimp 	= new As_Wb_Mailchimp( $api_key );
+							// API call
+							$mailchimp 	= new Mailchimp( $api_key );
 							$connect 	= $mailchimp->call( 'lists/subscribe', array(
 								'apikey'		=> $api_key,
 								'id'            => $list_id,
@@ -64,7 +64,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 								'send_welcome'  => TRUE
 							) );
 
-							// Collect Response
+							// Throw the correct response
 							if ( isset( $connect['code'] ) && 'ASERR' === $connect['code'] ) {
 								$response['code'] 	= 'error';
 								$response['text'] 	= $connect['message'];
@@ -94,7 +94,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 			echo '<div class="as-wb-subscribe">';
 
-			// Text
+			// Widget code
 			if ( ! empty( $text ) ) {
 				echo '<p>';
 				echo wp_kses( $text, array(
@@ -113,7 +113,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			// Form
 			echo '<form method="POST">';
 
-			// Show Response
+			// Response
 			if ( isset( $response ) ) {
 				echo '<div class="as-wb-response as-wb-response-' . $response['code'] . '">' . $response['text'] . '</div><!-- .as-wb-subscribe-response -->';
 			}
@@ -129,7 +129,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 			echo '</div><!-- .as-wb-subscribe -->';
 			echo $args['after_widget'];
-
 		}
 
 
@@ -140,14 +139,13 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 		 * @param array $new_instance New widget instance.
 		 * @param array $instance     Original widget instance.
 		 * @return array Updated widget instance.
-		 * -------------------------------------------------
 		 */
-
-		function update( $new_instance, $instance ) {
-
-			$new_instance 		= wp_parse_args( (array) $new_instance, self::defaults() );
+		public function update( $new_instance, $instance ) {
+			$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
 			$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
-			$instance['text'] 	= wp_kses( stripslashes( $new_instance['text'] ), array(
+			$instance['text'] 	= wp_kses( stripslashes(
+				$new_instance['text'] ),
+				[
 					'a' 		=> array(
 						'href' 	=> array(),
 						'title' => array()
@@ -155,28 +153,23 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 					'br' 		=> array(),
 					'em' 		=> array(),
 					'strong' 	=> array()
-				)
+				]
 			);
 			$instance['api_key'] = sanitize_text_field( $new_instance['api_key'] );
 			$instance['list_id'] = sanitize_text_field( $new_instance['list_id'] );
 
 			return $instance;
-
 		}
 
 
 		/**
-		 * Widget Form.
+		 * Widget form.
 		 *
 		 * @param array $instance
 		 * @return void
-		 * -------------------------------------------------
 		 */
-
-		function form( $instance ) {
-
+		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, self::defaults() );
-
 		?>
 
 			<p>
@@ -200,27 +193,22 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			</p>
 
 		<?php
-
 		}
 
 
 		/**
-		 * Default Options.
+		 * Default options.
 		 * @access private
-		 * -------------------------------------------------
 		 */
-
 		private static function defaults() {
-
 			$defaults = array(
 				'title' 	=> esc_html__( 'Subscribe', 'widgets-bundle' ),
 				'text' 		=> esc_html__( 'We will reach your mailbox twice a month only. Don\'t worry, we hate spam too!', 'widgets-bundle' ),
-				'api_key' 	=> '',
-				'list_id' 	=> ''
+				'api_key' => '',
+				'list_id' => ''
 			);
 
 			return $defaults;
-
 		}
 
 	}

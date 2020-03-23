@@ -76,10 +76,10 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			wp_enqueue_style( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/css/widgets.css', false, Config::VERSION );
 			wp_register_script( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/js/widgets.js', [ 'jquery' ], Config::VERSION, false );
 
-			wp_localize_script( 'as-wb-widgets', 'as_wb_js', $localize );
+			wp_localize_script( Config::SHORT_SLUG . '-widgets', Config::PREFIX . 'js', $localize );
 
 			// Scripts.
-			wp_enqueue_script( 'as-wb-widgets' );
+			wp_enqueue_script( Config::SHORT_SLUG . '-widgets' );
 			
 			if ( 'widgets' == $screen->id ) {
 				// Media Uploader.
