@@ -144,11 +144,8 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			$options['facebook'] 	= isset( $_POST[Config::PREFIX . 'facebook'] )		? true : false;
 			$options['twitter'] 	= isset( $_POST[Config::PREFIX . 'twitter'] )			? true : false;
 
-			update_option( Config::DB_OPTION, $options );
-			print_r($options);
-			exit;
-
 			// Update options
+			update_option( Config::DB_OPTION, $options );
 
 			// Headers for JSON format
 			header( "Content-Type: application/json" );
@@ -172,14 +169,14 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 
 			// Filter and sanitize
 			if ( ! empty( $_POST[Config::PREFIX . 'support_email'] ) && ! empty( $_POST[Config::PREFIX . 'support_issue'] ) ) {
-				$admin_email 	= sanitize_text_field( $_POST['as_support_email'] );
-				$issue 				= htmlentities( $_POST['as_support_issue'] );
+				$admin_email 	= sanitize_text_field( $_POST[Config::PREFIX . 'support_email'] );
+				$issue 				= htmlentities( $_POST[Config::PREFIX . 'support_issue'] );
 				$subject 			= '[Widgets Bundle v' . Config::VERSION . '] by ' . $admin_email;
 				$body 				= "Email: $admin_email \r\nIssue: $issue";
 				$headers 			= 'From: ' . $admin_email . "\r\n" . 'Reply-To: ' . $admin_email;
 
 				// Send email
-				if ( wp_mail( 'akshitsethi@gmail.com', $subject, $body, $headers ) ) {
+				if ( wp_mail( '19bbdec26d2d11ea94e7033192a1a3c3@tickets.tawk.to', $subject, $body, $headers ) ) {
 					// Success
 					$response = [
 						'code' 			=> 'success',
@@ -212,7 +209,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			$options 			= get_option( Config::DB_OPTION );
 
 			// Admin email
-			$admin_email 	= get_option( 'admin_email', '' );
+			$admin_email 	= sanitize_email( get_option( 'admin_email', '' ) );
 
 			// Settings page
 			require_once Config::$plugin_path . 'inc/admin/views/settings.php';
