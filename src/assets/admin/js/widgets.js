@@ -11,7 +11,7 @@
 		$( 'h3' ).each( function() {
 			var $parent = $( this ).parent().parent().parent();
 
-			if( $parent.attr( 'id' ) !== undefined && $parent.attr( 'id' ) !== false && $parent.attr( 'id' ).indexOf( 'as_wb_' ) > 0 ) {
+			if( $parent.attr( 'id' ) !== undefined && $parent.attr( 'id' ) !== false && $parent.attr( 'id' ).indexOf( widgetsbundle_admin.prefix ) > 0 ) {
 				$( this ).parents( '.widget-top' ).addClass( 'as-wb-widget-top' );
 			}
 		} );
@@ -33,9 +33,9 @@
 			}
 
 			custom_uploader = wp.media.frames.file_frame = wp.media( {
-				title: as_wb_js.image_text,
+				title: widgetsbundle_js.image_text,
 				button: {
-					text: as_wb_js.image_text
+					text: widgetsbundle_js.image_text
 				},
 				multiple: false
 			} );
@@ -46,10 +46,10 @@
 
 				$( '.as-wb-personal-url' ).val( attachment.url );
 				$( '.as-wb-personal-upload .as-wb-personal-preview' ).html( '<img src="' + attachment.url + '" />' );
-				$( '.as-wb-personal-append' ).html( '<a href="javascript:;" id="as-wb-personal-remove">' + as_wb_js.remove_text + '</a>' );
+				$( '.as-wb-personal-append' ).html( '<a href="javascript:;" id="as-wb-personal-remove">' + widgetsbundle_js.remove_text + '</a>' );
 
 				// Change state.
-				$( '.as-wb-personal-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( as_wb_js.save_text ).prop( 'disabled', false );
+				$( '.as-wb-personal-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( widgetsbundle_js.save_text ).prop( 'disabled', false );
 			} );
 
 			// Open dialog.
@@ -61,11 +61,11 @@
 			e.preventDefault();
 
 			$( '.as-wb-personal-url' ).val( '' );
-			$( '.as-wb-personal-upload .as-wb-personal-preview' ).html( as_wb_js.image_preview_text );
+			$( '.as-wb-personal-upload .as-wb-personal-preview' ).html( widgetsbundle_js.image_preview_text );
 			$( this ).hide();
 
 			// Change state.
-			$( '.as-wb-personal-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( as_wb_js.save_text ).prop( 'disabled', false );
+			$( '.as-wb-personal-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( widgetsbundle_js.save_text ).prop( 'disabled', false );
 		} );
 
 
@@ -85,9 +85,9 @@
 			}
 
 			custom_uploader = wp.media.frames.file_frame = wp.media( {
-				title: as_wb_js.ad_text,
+				title: widgetsbundle_js.ad_text,
 				button: {
-					text: as_wb_js.ad_text
+					text: widgetsbundle_js.ad_text
 				},
 				multiple: false
 			} );
@@ -98,10 +98,10 @@
 
 				$( '.as-wb-ads-url' ).val( attachment.url );
 				$( '.as-wb-ads-upload .as-wb-ads-preview' ).html( '<img src="' + attachment.url + '" />' );
-				$( '.as-wb-ads-append' ).html( '<a href="javascript:;" id="as-wb-ads-remove">' + as_wb_js.remove_text + '</a>' );
+				$( '.as-wb-ads-append' ).html( '<a href="javascript:;" id="as-wb-ads-remove">' + widgetsbundle_js.remove_text + '</a>' );
 
 				// Change state.
-				$( '.as-wb-ads-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( as_wb_js.save_text ).prop( 'disabled', false );
+				$( '.as-wb-ads-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( widgetsbundle_js.save_text ).prop( 'disabled', false );
 			} );
 
 			// Open dialog.
@@ -113,11 +113,11 @@
 			e.preventDefault();
 
 			$( '.as-wb-ads-url' ).val( '' );
-			$( '.as-wb-ads-upload .as-wb-ads-preview' ).html( as_wb_js.ad_preview_text );
+			$( '.as-wb-ads-upload .as-wb-ads-preview' ).html( widgetsbundle_js.ad_preview_text );
 			$( this ).hide();
 
 			// Change state.
-			$( '.as-wb-ads-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( as_wb_js.save_text ).prop( 'disabled', false );
+			$( '.as-wb-ads-upload' ).closest( '.widget' ).find( 'input[type="submit"]' ).val( widgetsbundle_js.save_text ).prop( 'disabled', false );
 		} );
 
 	} );

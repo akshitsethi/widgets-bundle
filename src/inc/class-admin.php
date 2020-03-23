@@ -59,6 +59,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 				'support_text' 	=> esc_html__( 'Ask for Support', 'widgets-bundle' )
 			];
 
+			wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin', $localize );
 			wp_enqueue_script( Config::SHORT_SLUG . '-admin' );
 		}
 
@@ -133,15 +134,15 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			];
 
 			// Filter and sanitize
-			$options['ads'] 			= isset( $_POST['as_wb_ads'] ) 				? true : false;
-			$options['personal'] 	= isset( $_POST['as_wb_personal'] ) 	? true : false;
-			$options['posts'] 		= isset( $_POST['as_wb_posts'] ) 			? true : false;
-			$options['quote'] 		= isset( $_POST['as_wb_quote'] ) 			? true : false;
-			$options['social'] 		= isset( $_POST['as_wb_social'] ) 		? true : false;
-			$options['subscribe'] = isset( $_POST['as_wb_subscribe'] ) 	? true : false;
-			$options['instagram'] = isset( $_POST['as_wb_instagram'] ) 	? true : false;
-			$options['facebook'] 	= isset( $_POST['as_wb_facebook'] ) 	? true : false;
-			$options['twitter'] 	= isset( $_POST['as_wb_twitter'] ) 		? true : false;
+			$options['ads'] 			= isset( $_POST[Config::PREFIX . 'ads'] ) 				? true : false;
+			$options['personal'] 	= isset( $_POST[Config::PREFIX . 'personal'] ) 		? true : false;
+			$options['posts'] 		= isset( $_POST[Config::PREFIX . 'posts'] ) 			? true : false;
+			$options['quote'] 		= isset( $_POST[Config::PREFIX . 'quote'] ) 			? true : false;
+			$options['social'] 		= isset( $_POST[Config::PREFIX . 'social'] ) 			? true : false;
+			$options['subscribe'] = isset( $_POST[Config::PREFIX . 'subscribe'] ) 	? true : false;
+			$options['instagram'] = isset( $_POST[Config::PREFIX . 'instagram'] ) 	? true : false;
+			$options['facebook'] 	= isset( $_POST[Config::PREFIX . 'facebook'] ) 		? true : false;
+			$options['twitter'] 	= isset( $_POST[Config::PREFIX . 'twitter'] ) 		? true : false;
 
 			// Update options
 			update_option( Config::DB_OPTION, $options );
@@ -167,7 +168,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			];
 
 			// Filter and sanitize
-			if ( ! empty( $_POST['as_support_email'] ) && ! empty( $_POST['as_support_issue'] ) ) {
+			if ( ! empty( $_POST[Config::PREFIX . 'support_email'] ) && ! empty( $_POST[Config::PREFIX . 'support_issue'] ) ) {
 				$admin_email 	= sanitize_text_field( $_POST['as_support_email'] );
 				$issue 				= htmlentities( $_POST['as_support_issue'] );
 				$subject 			= '[Widgets Bundle v' . Config::VERSION . '] by ' . $admin_email;
