@@ -49,7 +49,17 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 */
 		public function admin_scripts() {
 			wp_enqueue_style( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/css/admin.css', false, Config::VERSION );
-			wp_enqueue_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', [ 'jquery' ], Config::VERSION , true );
+
+			// Localize and enqueue script
+			wp_register_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', [ 'jquery' ], Config::VERSION , true );
+
+			$localize = [
+				'prefix' 				=> Config::PREFIX,
+				'save_text' 		=> esc_html__( 'Save Changes', 'widgets-bundle' ),
+				'support_text' 	=> esc_html__( 'Ask for Support', 'widgets-bundle' )
+			];
+
+			wp_enqueue_script( Config::SHORT_SLUG . '-admin' );
 		}
 
 
@@ -134,7 +144,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			$options['twitter'] 	= isset( $_POST['as_wb_twitter'] ) 		? true : false;
 
 			// Update options
-			update_option( 'as_wb_options', $options );
+			update_option( Config::DB_OPTION, $options );
 
 			// Headers for JSON format
 			header( "Content-Type: application/json" );
