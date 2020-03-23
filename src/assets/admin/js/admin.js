@@ -138,18 +138,16 @@ toastr.options = {
 				// Unblock
 				$('#' + id).unblock();
 
-				console.log(data);
+				// Success
+				if (data.code == 'success') {
+					toastr.success('<strong>Hey!</strong> ' + data.response);
 
-				// // Success
-				// if (data.code == 'success') {
-				// 	toastr.success('<strong>Hey!</strong> ' + data.response);
-
-				// 	// Remove input class
-				// 	$('input, textarea, select').removeClass('changed-input');
-				// } else {
-				// 	// Error
-				// 	toastr.error('<strong>Oops!</strong> ' + data.response);
-				// }
+					// Remove input class
+					$('input, textarea, select').removeClass('changed-input');
+				} else {
+					// Error
+					toastr.error('<strong>Oops!</strong> ' + data.response);
+				}
 			});
 		});
 
