@@ -38,7 +38,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		 * Class Constructor.
 		 */
 		public function __construct() {
-			// Initialize admin.
+			// Initialize admin
 			new Admin();
 
 			add_action( 'widgets_init', [ $this, 'register_widgets' ] );
@@ -55,7 +55,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			register_widget( __NAMESPACE__ . '\Widgets\Social' );
 			register_widget( __NAMESPACE__ . '\Widgets\Subscribe' );
 			register_widget( __NAMESPACE__ . '\Widgets\Twitter' );
-			register_widget( __NAMESPACE__ . '\Widgets\Video' );
 		}
 
 

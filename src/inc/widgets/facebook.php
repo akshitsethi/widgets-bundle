@@ -8,15 +8,16 @@
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 	use WP_Widget;
+	use AkshitSethi\Plugins\WidgetsBundle\Config;
 
 	class Facebook extends WP_Widget {
 
 		public function __construct() {
 			parent::__construct(
-				'as_wb_facebook',
+				Config::PREFIX . 'facebook',
 				esc_html__( 'Facebook', 'widgets-bundle' ),
 				[
-					'classname'   => 'as_wb_facebook',
+					'classname'   => Config::PREFIX . 'facebook',
 					'description' => esc_html__( 'Widget that displays your Facebook page feed.', 'widgets-bundle' )
 				]
 			);
@@ -52,24 +53,23 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
 
-			// Scripts.
-			wp_register_script( 'as-wb-fb', AS_WB_URL . '/framework/public/js/facebook.js', array( 'jquery' ), AS_WB_VERSION );
+			// Register script
+			wp_register_script( Config::SHORT_SLUG . '-fb', Config::$plugin_url . '/assets/js/facebook.js', [ 'jquery' ], Config::VERSION );
 
-			// Localize.
-			$localize = array(
-				'app_id' 	=> $app_id,
+			// Localize
+			$localize = [
+				'app_id' 		=> $app_id,
 				'language' 	=> $language
-			);
+			];
 
-			wp_localize_script( 'as-wb-fb', 'as_wb_fb', $localize );
-			wp_enqueue_script( 'as-wb-fb' );
+			wp_localize_script( Config::SHORT_SLUG . '-fb', Config::PREFIX . 'fb', $localize );
+			wp_enqueue_script( Config::SHORT_SLUG . '-fb' );
 
-			// HTML.
+			// Widget code
 			echo '<div class="as-wb-facebook">';
-			echo '<div class="as-wb-fb-loader"><img src="' . AS_WB_URL . '/framework/public/img/loading.gif" /></div><!-- .as-wb-fb-loader -->';
-			echo '<div id="fb-root"></div>';
+			echo '<div class="as-wb-fb-loader"><img src="' . Config::$plugin_url . '/assets/images/loading.gif" /></div><!-- .as-wb-fb-loader -->';
+ 
 			echo '<div class="fb-page" data-href="' . $url . '" data-small-header="' . $small_header . '" data-adapt-container-width="' . $container_width . '" data-hide-cover="' . $hide_cover . '" data-show-facepile="' . $show_facepile . '" data-show-posts="' . $show_posts . '" data-width="' . $width . '" data-height="' . $height . '"><blockquote cite="' . $url . '" class="fb-xfbml-parse-ignore"><a href="' . $url . '"></a></blockquote></div>';
-
 			echo '</div><!-- .as-wb-facebook -->';
 
 			echo $args['after_widget'];
@@ -91,11 +91,11 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			$instance['url'] 							= sanitize_text_field( $new_instance['url'] );
 			$instance['width'] 						= sanitize_text_field( $new_instance['width'] );
 			$instance['height'] 					= sanitize_text_field( $new_instance['height'] );
-			$instance['small_header'] 		= !empty( $new_instance['small_header'] ) ? 1 : 0;
-			$instance['container_width'] 	= !empty( $new_instance['container_width'] ) ? 1 : 0;
-			$instance['hide_cover'] 			= !empty( $new_instance['hide_cover'] ) ? 1 : 0;
-			$instance['show_facepile'] 		= !empty( $new_instance['show_facepile'] ) ? 1 : 0;
-			$instance['show_posts'] 			= !empty( $new_instance['show_posts'] ) ? 1 : 0;
+			$instance['small_header'] 		= ! empty( $new_instance['small_header'] ) ? 1 : 0;
+			$instance['container_width'] 	= ! empty( $new_instance['container_width'] ) ? 1 : 0;
+			$instance['hide_cover'] 			= ! empty( $new_instance['hide_cover'] ) ? 1 : 0;
+			$instance['show_facepile'] 		= ! empty( $new_instance['show_facepile'] ) ? 1 : 0;
+			$instance['show_posts'] 			= ! empty( $new_instance['show_posts'] ) ? 1 : 0;
 			$instance['language'] 				= sanitize_text_field( $new_instance['language'] );
 
 			return $instance;
@@ -103,7 +103,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 
 		/**
-		 * Widget Form.
+		 * Widget form.
 		 *
 		 * @param array $instance
 		 * @return void
@@ -164,8 +164,8 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 		<?php
 
-			// Locales File
-			$filename = AS_WB_PATH . 'framework/public/include/facebook-locales.json';
+			// Locales file
+			$filename = Config::$plugin_path . 'framework/public/include/facebook-locales.json';
 
 			if ( ini_get( 'allow_url_fopen' ) ) {
 				if ( file_exists( $filename ) ) {
@@ -202,16 +202,15 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 
 		?>
 
-				<p><?php printf( __( 'Your PHP configuration does not allow to read <a href="%1$s" target="_blank">this</a> file. To unable language option, enable <a href="http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen" target="_blank"><b>allow_url_fopen</b></a> in your server configuration.', 'widgets-bundle' ), esc_url( AS_WB_URL . '/framework/public/include/facebook-locales.json' ) ); ?></p>
+				<p><?php printf( __( 'Your PHP configuration does not allow to read <a href="%1$s" target="_blank">this</a> file. To unable language option, enable <a href="http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen" target="_blank"><b>allow_url_fopen</b></a> in your server configuration.', 'widgets-bundle' ), esc_url( Config::$plugin_url . '/assets/json/facebook-locales.json' ) ); ?></p>
 
 		<?php
-
 			}
 		}
 
 
 		/**
-		 * Default Options.
+		 * Default options.
 		 * @access private
 		 */
 		private static function defaults() {
