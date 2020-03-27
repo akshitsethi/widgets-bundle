@@ -64,7 +64,7 @@ toastr.options = {
 
   function hacks($tab) {
     // Submit button
-    var $as_button = $('#' + widgetsbundle_admin.prefix + 'submit');
+    var $as_button = $('#' + widgetsbundle_admin_l10n.prefix + 'submit');
 
     // About
     if ($tab == '#about') {
@@ -75,9 +75,9 @@ toastr.options = {
 
     // Support
     if ($tab == '#support') {
-      $as_button.val(widgetsbundle_admin.support_text);
+      $as_button.val(widgetsbundle_admin_l10n.support_text);
     } else {
-      $as_button.val(widgetsbundle_admin.save_text);
+      $as_button.val(widgetsbundle_admin_l10n.save_text);
     }
   }
 
@@ -101,7 +101,7 @@ toastr.options = {
     }
 
     // Submission
-    $(document).on('click', '#' + widgetsbundle_admin.prefix + 'submit', function (e) {
+    $(document).on('click', '#' + widgetsbundle_admin_l10n.prefix + 'submit', function (e) {
       e.preventDefault();
 
       // ID
@@ -111,7 +111,7 @@ toastr.options = {
       var data 	= new FormData($('#' + id + ' form')[0]);
 
       // Append action
-      data.append('action', widgetsbundle_admin.prefix + id);
+      data.append('action', widgetsbundle_admin_l10n.prefix + id);
 
       // AJAX
       $.ajax( {
@@ -155,7 +155,7 @@ toastr.options = {
     // On form change
     $('form').on('change keyup keydown', 'input, textarea, select', function (e) {
       // Get cookie state
-      var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
+      var $state = Cookies.get(widgetsbundle_admin_l10n.prefix + 'menu');
 
       if ($state) {
         if ($state != '#support') {
@@ -166,7 +166,7 @@ toastr.options = {
       }
     });
 
-    var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
+    var $state = Cookies.get(widgetsbundle_admin_l10n.prefix + 'menu');
 
     // Check menu position
     if ($state) {
@@ -174,7 +174,7 @@ toastr.options = {
       $('a[href="' + $state + '"]').addClass('active');
 
       // Add : Button (data-tab)
-      $('#' + widgetsbundle_admin.prefix + 'submit' ).attr('data-tab', $state);
+      $('#' + widgetsbundle_admin_l10n.prefix + 'submit' ).attr('data-tab', $state);
 
       // Hacks for support and about tabs
       hacks($state);
@@ -186,7 +186,7 @@ toastr.options = {
       $('.as-tile:first').fadeIn();
 
       // Add options (data-tab)
-      $('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', '#options');
+      $('#' + widgetsbundle_admin_l10n.prefix + 'submit').attr('data-tab', '#options');
     }
 
     // Menu
@@ -194,7 +194,7 @@ toastr.options = {
       e.preventDefault();
 
       // Remove cookies
-      Cookies.remove(widgetsbundle_admin.prefix + 'menu', {path: '/'});
+      Cookies.remove(widgetsbundle_admin_l10n.prefix + 'menu', {path: '/'});
 
       var $selector 		= $(this);
       var $tab      		= $selector.attr('href');
@@ -213,10 +213,10 @@ toastr.options = {
         $($tab).fadeIn();
 
         // Set cookie
-        Cookies.set(widgetsbundle_admin.prefix + 'menu', $tab, {path: '/'});
+        Cookies.set(widgetsbundle_admin_l10n.prefix + 'menu', $tab, {path: '/'});
 
         // State button (add)
-        $('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', $tab);
+        $('#' + widgetsbundle_admin_l10n.prefix + 'submit').attr('data-tab', $tab);
 
         // Hacks for support and about tabs
         hacks($tab)
