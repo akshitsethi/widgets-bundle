@@ -38,194 +38,194 @@ y),b(document.body).on("sticky_kit:recalc",y),a.on("sticky_kit:detach",H),setTim
 
 
 /**
- * Admin JS
+ * JS for options panel functionality.
  * @see https://akshitsethi.com
  */
 
 // Default options for Toastr
 toastr.options = {
-	"closeButton": false,
-	"debug": false,
-	"newestOnTop": true,
-	"progressBar": false,
-	"positionClass": "toast-bottom-right",
-	"preventDuplicates": false,
-	"onclick": null,
-	"showDuration": "1000",
-	"hideDuration": "1000",
-	"timeOut": "5000",
-	"extendedTimeOut": "1000",
-	"showEasing": "swing",
-	"hideEasing": "linear",
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": true,
+  "progressBar": false,
+  "positionClass": "toast-bottom-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "1000",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
 };
 
 (function($) {
-	'use strict';
+  'use strict';
 
-	function hacks($tab) {
-		// Submit button
-		var $as_button = $('#' + widgetsbundle_admin.prefix + 'submit');
+  function hacks($tab) {
+    // Submit button
+    var $as_button = $('#' + widgetsbundle_admin.prefix + 'submit');
 
-		// About
-		if ($tab == '#about') {
-			$as_button.hide();
-		} else {
-			$as_button.show();
-		}
+    // About
+    if ($tab == '#about') {
+      $as_button.hide();
+    } else {
+      $as_button.show();
+    }
 
-		// Support
-		if ($tab == '#support') {
-			$as_button.val(widgetsbundle_admin.support_text);
-		} else {
-			$as_button.val(widgetsbundle_admin.save_text);
-		}
-	}
+    // Support
+    if ($tab == '#support') {
+      $as_button.val(widgetsbundle_admin.support_text);
+    } else {
+      $as_button.val(widgetsbundle_admin.save_text);
+    }
+  }
 
-	// On DOM ready
-	$(document).ready(function() {
-		// IOS switches
-		var elements = Array.prototype.slice.call(document.querySelectorAll('.as-form-ios'));
+  // On DOM ready
+  $(document).ready(function () {
+    // IOS switches
+    var elements = Array.prototype.slice.call(document.querySelectorAll('.as-form-ios'));
 
-		elements.forEach(function(html) {
-			var switchery = new Switchery(html);
-		});
-
-
-		// Sticky header
-		if ($(window).width() <= 600) {
-			$('.as-header').stick_in_parent({bottoming: false, offset_top: 0});
-		} else if ($(window).width() > 600 && $(window).width() < 783) {
-			$('.as-header').stick_in_parent({bottoming: false, offset_top: 46});
-		} else {
-			$('.as-header').stick_in_parent({bottoming: false, offset_top: 32});
-		}
-
-		// Submission
-		$(document).on('click', '#' + widgetsbundle_admin.prefix + 'submit', function(e) {
-			e.preventDefault();
-
-			// ID
-			var id 		= $(this).attr('data-tab').replace('#', '');
-
-			// Form data
-			var data 	= new FormData($('#' + id + ' form')[0]);
-
-			// Append action
-			data.append('action', widgetsbundle_admin.prefix + id);
-
-			// AJAX
-			$.ajax( {
-				type: 'POST',
-				url: ajaxurl,
-				data: data,
-				processData: false,
-				contentType: false,
-				beforeSend: function() {
-					$('#' + id).block({
-						message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
-						css: {
-							border: 'none',
-							backgroundColor: 'none'
-						},
-						overlayCSS: {
-							backgroundColor: '#eeeeee',
-							opacity: '0.5',
-							cursor: 'wait'
-						}
-					});
-				}
-			}).done(function(data) {
-				// Unblock
-				$('#' + id).unblock();
-
-				// Success
-				if (data.code == 'success') {
-					toastr.success('<strong>Hey!</strong> ' + data.response);
-
-					// Remove input class
-					$('input, textarea, select').removeClass('changed-input');
-				} else {
-					// Error
-					toastr.error('<strong>Oops!</strong> ' + data.response);
-				}
-			});
-		});
+    elements.forEach(function(html) {
+      var switchery = new Switchery(html);
+    });
 
 
-		// On form change
-		$('form').on('change keyup keydown', 'input, textarea, select', function(e) {
-			// Get cookie state
-			var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
+    // Sticky header
+    if ($(window).width() <= 600) {
+      $('.as-header').stick_in_parent({bottoming: false, offset_top: 0});
+    } else if ($(window).width() > 600 && $(window).width() < 783) {
+      $('.as-header').stick_in_parent({bottoming: false, offset_top: 46});
+    } else {
+      $('.as-header').stick_in_parent({bottoming: false, offset_top: 32});
+    }
 
-			if ($state) {
-				if ($state != '#support') {
-					$(this).addClass('changed-input');
-				}
-			} else {
-				$(this).addClass('changed-input');
-			}
-		});
+    // Submission
+    $(document).on('click', '#' + widgetsbundle_admin.prefix + 'submit', function (e) {
+      e.preventDefault();
 
-		var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
+      // ID
+      var id 		= $(this).attr('data-tab').replace('#', '');
 
-		// Check menu position
-		if ($state) {
-			$('.as-main-menu li a').removeClass('active');
-			$('a[href="' + $state + '"]').addClass('active');
+      // Form data
+      var data 	= new FormData($('#' + id + ' form')[0]);
 
-			// Add : Button (data-tab)
-			$('#' + widgetsbundle_admin.prefix + 'submit' ).attr('data-tab', $state);
+      // Append action
+      data.append('action', widgetsbundle_admin.prefix + id);
 
-			// Hacks for support and about tabs
-			hacks($state);
+      // AJAX
+      $.ajax( {
+        type: 'POST',
+        url: ajaxurl,
+        data: data,
+        processData: false,
+        contentType: false,
+        beforeSend: function() {
+          $('#' + id).block({
+            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
+            css: {
+              border: 'none',
+              backgroundColor: 'none'
+            },
+            overlayCSS: {
+              backgroundColor: '#eeeeee',
+              opacity: '0.5',
+              cursor: 'wait'
+            }
+          });
+        }
+      }).done(function(data) {
+        // Unblock
+        $('#' + id).unblock();
 
-			// Load
-			$($state).fadeIn();
-		} else {
-			$('.as-main-menu li:first a').addClass('active');
-			$('.as-tile:first').fadeIn();
+        // Success
+        if (data.code == 'success') {
+          toastr.success('<strong>Hey!</strong> ' + data.response);
 
-			// Add options (data-tab)
-			$('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', '#options');
-		}
+          // Remove input class
+          $('input, textarea, select').removeClass('changed-input');
+        } else {
+          // Error
+          toastr.error('<strong>Oops!</strong> ' + data.response);
+        }
+      });
+    });
 
-		// Menu
-		$('.as-main-menu li a').click(function(e) {
-			e.preventDefault();
 
-			// Remove cookies
-			Cookies.remove(widgetsbundle_admin.prefix + 'menu', {path: '/'});
+    // On form change
+    $('form').on('change keyup keydown', 'input, textarea, select', function (e) {
+      // Get cookie state
+      var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
 
-			var $selector 		= $(this);
-			var $tab      		= $selector.attr('href');
+      if ($state) {
+        if ($state != '#support') {
+          $(this).addClass('changed-input');
+        }
+      } else {
+        $(this).addClass('changed-input');
+      }
+    });
 
-			if ($('.changed-input').length) {
-				toastr.error('<strong>Hey!</strong> You haven\'t saved your changes.');
-			} else {
-				// Change menu selection
-				$('.as-main-menu li a').removeClass('active');
-				$selector.addClass('active');
+    var $state = Cookies.get(widgetsbundle_admin.prefix + 'menu');
 
-				// Hide tabs
-				$('.as-tile').hide();
+    // Check menu position
+    if ($state) {
+      $('.as-main-menu li a').removeClass('active');
+      $('a[href="' + $state + '"]').addClass('active');
 
-				// Load selected tab
-				$($tab).fadeIn();
+      // Add : Button (data-tab)
+      $('#' + widgetsbundle_admin.prefix + 'submit' ).attr('data-tab', $state);
 
-				// Set cookie
-				Cookies.set(widgetsbundle_admin.prefix + 'menu', $tab, {path: '/'});
+      // Hacks for support and about tabs
+      hacks($state);
 
-				// State button (add)
-				$('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', $tab);
+      // Load
+      $($state).fadeIn();
+    } else {
+      $('.as-main-menu li:first a').addClass('active');
+      $('.as-tile:first').fadeIn();
 
-				// Hacks for support and about tabs
-				hacks($tab)
-			}
-		});
+      // Add options (data-tab)
+      $('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', '#options');
+    }
 
-		// Mobile navigation
-		$('.as-mobile-menu a').click(function() {
-			$('.as-main-menu').slideToggle();
-		});
-	});
+    // Menu
+    $('.as-main-menu li a').click(function (e) {
+      e.preventDefault();
+
+      // Remove cookies
+      Cookies.remove(widgetsbundle_admin.prefix + 'menu', {path: '/'});
+
+      var $selector 		= $(this);
+      var $tab      		= $selector.attr('href');
+
+      if ($('.changed-input').length) {
+        toastr.error('<strong>Hey!</strong> You haven\'t saved your changes.');
+      } else {
+        // Change menu selection
+        $('.as-main-menu li a').removeClass('active');
+        $selector.addClass('active');
+
+        // Hide tabs
+        $('.as-tile').hide();
+
+        // Load selected tab
+        $($tab).fadeIn();
+
+        // Set cookie
+        Cookies.set(widgetsbundle_admin.prefix + 'menu', $tab, {path: '/'});
+
+        // State button (add)
+        $('#' + widgetsbundle_admin.prefix + 'submit').attr('data-tab', $tab);
+
+        // Hacks for support and about tabs
+        hacks($tab)
+      }
+    });
+
+    // Mobile navigation
+    $('.as-mobile-menu a').click(function () {
+      $('.as-main-menu').slideToggle();
+    });
+  });
 })(jQuery);
