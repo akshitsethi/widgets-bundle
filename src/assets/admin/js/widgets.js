@@ -1,8 +1,6 @@
 /**
- * Widgets.js
- * -------------------------------------------------
+ * JS code for Widgets in the WP admin panel.
  */
-
 ( function( $ ) {
 
 	'use strict';
