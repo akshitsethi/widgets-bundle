@@ -13,8 +13,7 @@
   "autoload": {
     "psr-4": {
       "AkshitSethi\\Plugins\\WidgetsBundle\\": "inc",
-      "AkshitSethi\\Plugins\\WidgetsBundle\\Widgets\\": "inc/widgets",
-      "AkshitSethi\\Plugins\\WidgetsBundle\\Admin\\Views\\": "inc/admin/views"
+      "AkshitSethi\\Plugins\\WidgetsBundle\\Widgets\\": "inc/widgets"
     }
   }
 }
