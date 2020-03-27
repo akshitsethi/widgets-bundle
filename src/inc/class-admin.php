@@ -59,7 +59,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 				'support_text' 	=> esc_html__( 'Ask for Support', 'widgets-bundle' )
 			];
 
-			wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin', $localize );
+			wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
 			wp_enqueue_script( Config::SHORT_SLUG . '-admin' );
 		}
 
@@ -78,6 +78,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 		public function widget_scripts() {
 			$screen 		= get_current_screen();
 			$localize 	= [
+				'prefix' 							=> Config::PREFIX,
 				'image_text' 					=> esc_html__( 'Choose Personal Image', 'widgets-bundle' ),
 				'ad_text' 						=> esc_html__( 'Choose Advertisement', 'widgets-bundle' ),
 				'save_text' 					=> esc_html__( 'Save', 'widgets-bundle' ),
@@ -89,7 +90,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle {
 			wp_enqueue_style( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/css/widgets.css', false, Config::VERSION );
 			wp_register_script( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/js/widgets.js', [ 'jquery' ], Config::VERSION, false );
 
-			wp_localize_script( Config::SHORT_SLUG . '-widgets', Config::PREFIX . 'js', $localize );
+			wp_localize_script( Config::SHORT_SLUG . '-widgets', Config::PREFIX . 'l10n', $localize );
 
 			// Scripts
 			wp_enqueue_script( Config::SHORT_SLUG . '-widgets' );
