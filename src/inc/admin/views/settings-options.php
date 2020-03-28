@@ -68,7 +68,7 @@ use AkshitSethi\Plugins\WidgetsBundle\Config;
 				<div class="as-double-group as-clearfix">
 					<div class="as-form-group">
 						<label for="<?php echo Config::PREFIX . 'subscribe'; ?>" class="as-strong"><?php esc_html_e( 'Subscribe Widget', 'widgets-bundle' ); ?></label>
-						<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'mailchimp'; ?>" value="1"<?php checked( true, absint( $options['subscribe'] ) ); ?>>
+						<input type="checkbox" class="as-form-ios" name="<?php echo Config::PREFIX . 'subscribe'; ?>" value="1"<?php checked( true, absint( $options['subscribe'] ) ); ?>>
 
 						<p class="as-form-help-block"><?php esc_html_e( 'Mailchimp subscription form with AJAX functionality.', 'widgets-bundle' ); ?></p>
 					</div>
