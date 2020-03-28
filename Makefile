@@ -25,8 +25,6 @@ src/vendor:
 	cd src && composer dump-autoload -a
 
 build: ensure
-	sed -i "s/@##VERSION##@/${VERSION}/" src/$(PLUGINSLUG).php
-	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/$(PLUGINSLUG).pot
 	mkdir -p build
 	rm -rf src/vendor
 	cd src && composer install --no-dev
@@ -35,19 +33,13 @@ build: ensure
 	zip -r $(PLUGINSLUG).zip $(PLUGINSLUG)
 	rm -rf $(PLUGINSLUG)
 	mv $(PLUGINSLUG).zip build/
-	sed -i "s/${VERSION}/@##VERSION##@/" src/$(PLUGINSLUG).php
-	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/$(PLUGINSLUG).pot
 
 dist: ensure
-	sed -i "s/@##VERSION##@/${VERSION}/" src/$(PLUGINSLUG).php
-	sed -i "s/@##VERSION##@/${VERSION}/" src/i18n/$(PLUGINSLUG).pot
 	mkdir -p dist
 	rm -rf src/vendor
 	cd src && composer install --no-dev
 	cd src && composer dump-autoload -a
 	cp -r $(SRCPATH)/. dist/
-	sed -i "s/${VERSION}/@##VERSION##@/" src/$(PLUGINSLUG).php
-	sed -i "s/${VERSION}/@##VERSION##@/" src/i18n/$(PLUGINSLUG).pot
 
 publish: build bin/linux/amd64/github-release
 	bin/linux/amd64/github-release upload \
