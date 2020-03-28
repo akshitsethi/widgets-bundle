@@ -23,7 +23,6 @@ Widgets are great and add more power to your website. Widgets Bundle comes power
 * Twitter Widget - beautifully showcase your twitter profile feed
 * Social Widget - display your social media links with icons
 * Subscribe Widget - do you use MailChimp as your newsletter service? If yes, then this widget let's you have a beautiful subscribe form on the website
-* Video Widget - embed beautiful videos from YouTube, Vimeo, etc
 * Quote Widget - write quotes and show them in a beautiful format
 
 **About**

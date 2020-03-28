@@ -1,4 +1,9 @@
 <?php
+/**
+ * Frontend class for the plugin.
+ *
+ * @package AkshitSethi\Plugins\WidgetsBundle
+ */
 
 namespace AkshitSethi\Plugins\WidgetsBundle;
 
