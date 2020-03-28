@@ -68,11 +68,9 @@ release:
 
 fmt: ensure
 	bin/phpcbf --standard=WordPress src --ignore=src/vendor,src/assets
-	bin/phpcbf --standard=WordPress tests --ignore=vendor
 
 lint: ensure
-	bin/phpcs --standard=WordPress src --ignore=src/vendor
-	bin/phpcs --standard=WordPress tests --ignore=vendor
+	bin/phpcs --standard=WordPress src --ignore=src/vendor,src/assets
 
 psr: src/vendor
 	composer dump-autoload -a
