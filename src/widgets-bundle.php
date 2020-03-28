@@ -43,15 +43,18 @@ class WidgetsBundle {
 
 
 	public function register_widgets() {
-		register_widget( __NAMESPACE__ . '\Widgets\Ads' );
-		register_widget( __NAMESPACE__ . '\Widgets\Facebook' );
-		register_widget( __NAMESPACE__ . '\Widgets\Instagram' );
-		register_widget( __NAMESPACE__ . '\Widgets\Personal' );
-		register_widget( __NAMESPACE__ . '\Widgets\Posts' );
-		register_widget( __NAMESPACE__ . '\Widgets\Quote' );
-		register_widget( __NAMESPACE__ . '\Widgets\Social' );
-		register_widget( __NAMESPACE__ . '\Widgets\Subscribe' );
-		register_widget( __NAMESPACE__ . '\Widgets\Twitter' );
+		// Get option
+		$widgets = get_option( Config::DB_OPTION );
+
+		( $widgets['ads'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Ads' ) : false;
+		( $widgets['facebook'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Facebook' ) : false;
+		( $widgets['instagram'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Instagram' ) : false;
+		( $widgets['personal'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Personal' ) : false;
+		( $widgets['posts'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Posts' ) : false;
+		( $widgets['quote'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Quote' ) : false;
+		( $widgets['social'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Social' ) : false;
+		( $widgets['subscribe'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Subscribe' ) : false;
+		( $widgets['twitter'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Twitter' ) : false;
 	}
 
 
