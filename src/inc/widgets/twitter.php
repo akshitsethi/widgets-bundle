@@ -101,7 +101,7 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets {
 			echo $args['after_widget'];
 
 			// Script
-			wp_enqueue_script( 'as-wb-twitter', Config::plugin_url . '/framework/public/js/twitter.js', [ 'jquery' ], Config::VERSION );
+			wp_enqueue_script( Config::SHORT_SLUG . '-twitter', Config::$plugin_url . '/assets/js/twitter.js', array( 'jquery' ), Config::VERSION, true );
 		}
 
 
