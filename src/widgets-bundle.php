@@ -34,14 +34,29 @@ class WidgetsBundle {
 	 * Class Constructor.
 	 */
 	public function __construct() {
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
+	}
+
+
+	/**
+	 * Initialize plugin when all the plugins have been loaded.
+	 *
+	 * @since 2.0.0
+	 */
+	public function init() {
 		// Initialize front and admin
 		new Front();
 		new Admin();
 
-		add_action( 'widgets_init', [ $this, 'register_widgets' ] );
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 	}
 
 
+	 /**
+	 * Register widgets conditionally if they are enabled.
+	 *
+	 * @since 2.0.0
+	 */
 	public function register_widgets() {
 		// Get option
 		$widgets = get_option( Config::DB_OPTION );
