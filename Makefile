@@ -85,4 +85,4 @@ cover: vendor
 	bin/coverage-check clover.xml 100
 
 clean:
-	rm -rf vendor/ bin src/vendor/
+	rm -rf vendor/ src/vendor/
