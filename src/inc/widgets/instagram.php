@@ -58,41 +58,41 @@ class Instagram extends WP_Widget {
 			$media = $this->feed( $username, $photos );
 
 			if ( is_wp_error( $media ) ) {
-				echo '<p class="as-wb-ig-error"><span>' . $media->get_error_message() . '</span></p><!-- .as-wb-ig-error -->';
+				echo '<p class="as-wb-instagram--error"><span>' . $media->get_error_message() . '</span></p><!-- .as-wb-instagram--error -->';
 			} else {
 				if ( is_array( $media ) && ! empty( $media ) ) {
-					echo '<div class="as-wb-ig-wrapper">';
+					echo '<div class="as-wb-instagram--wrapper">';
 
 					foreach ( $media as $key => $value ) {
 						if ( $key >= $photos ) {
 							break;
 						}
 
-						echo '<div class="as-wb-ig-item as-wb-ig-' . absint( $photos_row ) . '">';
+						echo '<div class="as-wb-instagram--item as-wb-instagram--' . absint( $photos_row ) . '">';
 
 						if ( '320px' == $size ) {
-							echo '<div class="as-wb-ig-item-wrapper" style="background-image: url(' . esc_url( $value['url_medium'] ) . ');">';
+							echo '<div class="as-wb-instagram--item-wrapper" style="background-image: url(' . esc_url( $value['url_medium'] ) . ');">';
 						} else {
-							echo '<div class="as-wb-ig-item-wrapper" style="background-image: url(' . esc_url( $value['url_thumbnail'] ) . ');">';
+							echo '<div class="as-wb-instagram--item-wrapper" style="background-image: url(' . esc_url( $value['url_thumbnail'] ) . ');">';
 						}
 
 						echo '<a href="' . esc_url( $value['link'] ) . '" target="' . esc_attr( $target ) . '"></a>';
-						echo '</div><!-- .as-wb-ig-item-wrapper -->';
-						echo '</div><!-- .as-wb-ig-item -->';
+						echo '</div><!-- .as-wb-instagram--item-wrapper -->';
+						echo '</div><!-- .as-wb-instagram--item -->';
 					}
 
-					echo '</div><!-- .as-wb-ig-wrapper -->';
+					echo '</div><!-- .as-wb-instagram--wrapper -->';
 
 					// Follow Button
 					if ( '1' == $show_follow ) {
-						echo '<div class="as-wb-ig-button"><a href="https://instagram.com/' . $username . '" target="' . esc_attr( $target ) . '">' . esc_html( $follow_text ) . '</a></div><!-- .as-wb-ig-button -->';
+						echo '<div class="as-wb-instagram--button"><a href="https://instagram.com/' . $username . '" target="' . esc_attr( $target ) . '">' . esc_html( $follow_text ) . '</a></div><!-- .as-wb-instagram--button -->';
 					}
 				} else {
-					echo '<p class="as-wb-ig-error"><span>' . esc_html__( 'Unable to grab photos from Instagram.', 'widgets-bundle' ) . '</span></p><!-- .as-wb-ig-error -->';
+					echo '<p class="as-wb-instagram--error"><span>' . esc_html__( 'Unable to grab photos from Instagram.', 'widgets-bundle' ) . '</span></p><!-- .as-wb-instagram--error -->';
 				}
 			}
 		} else {
-			echo '<p class="as-wb-ig-error"><span>' . esc_html__( 'Username has not been provided.', 'widgets-bundle' ) . '</span></p><!-- .as-wb-ig-error -->';
+			echo '<p class="as-wb-instagram--error"><span>' . esc_html__( 'Username has not been provided.', 'widgets-bundle' ) . '</span></p><!-- .as-wb-instagram--error -->';
 		}
 
 		echo '</div><!-- .as-wb-instagram -->';

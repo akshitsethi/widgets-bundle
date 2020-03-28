@@ -184,15 +184,15 @@
 .as-wb-instagram {
   position: relative;
 }
-.as-wb-instagram .as-wb-ig-wrapper {
+.as-wb-instagram .as-wb-instagram--wrapper {
   margin: -1%;
 }
-.as-wb-instagram .as-wb-ig-item {
+.as-wb-instagram .as-wb-instagram--item {
   float: left;
   position: relative;
   margin: 1%;
 }
-.as-wb-instagram .as-wb-ig-item-wrapper {
+.as-wb-instagram .as-wb-instagram--item-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -202,58 +202,67 @@
   background-position: center center;
   background-size: cover;
 }
-.as-wb-instagram .as-wb-ig-2 {
+.as-wb-instagram .as-wb-instagram--2 {
   width: 48%;
   padding-top: 48%;
 }
-.as-wb-instagram .as-wb-ig-3 {
+.as-wb-instagram .as-wb-instagram--3 {
   width: 31.333333333333333%;
   padding-top: 31.333333333333333%;
 }
-.as-wb-instagram .as-wb-ig-4 {
+.as-wb-instagram .as-wb-instagram--4 {
   width: 23%;
   padding-top: 23%;
 }
-.as-wb-instagram .as-wb-ig-5 {
+.as-wb-instagram .as-wb-instagram--5 {
   width: 18%;
   padding-top: 18%;
 }
-.as-wb-instagram .as-wb-ig-6 {
+.as-wb-instagram .as-wb-instagram--6 {
   width: 14.666666666666667%;
   padding-top: 14.666666666666667%;
 }
-.as-wb-instagram .as-wb-ig-7 {
+.as-wb-instagram .as-wb-instagram--7 {
   width: 12.285714285714286%;
   padding-top: 12.285714285714286%;
 }
-.as-wb-instagram .as-wb-ig-8 {
+.as-wb-instagram .as-wb-instagram--8 {
   width: 10.5%;
   padding-top: 10.5%;
 }
-.as-wb-instagram .as-wb-ig-9 {
+.as-wb-instagram .as-wb-instagram--9 {
   width: 9.111111111111111%;
   padding-top: 9.111111111111111%;
 }
-.as-wb-instagram .as-wb-ig-10 {
+.as-wb-instagram .as-wb-instagram--10 {
   width: 8%;
   padding-top: 8%;
 }
-.as-wb-instagram .as-wb-ig-item-wrapper a {
+.as-wb-instagram .as-wb-instagram--item-wrapper a {
   display: block;
   height: 100%;
   width: 100%;
 }
-.as-wb-instagram .as-wb-instagram-error {
+.as-wb-instagram .as-wb-instagram--error {
   font-size: 16px;
   margin-top: 10px;
   padding-top: 45px;
 }
-.as-wb-instagram .as-wb-instagram-error span {
+.as-wb-instagram .as-wb-instagram--error span {
   color: #ffffff;
 }
-.as-wb-instagram .as-wb-ig-button {
+.as-wb-instagram .as-wb-instagram--button {
   margin-top: 12px;
 }
+.as-wb-instagram--wrapper:before,
+.as-wb-instagram--wrapper:after {
+  content: ' ';
+  display: table;
+}
+.as-wb-instagram--wrapper:after {
+  clear: both;
+}
+
 
 
 /**
@@ -280,42 +289,42 @@
   padding-bottom: 0;
   border: 0;
 }
-.as-wb-posts .as-wb-post-item {
+.as-wb-posts .as-wb-posts--item {
   word-break: break-all !important;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-image {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--image {
   display: inline-block;
   width: 86px;
   line-height: 0;
   vertical-align: middle;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-image img {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--image img {
   width: 72px;
   height: auto;
   border-radius: 100%;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-text {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--text {
   display: inline-block;
   width: calc(100% - 92px);
   vertical-align: middle;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-text h4 {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--text h4 {
   font-size: 16px;
   line-height: 26px;
   margin: 0 !important;
   padding: 0 !important;
   font-weight: 700;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-text h4 a {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--text h4 a {
   display: inline-block;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-text .as-wb-post-meta {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--text .as-wb-posts--meta {
   display: block;
   font-size: 12px;
   line-height: 18px;
   opacity: 0.60;
 }
-.as-wb-posts .as-wb-post-item .as-wb-post-text .as-wb-post-meta a {
+.as-wb-posts .as-wb-posts--item .as-wb-posts--text .as-wb-posts--meta a {
   opacity: 0.60;
 }
 
@@ -359,10 +368,10 @@
 /**
  * 07.. Social
  */
-.as-wb-social-icons {
+.as-wb-social .as-wb-social--icons {
   margin: -4px -10px;
 }
-.as-wb-social-icons a {
+.as-wb-social .as-wb-social--icons a {
   display: inline-block;
   margin: 0.875rem;
 }
@@ -403,10 +412,3 @@
 /**
  * 11.. Others
  */
-.as-wb-ig-wrapper:before, .as-wb-ig-wrapper:after {
-  content: ' ';
-  display: table;
-}
-.as-wb-ig-wrapper:after {
-  clear: both;
-}
