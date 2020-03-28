@@ -5,6 +5,15 @@
     "php": ">=7.2.0"
   },
   "require-dev": {
-    "lucatume/wp-browser": "^2.2"
+    "lucatume/wp-browser": "^2.2",
+    "dealerdirect/phpcodesniffer-composer-installer": "*",
+    "squizlabs/php_codesniffer": "*",
+    "wp-coding-standards/wpcs": "*",
+    "phpro/grumphp": "^0.14.2",
+    "sensiolabs/security-checker": "^5.0",
+    "maglnet/composer-require-checker": "^1.1"
+  },
+  "config": {
+    "bin-dir": "bin/"
   }
 }
