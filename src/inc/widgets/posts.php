@@ -64,18 +64,18 @@ class Posts extends WP_Widget {
 ?>
 
 				<li>
-					<div class="as-wb-post-item">
+					<div class="as-wb-post--item">
 						<?php if ( ( function_exists( 'has_post_thumbnail' ) ) && ( has_post_thumbnail() ) ) : ?>
-							<div class="as-wb-post-image">
+							<div class="as-wb-post--image">
 								<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_post_thumbnail( 'thumbnail', array( 'class' => 'as-item-image' ) ); ?></a>
-							</div><!-- .as-wb-post-image -->
+							</div><!-- .as-wb-post--image -->
 						<?php endif; ?>
 
-						<div class="as-wb-post-text">
-							<span class="as-wb-post-meta"><?php echo get_the_category_list( __( ', ', 'widgets-bundle' ) ); ?></span><!-- .as-wb-post-meta -->
+						<div class="as-wb-post--text">
+							<span class="as-wb-post--meta"><?php echo get_the_category_list( __( ', ', 'widgets-bundle' ) ); ?></span><!-- .as-wb-post--meta -->
 							<h4><a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark"><?php the_title(); ?></a></h4>
-						</div><!-- .as-wb-post-text -->
-					</div><!-- .as-wb-post-item -->
+						</div><!-- .as-wb-post--text -->
+					</div><!-- .as-wb-post--item -->
 				</li>
 
 <?php

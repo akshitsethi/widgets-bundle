@@ -75,7 +75,7 @@ class Social extends WP_Widget {
 			echo '</p>';
 		}
 
-		echo '<div class="as-wb-social-icons">';
+		echo '<div class="as-wb-social--icons">';
 
 		// Facebook
 		if ( ! empty( $facebook ) ) {
@@ -127,7 +127,7 @@ class Social extends WP_Widget {
 			echo '<a href="' . esc_url( $dribbble ) . '" target="' . esc_attr( $target ) . '"><i class="icon icon-dribbble"></i></a>';
 		}
 
-		echo '</div><!-- .as-wb-social-icons -->';
+		echo '</div><!-- .as-wb-social--icons -->';
 		echo '</div><!-- .as-wb-social -->';
 		echo $args['after_widget'];
 	}
