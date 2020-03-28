@@ -30,7 +30,7 @@
 }
  
 [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "widgets";
+  font-family: "as-wb-widgets";
   font-style: normal;
   font-weight: normal;
   speak: none;
@@ -364,7 +364,7 @@
 }
 .as-wb-social-icons a {
   display: inline-block;
-  margin: 4px 10px;
+  margin: 0.875rem;
 }
 
 

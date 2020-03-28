@@ -109,7 +109,7 @@ class Social extends WP_Widget {
 
 		// YouTube
 		if ( ! empty( $youtube ) ) {
-			echo '<a href="' . esc_url( $youtube ) . '" target="' . esc_attr( $target ) . '"><i class="icon icon-youtube-play"></i></a>';
+			echo '<a href="' . esc_url( $youtube ) . '" target="' . esc_attr( $target ) . '"><i class="icon icon-youtube"></i></a>';
 		}
 
 		// Flickr
