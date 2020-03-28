@@ -18,10 +18,10 @@ class Subscribe extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'subscribe',
 			esc_html__( 'Subscribe', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'subscribe',
-				'description' => esc_html__( 'Widget for subscription form utilising the MailChimp API.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget for subscription form utilising the MailChimp API.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -36,32 +36,35 @@ class Subscribe extends WP_Widget {
 	 * @return void Echoes its output.
 	 */
 	public function widget( $args, $instance ) {
-		$instance = wp_parse_args( (array) $instance, self::defaults() );
-		$title 		= apply_filters( 'widget_title', $instance['title'] );
-		$text 		= $instance['text'];
-		$api_key 	= $instance['api_key'];
-		$list_id 	= $instance['list_id'];
-		$success_message 	= $instance['success_message'];
+		$instance        = wp_parse_args( (array) $instance, self::defaults() );
+		$title           = apply_filters( 'widget_title', $instance['title'] );
+		$text            = $instance['text'];
+		$api_key         = $instance['api_key'];
+		$list_id         = $instance['list_id'];
+		$success_message = $instance['success_message'];
 
 		// Submission check
 		if ( ! empty( $api_key ) && ! empty( $list_id ) ) {
-			if ( isset( $_POST[Config::PREFIX . 'subscribe_email'] ) ) {
+			if ( isset( $_POST[ Config::PREFIX . 'subscribe_email' ] ) ) {
 				// Process information
-				$email =  sanitize_text_field( $_POST[Config::PREFIX . 'subscribe_email'] );
+				$email = sanitize_text_field( $_POST[ Config::PREFIX . 'subscribe_email' ] );
 
 				if ( empty( $email ) ) {
-					$response['code'] 	= 'error';
-					$response['text'] 	= esc_html__( 'Please provide your email address.', 'widgets-bundle' );
+					$response['code'] = 'error';
+					$response['text'] = esc_html__( 'Please provide your email address.', 'widgets-bundle' );
 				} else {
 					$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
 					if ( strpos( $email, '@' ) ) {
 						// API call
-						$mailchimp 	= new MailChimp( $api_key );
-						$connect 		= $mailchimp->post( 'lists/' . $list_id . '/members', array(
-							'email_address' => $email,
-							'status'  			=> 'subscribed'
-						) );
+						$mailchimp = new MailChimp( $api_key );
+						$connect   = $mailchimp->post(
+							'lists/' . $list_id . '/members',
+							array(
+								'email_address' => $email,
+								'status'        => 'subscribed',
+							)
+						);
 
 						// Show the response
 						if ( $mailchimp->success() ) {
@@ -71,15 +74,15 @@ class Subscribe extends WP_Widget {
 							if ( ! empty( $success_message ) ) {
 								$response['text'] = $success_message;
 							} else {
-								$response['text'] = esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle');
+								$response['text'] = esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' );
 							}
 						} else {
 							$response['code'] = 'error';
 							$response['text'] = $mailchimp->getLastError();
 						}
 					} else {
-						$response['code'] 	= 'error';
-						$response['text'] 	= esc_html__( 'Please provide a valid email address.', 'widgets-bundle' );
+						$response['code'] = 'error';
+						$response['text'] = esc_html__( 'Please provide a valid email address.', 'widgets-bundle' );
 					}
 				}
 			}
@@ -98,14 +101,16 @@ class Subscribe extends WP_Widget {
 			// Widget code
 			if ( ! empty( $text ) ) {
 				echo '<p>';
-				echo wp_kses( $text, array(
-						'a' 		=> array(
-							'href' 	=> array(),
-							'title' => array()
+				echo wp_kses(
+					$text,
+					array(
+						'a'      => array(
+							'href'  => array(),
+							'title' => array(),
 						),
-						'br' 		=> array(),
-						'em' 		=> array(),
-						'strong' 	=> array()
+						'br'     => array(),
+						'em'     => array(),
+						'strong' => array(),
 					)
 				);
 				echo '</p>';
@@ -146,22 +151,24 @@ class Subscribe extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
-		$instance['text'] 	= wp_kses( stripslashes(
-			$new_instance['text'] ),
-			[
-				'a' 		=> array(
-					'href' 	=> array(),
-					'title' => array()
+		$new_instance                = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']           = sanitize_text_field( $new_instance['title'] );
+		$instance['text']            = wp_kses(
+			stripslashes(
+				$new_instance['text']
+			),
+			array(
+				'a'      => array(
+					'href'  => array(),
+					'title' => array(),
 				),
-				'br' 		=> array(),
-				'em' 		=> array(),
-				'strong' 	=> array()
-			]
+				'br'     => array(),
+				'em'     => array(),
+				'strong' => array(),
+			)
 		);
-		$instance['api_key'] = sanitize_text_field( $new_instance['api_key'] );
-		$instance['list_id'] = sanitize_text_field( $new_instance['list_id'] );
+		$instance['api_key']         = sanitize_text_field( $new_instance['api_key'] );
+		$instance['list_id']         = sanitize_text_field( $new_instance['list_id'] );
 		$instance['success_message'] = sanitize_text_field( $new_instance['success_message'] );
 
 		return $instance;
@@ -176,7 +183,7 @@ class Subscribe extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -203,21 +210,22 @@ class Subscribe extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'success_message' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'success_message' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['success_message'] ); ?>" />
 		</p>
 
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 	=> esc_html__( 'Subscribe', 'widgets-bundle' ),
-			'text' 		=> esc_html__( 'We will reach your mailbox only twice a month. Don\'t worry, we hate spam too!', 'widgets-bundle' ),
-			'api_key' => '',
-			'list_id' => '',
-			'success_message' => esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' )
+			'title'           => esc_html__( 'Subscribe', 'widgets-bundle' ),
+			'text'            => esc_html__( 'We will reach your mailbox only twice a month. Don\'t worry, we hate spam too!', 'widgets-bundle' ),
+			'api_key'         => '',
+			'list_id'         => '',
+			'success_message' => esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' ),
 		);
 
 		return $defaults;

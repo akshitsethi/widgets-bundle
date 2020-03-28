@@ -16,10 +16,10 @@ class Ads extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'ads',
 			esc_html__( 'Ads', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'ads',
-				'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget for showing ads in 125 x 125 px format.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -35,11 +35,11 @@ class Ads extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-		$title 		= apply_filters( 'widget_title', $instance['title'] );
-		$image 		= $instance['image'];
-		$link 		= $instance['link'];
-		$target 	= $instance['target'];
-		$text 		= $instance['text'];
+		$title    = apply_filters( 'widget_title', $instance['title'] );
+		$image    = $instance['image'];
+		$link     = $instance['link'];
+		$target   = $instance['target'];
+		$text     = $instance['text'];
 
 		echo $args['before_widget'];
 
@@ -61,15 +61,17 @@ class Ads extends WP_Widget {
 		// Text.
 		if ( ! empty( $text ) ) {
 			echo '<p>';
-			echo wp_kses( $text, [
-					'a' 			=> [
-						'href' 	=> [],
-						'title' => []
-					],
-					'br' 			=> [],
-					'em' 			=> [],
-					'strong' 	=> []
-				]
+			echo wp_kses(
+				$text,
+				array(
+					'a'      => array(
+						'href'  => array(),
+						'title' => array(),
+					),
+					'br'     => array(),
+					'em'     => array(),
+					'strong' => array(),
+				)
 			);
 			echo '</p>';
 		}
@@ -88,20 +90,22 @@ class Ads extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
-		$instance['image'] 	= sanitize_text_field( $new_instance['image'] );
-		$instance['link'] 	= sanitize_text_field( esc_url( $new_instance['link'] ) );
+		$new_instance       = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']  = sanitize_text_field( $new_instance['title'] );
+		$instance['image']  = sanitize_text_field( $new_instance['image'] );
+		$instance['link']   = sanitize_text_field( esc_url( $new_instance['link'] ) );
 		$instance['target'] = sanitize_text_field( $new_instance['target'] );
-		$instance['text'] 	= wp_kses( stripslashes( $new_instance['text'] ), [
-				'a' 			=> [
-					'href' 	=> [],
-					'title' => []
-				],
-				'br' 			=> [],
-				'em' 			=> [],
-				'strong' 	=> []
-			]
+		$instance['text']   = wp_kses(
+			stripslashes( $new_instance['text'] ),
+			array(
+				'a'      => array(
+					'href'  => array(),
+					'title' => array(),
+				),
+				'br'     => array(),
+				'em'     => array(),
+				'strong' => array(),
+			)
 		);
 
 		return $instance;
@@ -116,7 +120,7 @@ class Ads extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -161,21 +165,22 @@ class Ads extends WP_Widget {
 			<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>"><?php echo esc_textarea( $instance['text'] ); ?></textarea>
 		</p>
 
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 	=> esc_html__( 'Sponsored', 'widgets-bundle' ),
-			'image' 	=> '',
-			'link' 		=> '',
-			'target' 	=> '_blank',
-			'text' 		=> ''
+			'title'  => esc_html__( 'Sponsored', 'widgets-bundle' ),
+			'image'  => '',
+			'link'   => '',
+			'target' => '_blank',
+			'text'   => '',
 		);
 
 		return $defaults;

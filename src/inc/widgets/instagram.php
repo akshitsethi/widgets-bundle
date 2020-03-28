@@ -16,10 +16,10 @@ class Instagram extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'instagram',
 			esc_html__( 'Instagram', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'instagram',
-				'description' => esc_html__( 'Widget for showing Instagram photos.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget for showing Instagram photos.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -34,15 +34,15 @@ class Instagram extends WP_Widget {
 	 * @return void Echoes its output.
 	 */
 	public function widget( $args, $instance ) {
-		$instance 		= wp_parse_args( (array) $instance, self::defaults() );
-		$title 				= apply_filters( 'widget_title', $instance['title'] );
-		$username 		= esc_html( $instance['username'] );
-		$photos 			= absint( $instance['photos'] );
-		$photos_row 	= $instance['photos_row'];
-		$size 				= $instance['size'];
-		$target 			= $instance['target'];
-		$show_follow 	= $instance['show_follow'];
-		$follow_text 	= $instance['follow_text'];
+		$instance    = wp_parse_args( (array) $instance, self::defaults() );
+		$title       = apply_filters( 'widget_title', $instance['title'] );
+		$username    = esc_html( $instance['username'] );
+		$photos      = absint( $instance['photos'] );
+		$photos_row  = $instance['photos_row'];
+		$size        = $instance['size'];
+		$target      = $instance['target'];
+		$show_follow = $instance['show_follow'];
+		$follow_text = $instance['follow_text'];
 
 		echo $args['before_widget'];
 
@@ -109,15 +109,15 @@ class Instagram extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 						= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 				= sanitize_text_field( $new_instance['title'] );
-		$instance['username'] 		= sanitize_text_field( $new_instance['username'] );
-		$instance['photos'] 			= absint( $new_instance['photos'] );
-		$instance['photos_row'] 	= absint( $new_instance['photos_row'] );
-		$instance['size'] 				= sanitize_text_field( $new_instance['size'] );
-		$instance['target'] 			= sanitize_text_field( $new_instance['target'] );
-		$instance['show_follow'] 	= absint( $new_instance['show_follow'] );
-		$instance['follow_text'] 	= sanitize_text_field( $new_instance['follow_text'] );
+		$new_instance            = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']       = sanitize_text_field( $new_instance['title'] );
+		$instance['username']    = sanitize_text_field( $new_instance['username'] );
+		$instance['photos']      = absint( $new_instance['photos'] );
+		$instance['photos_row']  = absint( $new_instance['photos_row'] );
+		$instance['size']        = sanitize_text_field( $new_instance['size'] );
+		$instance['target']      = sanitize_text_field( $new_instance['target'] );
+		$instance['show_follow'] = absint( $new_instance['show_follow'] );
+		$instance['follow_text'] = sanitize_text_field( $new_instance['follow_text'] );
 
 		return $instance;
 	}
@@ -131,7 +131,7 @@ class Instagram extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -205,24 +205,25 @@ class Instagram extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'follow_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'follow_text' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['follow_text'] ); ?>" />
 		</p>
 
-<?php
+		<?php
 	}
 
 
 	/**
 	 * Default Options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 			=> esc_html__( 'Instagram', 'widgets-bundle' ),
-			'username' 		=> '',
-			'photos' 			=> '9',
-			'photos_row' 	=> '3',
-			'size' 				=> '320px',
-			'target' 			=> '_blank',
+			'title'       => esc_html__( 'Instagram', 'widgets-bundle' ),
+			'username'    => '',
+			'photos'      => '9',
+			'photos_row'  => '3',
+			'size'        => '320px',
+			'target'      => '_blank',
 			'show_follow' => '1',
-			'follow_text' => esc_html__( 'Follow Me', 'widgets-bundle' )
+			'follow_text' => esc_html__( 'Follow Me', 'widgets-bundle' ),
 		);
 
 		return $defaults;
@@ -231,12 +232,13 @@ class Instagram extends WP_Widget {
 
 	/**
 	 * For scraping the instagram feed.
+	 *
 	 * @link https://gist.github.com/cosmocatalano/4544576
 	 */
 	private function feed( $username, $slice = 10 ) {
-		$username 		= strtolower( $username );
-		$option_name 	= Config::PREFIX . 'ig_' . $username;
-		$insta_data 	= get_transient( $option_name );
+		$username    = strtolower( $username );
+		$option_name = Config::PREFIX . 'ig_' . $username;
+		$insta_data  = get_transient( $option_name );
 
 		if ( ! $insta_data ) {
 			$response = wp_remote_get( 'https://instagram.com/' . trim( $username ) );
@@ -250,7 +252,7 @@ class Instagram extends WP_Widget {
 
 				// Compatibility Check
 				if ( version_compare( PHP_VERSION, '5.3.0', '>=' ) ) {
-					$json = strstr( $json, '</script>', TRUE );
+					$json = strstr( $json, '</script>', true );
 				} else {
 					$json = substr( $json, 0, strpos( $json, '</script>' ) );
 				}
@@ -259,9 +261,9 @@ class Instagram extends WP_Widget {
 
 				// Function json_last_error() is not available before PHP * 5.3.0 version
 				if ( function_exists( 'json_last_error' ) ) {
-					( $results = json_decode( $json, TRUE ) ) && json_last_error() == JSON_ERROR_NONE;
+					( $results = json_decode( $json, true ) ) && json_last_error() == JSON_ERROR_NONE;
 				} else {
-					$results = json_decode( $json, TRUE );
+					$results = json_decode( $json, true );
 				}
 
 				if ( $results && is_array( $results ) ) {
@@ -285,16 +287,16 @@ class Instagram extends WP_Widget {
 							break;
 						}
 
-						$image_data['code'] 					= $result['node']['shortcode'];
-						$image_data['username'] 			= $username;
-						$image_data['user_id'] 				= $result['node']['owner']['id'];
-						$image_data['id'] 						= $result['node']['id'];
-						$image_data['link'] 					= 'https://instagram.com/p/' . $result['node']['shortcode'];
-						$image_data['popularity'] 		= (int) ( $result['node']['edge_media_to_comment']['count'] ) + ( $result['node']['edge_liked_by']['count'] );
-						$image_data['timestamp'] 			= (float) $result['node']['taken_at_timestamp'];
-						$image_data['url'] 						= $result['node']['display_url'];
-						$image_data['url_medium'] 		= $result['node']['thumbnail_resources'][2]['src'];
-						$image_data['url_thumbnail'] 	= $result['node']['thumbnail_resources'][1]['src'];
+						$image_data['code']          = $result['node']['shortcode'];
+						$image_data['username']      = $username;
+						$image_data['user_id']       = $result['node']['owner']['id'];
+						$image_data['id']            = $result['node']['id'];
+						$image_data['link']          = 'https://instagram.com/p/' . $result['node']['shortcode'];
+						$image_data['popularity']    = (int) ( $result['node']['edge_media_to_comment']['count'] ) + ( $result['node']['edge_liked_by']['count'] );
+						$image_data['timestamp']     = (float) $result['node']['taken_at_timestamp'];
+						$image_data['url']           = $result['node']['display_url'];
+						$image_data['url_medium']    = $result['node']['thumbnail_resources'][2]['src'];
+						$image_data['url_thumbnail'] = $result['node']['thumbnail_resources'][1]['src'];
 
 						$insta_data[] = $image_data;
 					}

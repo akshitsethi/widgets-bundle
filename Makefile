@@ -67,7 +67,7 @@ release:
 	git pull -r
 
 fmt: ensure
-	bin/phpcbf --standard=WordPress src --ignore=src/vendor
+	bin/phpcbf --standard=WordPress src --ignore=src/vendor,src/assets
 	bin/phpcbf --standard=WordPress tests --ignore=vendor
 
 lint: ensure

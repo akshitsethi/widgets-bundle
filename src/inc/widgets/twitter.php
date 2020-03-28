@@ -22,17 +22,17 @@ class Twitter extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'twitter',
 			esc_html__( 'Twitter', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'twitter',
-				'description' => esc_html__( 'Widget that displays your Twitter feed.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget that displays your Twitter feed.', 'widgets-bundle' ),
+			)
 		);
 
 		// Set theme option
-		$this->theme = [
+		$this->theme = array(
 			'light' => esc_html__( 'Light', 'widgets-bundle' ),
-			'dark'  => esc_html__( 'Dark', 'widgets-bundle' )
-		];
+			'dark'  => esc_html__( 'Dark', 'widgets-bundle' ),
+		);
 	}
 
 
@@ -47,7 +47,7 @@ class Twitter extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-		$title 		= apply_filters( 'widget_title', $instance['title'] );
+		$title    = apply_filters( 'widget_title', $instance['title'] );
 
 		echo $args['before_widget'];
 
@@ -72,7 +72,7 @@ class Twitter extends WP_Widget {
 			'tweet_limit'  => 'tweet-limit',
 			'theme'        => 'theme',
 			'link_color'   => 'link-color',
-			'border_color' => 'border-color'
+			'border_color' => 'border-color',
 		);
 
 		foreach ( $data_attributes as $key => $value ) {
@@ -83,7 +83,7 @@ class Twitter extends WP_Widget {
 
 		// Chrome settings
 		if ( ! empty( $instance['chrome'] ) && is_array( $instance['chrome'] ) ) {
-			$timeline .= ' data-chrome="' . esc_attr( join ( ' ', $instance['chrome'] ) ) . '"';
+			$timeline .= ' data-chrome="' . esc_attr( join( ' ', $instance['chrome'] ) ) . '"';
 		}
 
 		// Username
@@ -114,29 +114,29 @@ class Twitter extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 						= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 				= sanitize_text_field( $new_instance['title'] );
-		$instance['username'] 		= sanitize_text_field( $new_instance['username'] );
-		$instance['tweet_limit'] 	= ( $tweet_limit ? $tweet_limit : null );
-		$instance['theme'] 				= $new_instance['theme'];
+		$new_instance             = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']        = sanitize_text_field( $new_instance['title'] );
+		$instance['username']     = sanitize_text_field( $new_instance['username'] );
+		$instance['tweet_limit']  = ( $tweet_limit ? $tweet_limit : null );
+		$instance['theme']        = $new_instance['theme'];
 		$instance['link_color']   = sanitize_hex_color( $new_instance['link_color'] );
 		$instance['border_color'] = sanitize_hex_color( $new_instance['border_color'] );
-		$instance['chrome'] 			= [];
+		$instance['chrome']       = array();
 
-		$width 				= absint( $new_instance['width'] );
-		$height 			= absint( $new_instance['height'] );
-		$tweet_limit 	= absint( $new_instance['tweet_limit'] );
+		$width       = absint( $new_instance['width'] );
+		$height      = absint( $new_instance['height'] );
+		$tweet_limit = absint( $new_instance['tweet_limit'] );
 
 		if ( $width ) {
 			// From publish.twitter.com: 220 <= width <= 1200
-			$instance['width'] = min ( max ( $width, 220 ), 1200 );
+			$instance['width'] = min( max( $width, 220 ), 1200 );
 		} else {
 			$instance['width'] = '';
 		}
 
 		if ( $height ) {
 			// From publish.twitter.com: height >= 200
-			$instance['height'] = max ( $height, 200 );
+			$instance['height'] = max( $height, 200 );
 		} else {
 			$instance['height'] = '';
 		}
@@ -145,13 +145,13 @@ class Twitter extends WP_Widget {
 			$instance['theme'] = $this->default_instance['theme'];
 		}
 
-		$chrome_settings = [
+		$chrome_settings = array(
 			'noheader',
 			'nofooter',
 			'noborders',
 			'noscrollbar',
-			'transparent'
-		];
+			'transparent',
+		);
 
 		if ( isset( $new_instance['chrome'] ) ) {
 			foreach ( $new_instance['chrome'] as $chrome ) {
@@ -173,7 +173,7 @@ class Twitter extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -205,7 +205,7 @@ class Twitter extends WP_Widget {
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'theme' ) ); ?>"><?php esc_html_e( 'Theme', 'widgets-bundle' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'theme' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'theme' ) ); ?>">
-				<?php foreach ( $this->theme as $key => $value ): ?>
+				<?php foreach ( $this->theme as $key => $value ) : ?>
 					<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $instance['theme'], $key ); ?>><?php echo esc_html( $value ); ?></option>
 				<?php endforeach; ?>
 			</select>
@@ -252,26 +252,27 @@ class Twitter extends WP_Widget {
 			<label for="<?php echo esc_attr( $this->get_field_id( 'chrome_transparent' ) ); ?>"><?php esc_html_e( 'Transparent Background', 'widgets-bundle' ); ?></label>
 		</p>
 
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
-		$defaults = [
-			'title' 				=> esc_html__( 'Follow Me', 'widgets-bundle' ),
-			'username'     	=> 'akshitsethi',
-			'width'        	=> '',
-			'height'       	=> 400,
-			'tweet_limit'  	=> null,
-			'theme'        	=> 'light',
-			'link_color'   	=> '#3b94d9',
-			'border_color' 	=> '#f5f5f5',
-			'chrome'       	=> []
-		];
+		$defaults = array(
+			'title'        => esc_html__( 'Follow Me', 'widgets-bundle' ),
+			'username'     => 'akshitsethi',
+			'width'        => '',
+			'height'       => 400,
+			'tweet_limit'  => null,
+			'theme'        => 'light',
+			'link_color'   => '#3b94d9',
+			'border_color' => '#f5f5f5',
+			'chrome'       => array(),
+		);
 
 		return $defaults;
 	}
