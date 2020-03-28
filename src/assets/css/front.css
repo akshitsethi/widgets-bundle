@@ -17,24 +17,30 @@
 /**
  * 01.. Icons
  */
-@font-face {
-  font-family: 'widgets';
-  src: url('../fonts/widgets.eot?58030821');
-  src: url('../fonts/widgets.eot?58030821#iefix') format('embedded-opentype'),
-       url('../fonts/widgets.woff2?58030821') format('woff2'),
-       url('../fonts/widgets.woff?58030821') format('woff'),
-       url('../fonts/widgets.ttf?58030821') format('truetype'),
-       url('../fonts/widgets.svg?58030821#widgets') format('svg');
+ @font-face {
+  font-family: 'as-wb-widgets';
+  src: url('../fonts/widgets.eot?3535979');
+  src: url('../fonts/widgets.eot?3535979#iefix') format('embedded-opentype'),
+       url('../fonts/widgets.woff2?3535979') format('woff2'),
+       url('../fonts/widgets.woff?3535979') format('woff'),
+       url('../fonts/widgets.ttf?3535979') format('truetype'),
+       url('../fonts/widgets.svg?3535979#widgets') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+ 
 [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "widgets";
   font-style: normal;
   font-weight: normal;
+  speak: none;
+ 
   display: inline-block;
   text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
   text-align: center;
+  /* opacity: .8; */
  
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
@@ -42,6 +48,10 @@
  
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
  
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
@@ -53,50 +63,111 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
-.icon-twitter:before { content: '\f099'; }
-.icon-facebook:before { content: '\f09a'; }
-.icon-gplus:before { content: '\f0d5'; }
-.icon-linkedin:before { content: '\f0e1'; }
-.icon-quote-left:before { content: '\f10d'; }
-.icon-github:before { content: '\f113'; }
-.icon-youtube-play:before { content: '\f16a'; }
-.icon-dropbox:before { content: '\f16b'; }
-.icon-stackoverflow:before { content: '\f16c'; }
-.icon-instagram:before { content: '\f16d'; }
-.icon-flickr:before { content: '\f16e'; }
-.icon-bitbucket:before { content: '\f171'; }
-.icon-tumblr:before { content: '\f173'; }
-.icon-apple:before { content: '\f179'; }
-.icon-dribbble:before { content: '\f17d'; }
-.icon-skype:before { content: '\f17e'; }
-.icon-foursquare:before { content: '\f180'; }
-.icon-trello:before { content: '\f181'; }
-.icon-vkontakte:before { content: '\f189'; }
-.icon-stackexchange:before { content: '\f18d'; }
-.icon-slack:before { content: '\f198'; }
-.icon-wordpress:before { content: '\f19a'; }
-.icon-yahoo:before { content: '\f19e'; }
-.icon-google:before { content: '\f1a0'; }
-.icon-stumbleupon:before { content: '\f1a4'; }
-.icon-delicious:before { content: '\f1a5'; }
-.icon-digg:before { content: '\f1a6'; }
-.icon-drupal:before { content: '\f1a9'; }
-.icon-behance:before { content: '\f1b4'; }
-.icon-behance-squared:before { content: '\f1b5'; }
-.icon-spotify:before { content: '\f1bc'; }
-.icon-deviantart:before { content: '\f1bd'; }
-.icon-soundcloud:before { content: '\f1be'; }
-.icon-codeopen:before { content: '\f1cb'; }
-.icon-twitch:before { content: '\f1e8'; }
-.icon-yelp:before { content: '\f1e9'; }
-.icon-paypal:before { content: '\f1ed'; }
-.icon-gwallet:before { content: '\f1ee'; }
-.icon-lastfm:before { content: '\f202'; }
-.icon-angellist:before { content: '\f209'; }
-.icon-pinterest:before { content: '\f231'; }
-.icon-whatsapp:before { content: '\f232'; }
-.icon-quora:before { content: '\f2c4'; }
-.icon-etsy:before { content: '\f2d7'; }
+ 
+.icon-duckduckgo:before { content: '\e800'; }
+.icon-aim:before { content: '\e801'; }
+.icon-delicious:before { content: '\e802'; }
+.icon-paypal:before { content: '\e803'; }
+.icon-flattr:before { content: '\e804'; }
+.icon-android:before { content: '\e805'; }
+.icon-eventful:before { content: '\e806'; }
+.icon-ie:before { content: '\e807'; }
+.icon-stumbleupon:before { content: '\e808'; }
+.icon-smashmag:before { content: '\e809'; }
+.icon-gplus:before { content: '\e80a'; }
+.icon-wikipedia:before { content: '\e80b'; }
+.icon-lanyrd:before { content: '\e80c'; }
+.icon-fivehundredpx:before { content: '\e80d'; }
+.icon-pinterest:before { content: '\e80e'; }
+.icon-bitcoin:before { content: '\e80f'; }
+.icon-w3c:before { content: '\e810'; }
+.icon-foursquare:before { content: '\e811'; }
+.icon-call:before { content: '\e812'; }
+.icon-grooveshark:before { content: '\e813'; }
+.icon-ninetyninedesigns:before { content: '\e814'; }
+.icon-forrst:before { content: '\e815'; }
+.icon-digg:before { content: '\e816'; }
+.icon-spotify:before { content: '\e817'; }
+.icon-reddit:before { content: '\e818'; }
+.icon-guest:before { content: '\e819'; }
+.icon-gowalla:before { content: '\e81a'; }
+.icon-appstore:before { content: '\e81b'; }
+.icon-blogger:before { content: '\e81c'; }
+.icon-cc:before { content: '\e81d'; }
+.icon-dribbble:before { content: '\e81e'; }
+.icon-evernote:before { content: '\e81f'; }
+.icon-flickr:before { content: '\e820'; }
+.icon-google:before { content: '\e821'; }
+.icon-viadeo:before { content: '\e822'; }
+.icon-instapaper:before { content: '\e823'; }
+.icon-weibo:before { content: '\e824'; }
+.icon-klout:before { content: '\e825'; }
+.icon-linkedin:before { content: '\e826'; }
+.icon-meetup:before { content: '\e827'; }
+.icon-vk:before { content: '\e828'; }
+.icon-plancast:before { content: '\e829'; }
+.icon-disqus:before { content: '\e82a'; }
+.icon-rss:before { content: '\e82b'; }
+.icon-skype:before { content: '\e82c'; }
+.icon-twitter:before { content: '\e82d'; }
+.icon-youtube:before { content: '\e82e'; }
+.icon-vimeo:before { content: '\e82f'; }
+.icon-windows:before { content: '\e830'; }
+.icon-xing:before { content: '\e831'; }
+.icon-yahoo:before { content: '\e832'; }
+.icon-chrome:before { content: '\e833'; }
+.icon-email:before { content: '\e834'; }
+.icon-macstore:before { content: '\e835'; }
+.icon-myspace:before { content: '\e836'; }
+.icon-podcast:before { content: '\e837'; }
+.icon-amazon:before { content: '\e838'; }
+.icon-steam:before { content: '\e839'; }
+.icon-cloudapp:before { content: '\e83a'; }
+.icon-dropbox:before { content: '\e83b'; }
+.icon-ebay:before { content: '\e83c'; }
+.icon-facebook:before { content: '\e83d'; }
+.icon-github:before { content: '\e83e'; }
+.icon-github-circled:before { content: '\e83f'; }
+.icon-googleplay:before { content: '\e840'; }
+.icon-itunes:before { content: '\e841'; }
+.icon-plurk:before { content: '\e842'; }
+.icon-songkick:before { content: '\e843'; }
+.icon-lastfm:before { content: '\e844'; }
+.icon-gmail:before { content: '\e845'; }
+.icon-pinboard:before { content: '\e846'; }
+.icon-openid:before { content: '\e847'; }
+.icon-quora:before { content: '\e848'; }
+.icon-soundcloud:before { content: '\e849'; }
+.icon-tumblr:before { content: '\e84a'; }
+.icon-eventasaurus:before { content: '\e84b'; }
+.icon-wordpress:before { content: '\e84c'; }
+.icon-yelp:before { content: '\e84d'; }
+.icon-intensedebate:before { content: '\e84e'; }
+.icon-eventbrite:before { content: '\e84f'; }
+.icon-scribd:before { content: '\e850'; }
+.icon-posterous:before { content: '\e851'; }
+.icon-stripe:before { content: '\e852'; }
+.icon-opentable:before { content: '\e853'; }
+.icon-cart:before { content: '\e854'; }
+.icon-print:before { content: '\e855'; }
+.icon-angellist:before { content: '\e856'; }
+.icon-instagram:before { content: '\e857'; }
+.icon-dwolla:before { content: '\e858'; }
+.icon-appnet:before { content: '\e859'; }
+.icon-statusnet:before { content: '\e85a'; }
+.icon-acrobat:before { content: '\e85b'; }
+.icon-drupal:before { content: '\e85c'; }
+.icon-buffer:before { content: '\e85d'; }
+.icon-pocket:before { content: '\e85e'; }
+.icon-bitbucket:before { content: '\e85f'; }
+.icon-lego:before { content: '\e860'; }
+.icon-login:before { content: '\e861'; }
+.icon-stackoverflow:before { content: '\e862'; }
+.icon-hackernews:before { content: '\e863'; }
+.icon-lkdto:before { content: '\e864'; }
+.icon-html5:before { content: '\e865'; }
+.icon-calendar:before { content: '\e866'; }
+.icon-quote-left:before { content: '\e867'; }
 
 
 /**
@@ -261,8 +332,8 @@
   margin-bottom: 24px;
 }
 .as-wb-quote blockquote p:before {
-  content: '\f10d';
-  font-family: 'widgets';
+  content: '\e867';
+  font-family: 'as-wb-widgets';
   position: absolute;
   opacity: 0.20;
   font-size: 32px;
