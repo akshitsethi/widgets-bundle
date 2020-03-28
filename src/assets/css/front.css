@@ -371,17 +371,17 @@
 /**
  * 08.. Subscribe
  */
-.as-wb-subscribe .as-wb-subscribe-button {
+.as-wb-subscribe .as-wb-subscribe--button {
   margin-top: 8px;
 }
-.as-wb-subscribe .as-wb-response {
+.as-wb-subscribe .as-wb-subscribe--response {
   display: block;
   margin-bottom: 12px;
 }
-.as-wb-subscribe .as-wb-response-error {
+.as-wb-subscribe .as-wb-subscribe--response-error {
   color: #d64541;
 }
-.as-wb-subscribe .as-wb-response-success {
+.as-wb-subscribe .as-wb-subscribe--response-success {
   color: #1bbc9b;
 }
 

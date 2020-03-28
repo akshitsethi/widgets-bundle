@@ -9,7 +9,8 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets;
 
 use WP_Widget;
 use AkshitSethi\Plugins\WidgetsBundle\Config;
-use AkshitSethi\Plugins\WidgetsBundle\Providers\MailChimp;
+
+use DrewM\MailChimp\MailChimp;
 
 class Subscribe extends WP_Widget {
 
@@ -40,6 +41,7 @@ class Subscribe extends WP_Widget {
 		$text 		= $instance['text'];
 		$api_key 	= $instance['api_key'];
 		$list_id 	= $instance['list_id'];
+		$success_message 	= $instance['success_message'];
 
 		// Submission check
 		if ( ! empty( $api_key ) && ! empty( $list_id ) ) {
@@ -55,28 +57,25 @@ class Subscribe extends WP_Widget {
 
 					if ( strpos( $email, '@' ) ) {
 						// API call
-						$mailchimp 	= new Mailchimp( $api_key );
-						$connect 		= $mailchimp->call( 'lists/subscribe', array(
-							'apikey'		=> $api_key,
-							'id'            => $list_id,
-							'email'         => array( 'email' => $email ),
-							'double_optin'  => true,
-							'send_welcome'  => true
+						$mailchimp 	= new MailChimp( $api_key );
+						$connect 		= $mailchimp->post( 'lists/' . $list_id . '/members', array(
+							'email_address' => $email,
+							'status'  			=> 'subscribed'
 						) );
 
-						// Capture the correct response
-						if ( isset( $connect['code'] ) && 'ASERR' === $connect['code'] ) {
-							$response['code'] 	= 'error';
-							$response['text'] 	= $connect['message'];
-						} elseif ( isset( $connect['code'] ) && 214 !== $connect['code'] ) {
-							$response['code'] 	= 'error';
-							$response['text'] 	= esc_html__( 'Oops! Something went wrong.', 'widgets-bundle' );
-						} elseif ( isset( $connect['code'] ) && 214 === $connect['code'] ) {
-							$response['code'] 	= 'success';
-							$response['text'] 	= esc_html__( 'You are already subscribed!', 'widgets-bundle' );
+						// Show the response
+						if ( $mailchimp->success() ) {
+							$response['code'] = 'success';
+
+							// Show the success message if not empty
+							if ( ! empty( $success_message ) ) {
+								$response['text'] = $success_message;
+							} else {
+								$response['text'] = esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle');
+							}
 						} else {
-							$response['code'] 	= 'success';
-							$response['text'] 	= esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' );
+							$response['code'] = 'error';
+							$response['text'] = $mailchimp->getLastError();
 						}
 					} else {
 						$response['code'] 	= 'error';
@@ -92,40 +91,46 @@ class Subscribe extends WP_Widget {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
+		// Show the widget only if the API key and List ID are provided
 		echo '<div class="as-wb-subscribe">';
 
-		// Widget code
-		if ( ! empty( $text ) ) {
-			echo '<p>';
-			echo wp_kses( $text, array(
-					'a' 		=> array(
-						'href' 	=> array(),
-						'title' => array()
-					),
-					'br' 		=> array(),
-					'em' 		=> array(),
-					'strong' 	=> array()
-				)
-			);
-			echo '</p>';
+		if ( ! empty( $api_key ) && ! empty( $list_id ) ) {
+			// Widget code
+			if ( ! empty( $text ) ) {
+				echo '<p>';
+				echo wp_kses( $text, array(
+						'a' 		=> array(
+							'href' 	=> array(),
+							'title' => array()
+						),
+						'br' 		=> array(),
+						'em' 		=> array(),
+						'strong' 	=> array()
+					)
+				);
+				echo '</p>';
+			}
+
+			// Form
+			echo '<form method="POST">';
+
+			// Response
+			if ( isset( $response ) ) {
+				echo '<div class="as-wb-subscribe--response as-wb-subscribe--response-' . $response['code'] . '">' . $response['text'] . '</div><!-- .as-wb-subscribe--response -->';
+			}
+
+			echo '<div class="as-wb-subscribe--form-group">';
+			echo '<input type="text" name="' . Config::PREFIX . 'subscribe_email" class="as-wb-subscribe--form-control" placeholder="' . esc_html__( 'Enter your email address..', 'widgets-bundle' ) . '" />';
+			echo '</div><!-- .as-wb-subscribe--form-group -->';
+
+			echo '<div class="as-wb-subscribe--button">';
+			echo '<input type="submit" value="' . esc_html__( 'Subscribe', 'widgets-bundle' ) . '">';
+			echo '</div><!-- .as-wb-subscribe--button -->';
+			echo '</form>';
+
+		} else {
+			echo '<p>' . esc_html__( 'Please provide your API key and List ID for this widget to work properly.', 'widgets-bundle' ) . '</p>';
 		}
-
-		// Form
-		echo '<form method="POST">';
-
-		// Response
-		if ( isset( $response ) ) {
-			echo '<div class="as-wb-response as-wb-subscribe--response-' . $response['code'] . '">' . $response['text'] . '</div><!-- .as-wb-subscribe--response -->';
-		}
-
-		echo '<div class="as-wb-subscribe--form-group">';
-		echo '<input type="text" name="' . Config::PREFIX . 'subscribe_email" class="as-wb-subscribe--form-control" placeholder="' . esc_html__( 'Enter your email address..', 'widgets-bundle' ) . '" />';
-		echo '</div><!-- .as-wb-subscribe--form-group -->';
-
-		echo '<div class="as-wb-subscribe--button">';
-		echo '<input type="submit" value="' . esc_html__( 'Subscribe', 'widgets-bundle' ) . '">';
-		echo '</div><!-- .as-wb-subscribe--button -->';
-		echo '</form>';
 
 		echo '</div><!-- .as-wb-subscribe -->';
 		echo $args['after_widget'];
@@ -157,6 +162,7 @@ class Subscribe extends WP_Widget {
 		);
 		$instance['api_key'] = sanitize_text_field( $new_instance['api_key'] );
 		$instance['list_id'] = sanitize_text_field( $new_instance['list_id'] );
+		$instance['success_message'] = sanitize_text_field( $new_instance['success_message'] );
 
 		return $instance;
 	}
@@ -192,6 +198,11 @@ class Subscribe extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'list_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'list_id' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['list_id'] ); ?>" />
 		</p>
 
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'success_message' ) ); ?>"><?php esc_html_e( 'Success Message', 'widgets-bundle' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'success_message' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'success_message' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['success_message'] ); ?>" />
+		</p>
+
 	<?php
 	}
 
@@ -205,7 +216,8 @@ class Subscribe extends WP_Widget {
 			'title' 	=> esc_html__( 'Subscribe', 'widgets-bundle' ),
 			'text' 		=> esc_html__( 'We will reach your mailbox only twice a month. Don\'t worry, we hate spam too!', 'widgets-bundle' ),
 			'api_key' => '',
-			'list_id' => ''
+			'list_id' => '',
+			'success_message' => esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' )
 		);
 
 		return $defaults;
