@@ -35,6 +35,7 @@ class WidgetsBundle {
 	 */
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 	}
 
 
@@ -70,6 +71,16 @@ class WidgetsBundle {
 		( $widgets['social'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Social' ) : false;
 		( $widgets['subscribe'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Subscribe' ) : false;
 		( $widgets['twitter'] ) ? register_widget( __NAMESPACE__ . '\Widgets\Twitter' ) : false;
+	}
+
+
+	/**
+	 * Loads textdomain for the plugin.
+	 *
+	 * @since 2.0.0
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain( Config::PLUGIN_SLUG, false, Config::$plugin_path . 'i18n/' );
 	}
 
 
