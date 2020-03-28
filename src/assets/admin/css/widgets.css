@@ -2,34 +2,34 @@
  * Styling for the WordPress widgets panel.
  */
 .as-wb-widget-top .widget-title {
-    background-image: url('../images/wd-icon.png');
-    background-repeat: no-repeat;
-    padding-left: 27px;
+	background-image: url('../images/wd-icon.png');
+	background-repeat: no-repeat;
+	padding-left: 27px;
 }
 .as-wb-upload {
-    padding: 18px 0;
-    margin-top: 20px;
-    text-align: center;
-    border: 2px dashed #eeeeee;
+	padding: 18px 0;
+	margin-top: 20px;
+	text-align: center;
+	border: 2px dashed #eeeeee;
 }
 .as-wb-upload .as-wb-preview {
-    display: block;
-    font-size: 12px;
-    color: #898989;
-    padding-bottom: 10px;
+	display: block;
+	font-size: 12px;
+	color: #898989;
+	padding-bottom: 10px;
 }
 .as-wb-upload .as-wb-preview img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin-top: -18px;
-    margin-bottom: 8px;
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin-top: -18px;
+	margin-bottom: 8px;
 }
 #as-wb-remove {
-    margin-left: 5px;
-    line-height: 26px;
-    color: #a00a00;
+	margin-left: 5px;
+	line-height: 26px;
+	color: #a00a00;
 }
 #as-wb-remove:hover, #as-wb-remove:focus {
-    color: #dc3232;
+	color: #dc3232;
 }

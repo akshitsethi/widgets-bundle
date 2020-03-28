@@ -17,10 +17,10 @@ class Posts extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'posts',
 			esc_html__( 'Posts', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'posts',
-				'description' => esc_html__( 'Widget that displays your latest posts along with a featured image.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget that displays your latest posts along with a featured image.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -35,20 +35,20 @@ class Posts extends WP_Widget {
 	 * @return void Echoes its output.
 	 */
 	public function widget( $args, $instance ) {
-		$instance 		= wp_parse_args( (array) $instance, self::defaults() );
-		$title 				= apply_filters( 'widget_title', $instance['title'] );
-		$categories 	= $instance['categories'];
-		$number 			= $instance['number'];
-		$query_args 	= array(
-			'showposts' 					=> $number,
-			'nopaging' 						=> 0,
-			'post_status' 				=> 'publish',
+		$instance   = wp_parse_args( (array) $instance, self::defaults() );
+		$title      = apply_filters( 'widget_title', $instance['title'] );
+		$categories = $instance['categories'];
+		$number     = $instance['number'];
+		$query_args = array(
+			'showposts'           => $number,
+			'nopaging'            => 0,
+			'post_status'         => 'publish',
 			'ignore_sticky_posts' => 1,
-			'cat' 								=> $categories,
-			'order' 							=> 'ASC',
-			'orderby' 						=> 'date'
+			'cat'                 => $categories,
+			'order'               => 'ASC',
+			'orderby'             => 'date',
 		);
-		$query 				= new WP_Query( $query_args );
+		$query      = new WP_Query( $query_args );
 
 		echo $args['before_widget'];
 
@@ -60,8 +60,9 @@ class Posts extends WP_Widget {
 			echo '<div class="as-wb-posts">';
 			echo '<ul>';
 
-			while ( $query->have_posts() ) : $query->the_post();
-?>
+			while ( $query->have_posts() ) :
+				$query->the_post();
+				?>
 
 				<li>
 					<div class="as-wb-post--item">
@@ -78,7 +79,7 @@ class Posts extends WP_Widget {
 					</div><!-- .as-wb-post--item -->
 				</li>
 
-<?php
+				<?php
 
 			endwhile;
 			wp_reset_postdata();
@@ -100,10 +101,10 @@ class Posts extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 		= sanitize_text_field( $new_instance['title'] );
+		$new_instance           = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']      = sanitize_text_field( $new_instance['title'] );
 		$instance['categories'] = sanitize_text_field( $new_instance['categories'] );
-		$instance['number'] 	= absint( $new_instance['number'] );
+		$instance['number']     = absint( $new_instance['number'] );
 
 		return $instance;
 	}
@@ -118,7 +119,7 @@ class Posts extends WP_Widget {
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
 
-?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -127,7 +128,7 @@ class Posts extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'categories' ) ); ?>"><?php esc_html_e( 'Categories', 'widgets-bundle' ); ?></label>
-			<select id="<?php echo esc_attr( $this->get_field_id('categories') ); ?>" name="<?php echo esc_attr( $this->get_field_name('categories') ); ?>" class="widefat categories">
+			<select id="<?php echo esc_attr( $this->get_field_id( 'categories' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'categories' ) ); ?>" class="widefat categories">
 				<option value="<?php esc_attr_e( 'all', 'widgets-bundle' ); ?>"<?php selected( 'all', $instance['categories'] ); ?>><?php esc_attr_e( 'All', 'widgets-bundle' ); ?></option>
 				<?php $categories = get_categories( 'hide_empty=0&depth=1&type=post' ); ?>
 				<?php foreach ( $categories as $category ) : ?>
@@ -141,19 +142,20 @@ class Posts extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['number'] ); ?>" />
 		</p>
 
-<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 			=> esc_html__( 'Recent', 'widgets-bundle' ),
-			'categories' 	=> '',
-			'number' 			=> '4'
+			'title'      => esc_html__( 'Recent', 'widgets-bundle' ),
+			'categories' => '',
+			'number'     => '4',
 		);
 
 		return $defaults;

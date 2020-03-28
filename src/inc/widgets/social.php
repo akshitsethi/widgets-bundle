@@ -16,10 +16,10 @@ class Social extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'social',
 			esc_html__( 'Social', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'social',
-				'description' => esc_html__( 'Widget for showing Social Media profile links with icons.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget for showing Social Media profile links with icons.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -34,20 +34,20 @@ class Social extends WP_Widget {
 	 * @return void Echoes its output.
 	 */
 	public function widget( $args, $instance ) {
-		$instance 	= wp_parse_args( (array) $instance, self::defaults() );
-		$title 			= apply_filters( 'widget_title', $instance['title'] );
-		$text 			= $instance['text'];
-		$target 		= $instance['target'];
-		$facebook 	= $instance['facebook'];
-		$twitter 		= $instance['twitter'];
-		$google 		= $instance['google'];
-		$instagram 	= $instance['instagram'];
-		$pinterest 	= $instance['pinterest'];
-		$linkedin 	= $instance['linkedin'];
-		$youtube 		= $instance['youtube'];
-		$flickr 		= $instance['flickr'];
-		$github 		= $instance['github'];
-		$dribbble 	= $instance['dribbble'];
+		$instance  = wp_parse_args( (array) $instance, self::defaults() );
+		$title     = apply_filters( 'widget_title', $instance['title'] );
+		$text      = $instance['text'];
+		$target    = $instance['target'];
+		$facebook  = $instance['facebook'];
+		$twitter   = $instance['twitter'];
+		$google    = $instance['google'];
+		$instagram = $instance['instagram'];
+		$pinterest = $instance['pinterest'];
+		$linkedin  = $instance['linkedin'];
+		$youtube   = $instance['youtube'];
+		$flickr    = $instance['flickr'];
+		$github    = $instance['github'];
+		$dribbble  = $instance['dribbble'];
 
 		echo $args['before_widget'];
 
@@ -63,13 +63,13 @@ class Social extends WP_Widget {
 			echo wp_kses(
 				$text,
 				array(
-					'a' 			=> array(
-						'href' 	=> array(),
-						'title' => array()
+					'a'      => array(
+						'href'  => array(),
+						'title' => array(),
 					),
-					'br' 			=> array(),
-					'em' 			=> array(),
-					'strong' 	=> array()
+					'br'     => array(),
+					'em'     => array(),
+					'strong' => array(),
 				)
 			);
 			echo '</p>';
@@ -142,31 +142,33 @@ class Social extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
-		$instance['text'] 	= wp_kses( stripslashes(
-			$new_instance['text'] ),
-			[
-				'a' 		=> array(
-					'href' 	=> array(),
-					'title' => array()
+		$new_instance          = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']     = sanitize_text_field( $new_instance['title'] );
+		$instance['text']      = wp_kses(
+			stripslashes(
+				$new_instance['text']
+			),
+			array(
+				'a'      => array(
+					'href'  => array(),
+					'title' => array(),
 				),
-				'br' 		=> array(),
-				'em' 		=> array(),
-				'strong' 	=> array()
-			]
+				'br'     => array(),
+				'em'     => array(),
+				'strong' => array(),
+			)
 		);
-		$instance['target'] 		= sanitize_text_field( $new_instance['target'] );
-		$instance['facebook'] 	= sanitize_text_field( esc_url( $new_instance['facebook'] ) );
-		$instance['twitter'] 		= sanitize_text_field( esc_url( $new_instance['twitter'] ) );
-		$instance['google'] 		= sanitize_text_field( esc_url( $new_instance['google'] ) );
-		$instance['instagram'] 	= sanitize_text_field( esc_url( $new_instance['instagram'] ) );
-		$instance['pinterest'] 	= sanitize_text_field( esc_url( $new_instance['pinterest'] ) );
-		$instance['linkedin'] 	= sanitize_text_field( esc_url( $new_instance['linkedin'] ) );
-		$instance['flickr'] 		= sanitize_text_field( esc_url( $new_instance['flickr'] ) );
-		$instance['youtube'] 		= sanitize_text_field( esc_url( $new_instance['youtube'] ) );
-		$instance['github'] 		= sanitize_text_field( esc_url( $new_instance['github'] ) );
-		$instance['dribbble'] 	= sanitize_text_field( esc_url( $new_instance['dribbble'] ) );
+		$instance['target']    = sanitize_text_field( $new_instance['target'] );
+		$instance['facebook']  = sanitize_text_field( esc_url( $new_instance['facebook'] ) );
+		$instance['twitter']   = sanitize_text_field( esc_url( $new_instance['twitter'] ) );
+		$instance['google']    = sanitize_text_field( esc_url( $new_instance['google'] ) );
+		$instance['instagram'] = sanitize_text_field( esc_url( $new_instance['instagram'] ) );
+		$instance['pinterest'] = sanitize_text_field( esc_url( $new_instance['pinterest'] ) );
+		$instance['linkedin']  = sanitize_text_field( esc_url( $new_instance['linkedin'] ) );
+		$instance['flickr']    = sanitize_text_field( esc_url( $new_instance['flickr'] ) );
+		$instance['youtube']   = sanitize_text_field( esc_url( $new_instance['youtube'] ) );
+		$instance['github']    = sanitize_text_field( esc_url( $new_instance['github'] ) );
+		$instance['dribbble']  = sanitize_text_field( esc_url( $new_instance['dribbble'] ) );
 
 		return $instance;
 	}
@@ -190,14 +192,14 @@ class Social extends WP_Widget {
 			echo '<label for="' . esc_attr( $this->get_field_id( $key ) ) . '">' . sprintf( esc_html_x( '%1$s', 'title', 'widgets-bundle' ), ucfirst( $key ) ) . '</label>';
 
 			if ( 'text' == $key ) {
-				echo '<textarea class="widefat" id="' . esc_attr( $this->get_field_id( $key ) ) . '" name="' . esc_attr( $this->get_field_name( $key ) ) . '">' . esc_textarea( $instance[$key] ) . '</textarea>';
+				echo '<textarea class="widefat" id="' . esc_attr( $this->get_field_id( $key ) ) . '" name="' . esc_attr( $this->get_field_name( $key ) ) . '">' . esc_textarea( $instance[ $key ] ) . '</textarea>';
 			} elseif ( 'target' == $key ) {
 				echo '<select class="widefat" id="' . esc_attr( $this->get_field_id( 'target' ) ) . '" name="' . esc_attr( $this->get_field_name( 'target' ) ) . '">';
 				echo '<option value="' . esc_attr__( '_self', 'widgets-bundle' ) . '"' . selected( __( '_self', 'widgets-bundle' ), $instance['target'], false ) . '>' . esc_attr__( 'Current Window', 'widgets-bundle' ) . '</option>';
 				echo '<option value="' . esc_attr__( '_blank', 'widgets-bundle' ) . '"' . selected( __( '_blank', 'widgets-bundle' ), $instance['target'], false ) . '>' . esc_attr__( 'New Window', 'widgets-bundle' ) . '</option>';
 				echo '</select>';
 			} else {
-				echo '<input class="widefat" id="' . esc_attr( $this->get_field_id( $key ) ) . '" name="' . esc_attr( $this->get_field_name( $key ) ) . '" type="text" value="' . esc_attr( $instance[$key] ) . '" />';
+				echo '<input class="widefat" id="' . esc_attr( $this->get_field_id( $key ) ) . '" name="' . esc_attr( $this->get_field_name( $key ) ) . '" type="text" value="' . esc_attr( $instance[ $key ] ) . '" />';
 			}
 
 			echo '</p>';
@@ -207,23 +209,24 @@ class Social extends WP_Widget {
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 		=> '',
-			'text'			=> '',
-			'target' 		=> '',
-			'facebook' 	=> '',
-			'twitter'		=> '',
-			'google'		=> '',
-			'instagram'	=> '',
-			'pinterest'	=> '',
-			'linkedin'	=> '',
-			'youtube'		=> '',
-			'flickr'		=> '',
-			'github'		=> '',
-			'dribbble'	=> ''
+			'title'     => '',
+			'text'      => '',
+			'target'    => '',
+			'facebook'  => '',
+			'twitter'   => '',
+			'google'    => '',
+			'instagram' => '',
+			'pinterest' => '',
+			'linkedin'  => '',
+			'youtube'   => '',
+			'flickr'    => '',
+			'github'    => '',
+			'dribbble'  => '',
 		);
 
 		return $defaults;

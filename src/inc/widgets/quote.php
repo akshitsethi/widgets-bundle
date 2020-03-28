@@ -16,10 +16,10 @@ class Quote extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'quote',
 			esc_html__( 'Quote', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'quote',
-				'description' => esc_html__( 'Widget that displays your Quotes.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget that displays your Quotes.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -34,10 +34,10 @@ class Quote extends WP_Widget {
 	 * @return void Echoes its output.
 	 */
 	public function widget( $args, $instance ) {
-		$instance 	= wp_parse_args( (array) $instance, self::defaults() );
-		$title 			= apply_filters( 'widget_title', $instance['title'] );
-		$quote 			= $instance['quote'];
-		$citation 	= $instance['citation'];
+		$instance = wp_parse_args( (array) $instance, self::defaults() );
+		$title    = apply_filters( 'widget_title', $instance['title'] );
+		$quote    = $instance['quote'];
+		$citation = $instance['citation'];
 
 		echo $args['before_widget'];
 
@@ -74,9 +74,9 @@ class Quote extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 				= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 		= sanitize_text_field( $new_instance['title'] );
-		$instance['quote'] 		= sanitize_text_field( $new_instance['quote'] );
+		$new_instance         = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title']    = sanitize_text_field( $new_instance['title'] );
+		$instance['quote']    = sanitize_text_field( $new_instance['quote'] );
 		$instance['citation'] = sanitize_text_field( $new_instance['citation'] );
 
 		return $instance;
@@ -91,7 +91,7 @@ class Quote extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -108,19 +108,20 @@ class Quote extends WP_Widget {
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'citation' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'citation' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['citation'] ); ?>" />
 		</p>
 
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
-			'title' 		=> esc_html__( 'Today\'s Quote', 'widgets-bundle' ),
-			'quote' 		=> '',
-			'citation' 	=> ''
+			'title'    => esc_html__( 'Today\'s Quote', 'widgets-bundle' ),
+			'quote'    => '',
+			'citation' => '',
 		);
 
 		return $defaults;

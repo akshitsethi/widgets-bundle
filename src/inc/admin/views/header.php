@@ -2,7 +2,7 @@
 
 /**
  * View: Header
- * 
+ *
  * @since 1.0.0
  */
 

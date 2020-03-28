@@ -16,7 +16,7 @@ class Front {
 	 * Class constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ] );
+		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
 	}
 
 

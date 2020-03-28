@@ -2,7 +2,7 @@
 
 /**
  * Settings panel view for the plugin.
- * 
+ *
  * @since 1.0.0
  */
 

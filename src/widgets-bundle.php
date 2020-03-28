@@ -9,7 +9,7 @@
  * Text Domain: widgets-bundle
  * Domain Path: i18n
  * Author URI:  https://akshitsethi.com
- * License: 		GPLv3
+ * License:         GPLv3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
@@ -54,10 +54,10 @@ class WidgetsBundle {
 
 
 	 /**
-	 * Register widgets conditionally if they are enabled.
-	 *
-	 * @since 2.0.0
-	 */
+	  * Register widgets conditionally if they are enabled.
+	  *
+	  * @since 2.0.0
+	  */
 	public function register_widgets() {
 		// Get option
 		$widgets = get_option( Config::DB_OPTION );
@@ -109,5 +109,5 @@ $widgets_bundle = new WidgetsBundle();
 /**
  * Hooks for plugin activation & deactivation.
  */
-register_activation_hook( __FILE__, [ $widgets_bundle, 'activate' ] );
-register_deactivation_hook( __FILE__, [ $widgets_bundle, 'deactivate' ] );
+register_activation_hook( __FILE__, array( $widgets_bundle, 'activate' ) );
+register_deactivation_hook( __FILE__, array( $widgets_bundle, 'deactivate' ) );

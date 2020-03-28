@@ -16,10 +16,10 @@ class Personal extends WP_Widget {
 		parent::__construct(
 			Config::PREFIX . 'personal',
 			esc_html__( 'Personal', 'widgets-bundle' ),
-			[
+			array(
 				'classname'   => Config::PREFIX . 'personal',
-				'description' => esc_html__( 'Widget for showing personal image along with a short bio.', 'widgets-bundle' )
-			]
+				'description' => esc_html__( 'Widget for showing personal image along with a short bio.', 'widgets-bundle' ),
+			)
 		);
 	}
 
@@ -35,9 +35,9 @@ class Personal extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-		$title 		= apply_filters( 'widget_title', $instance['title'] );
-		$url 			= $instance['url'];
-		$bio 			= $instance['bio'];
+		$title    = apply_filters( 'widget_title', $instance['title'] );
+		$url      = $instance['url'];
+		$bio      = $instance['bio'];
 
 		echo $args['before_widget'];
 
@@ -57,14 +57,16 @@ class Personal extends WP_Widget {
 		// Bio
 		if ( ! empty( $bio ) ) {
 			echo '<p>';
-			echo wp_kses( $bio, array(
-					'a' 		=> array(
-						'href' 	=> array(),
-						'title' => array()
+			echo wp_kses(
+				$bio,
+				array(
+					'a'      => array(
+						'href'  => array(),
+						'title' => array(),
 					),
-					'br' 		=> array(),
-					'em' 		=> array(),
-					'strong' 	=> array()
+					'br'     => array(),
+					'em'     => array(),
+					'strong' => array(),
 				)
 			);
 			echo '</p>';
@@ -84,18 +86,20 @@ class Personal extends WP_Widget {
 	 * @return array Updated widget instance.
 	 */
 	public function update( $new_instance, $instance ) {
-		$new_instance 			= wp_parse_args( (array) $new_instance, self::defaults() );
-		$instance['title'] 	= sanitize_text_field( $new_instance['title'] );
-		$instance['url'] 		= sanitize_text_field( $new_instance['url'] );
-		$instance['bio'] 		= wp_kses( stripslashes( $new_instance['bio'] ), array(
-				'a' 			=> array(
-					'href' 	=> array(),
-					'title' => array()
+		$new_instance      = wp_parse_args( (array) $new_instance, self::defaults() );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['url']   = sanitize_text_field( $new_instance['url'] );
+		$instance['bio']   = wp_kses(
+			stripslashes( $new_instance['bio'] ),
+			array(
+				'a'      => array(
+					'href'  => array(),
+					'title' => array(),
 				),
-				'br' 			=> array(),
-				'em' 			=> array(),
-				'strong' 	=> array()
-			)  
+				'br'     => array(),
+				'em'     => array(),
+				'strong' => array(),
+			)
 		);
 
 		return $instance;
@@ -110,7 +114,7 @@ class Personal extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, self::defaults() );
-	?>
+		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'widgets-bundle' ); ?></label>
@@ -141,19 +145,20 @@ class Personal extends WP_Widget {
 			<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'bio' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'bio' ) ); ?>"><?php echo esc_textarea( $instance['bio'] ); ?></textarea>
 		</p>
 
-	<?php
+		<?php
 	}
 
 
 	/**
 	 * Default options.
+	 *
 	 * @access private
 	 */
 	private static function defaults() {
 		$defaults = array(
 			'title' => esc_html__( 'About Me', 'widgets-bundle' ),
-			'url' 	=> '',
-			'bio' 	=> ''
+			'url'   => '',
+			'bio'   => '',
 		);
 
 		return $defaults;
