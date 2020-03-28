@@ -1,5 +1,5 @@
 {
-  "name": "Widgets Bundle",
+  "name": "akshitsethi/widgets-bundle",
   "description": "Collection of useful Widgets for WordPress blog or website.",
   "keywords": [
     "wordpress",
@@ -8,7 +8,8 @@
   ],
   "type": "wordpress-plugin",
   "require": {
-    "php": ">=5.6.0"
+    "php": ">=5.6.0",
+    "drewm/mailchimp-api": "^2.5"
   },
   "autoload": {
     "psr-4": {

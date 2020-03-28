@@ -1,5 +1,5 @@
 {
-  "name": "Widgets Bundle",
+  "name": "akshitsethi/widgets-bundle",
   "description": "Collection of useful Widgets for WordPress blog or website.",
   "require": {
     "php": ">=7.2.0"
