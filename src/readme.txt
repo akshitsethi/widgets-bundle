@@ -55,7 +55,7 @@ Getting help is just a click away now. Report your issues using the support form
 
 * Code has been completely refactored
 * Supports the latest version of WordPress
-* New plugins added
+* Improved the Subscribe widget
 
 = 1.1 =
 * Fixed issue with the Instagram widget

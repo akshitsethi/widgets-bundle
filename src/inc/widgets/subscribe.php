@@ -9,7 +9,6 @@ namespace AkshitSethi\Plugins\WidgetsBundle\Widgets;
 
 use WP_Widget;
 use AkshitSethi\Plugins\WidgetsBundle\Config;
-
 use DrewM\MailChimp\MailChimp;
 
 class Subscribe extends WP_Widget {
@@ -46,42 +45,56 @@ class Subscribe extends WP_Widget {
 		// Submission check
 		if ( ! empty( $api_key ) && ! empty( $list_id ) ) {
 			if ( isset( $_POST[ Config::PREFIX . 'subscribe_email' ] ) ) {
+				// Default response
+				$response = array(
+					'code' => 'error',
+					'text' => esc_html__( 'There was an error processing your request.', 'widgets-bundle' ),
+				);
+
 				// Process information
 				$email = sanitize_text_field( $_POST[ Config::PREFIX . 'subscribe_email' ] );
 
 				if ( empty( $email ) ) {
-					$response['code'] = 'error';
 					$response['text'] = esc_html__( 'Please provide your email address.', 'widgets-bundle' );
 				} else {
 					$email = filter_var( strtolower( trim( $email ) ), FILTER_SANITIZE_EMAIL );
 
-					if ( strpos( $email, '@' ) ) {
-						// API call
-						$mailchimp = new MailChimp( $api_key );
-						$connect   = $mailchimp->post(
-							'lists/' . $list_id . '/members',
-							array(
-								'email_address' => $email,
-								'status'        => 'subscribed',
-							)
-						);
+					if ( $email ) {
+						try {
+							// API call
+							$mailchimp = new MailChimp( sanitize_text_field( $api_key ) );
 
-						// Show the response
-						if ( $mailchimp->success() ) {
-							$response['code'] = 'success';
+							// Send data via POST
+							$connect = $mailchimp->post(
+								'lists/' . sanitize_text_field( $list_id ) . '/members',
+								array(
+									'email_address' => $email,
+									'status'        => 'subscribed',
+								)
+							);
 
-							// Show the success message if not empty
-							if ( ! empty( $success_message ) ) {
-								$response['text'] = $success_message;
+							// Show the response
+							if ( $mailchimp->success() ) {
+								$response['code'] = 'success';
+
+								// Show the success message if not empty
+								if ( ! empty( $success_message ) ) {
+									$response['text'] = esc_html( $success_message );
+								} else {
+									$response['text'] = esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' );
+								}
 							} else {
-								$response['text'] = esc_html__( 'Thank you! We\'ll be in touch!', 'widgets-bundle' );
+								if ( 400 === $mailchimp->getLastResponse()['headers']['http_code'] ) {
+									$response['code'] = 'success';
+									$response['text'] = esc_html__( 'You are already subscribed. We will reach you shortly.', 'widgets-bundle' );
+								} else {
+									$response['text'] = esc_html( $mailchimp->getLastError() );
+								}
 							}
-						} else {
-							$response['code'] = 'error';
-							$response['text'] = $mailchimp->getLastError();
+						} catch ( Exception $e ) {
+							$response['text'] = $get->getMessage();
 						}
 					} else {
-						$response['code'] = 'error';
 						$response['text'] = esc_html__( 'Please provide a valid email address.', 'widgets-bundle' );
 					}
 				}
