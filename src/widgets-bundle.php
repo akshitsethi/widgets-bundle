@@ -107,8 +107,9 @@ class WidgetsBundle {
 	 * Attached to the de-activation hook.
 	 */
 	public function deactivate() {
-		// Remove from `wp_options` table.
-		delete_option( Config::DB_OPTION );
+		/**
+		 * @todo Keeping it here as it will be needed in future versions.
+		 */
 	}
 
 }
