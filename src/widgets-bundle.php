@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Widgets Bundle
  * Description: The Widgets Bundle plugin allows you to add powerful collection of beautifully crafted widgets to your website.
- * Version:     2.0.0
+ * Version:     2.0.1
  * Runtime:     5.6+
  * Author:      akshitsethi
  * Text Domain: widgets-bundle
@@ -88,8 +88,18 @@ class WidgetsBundle {
 	 * Attached to the activation hook.
 	 */
 	public function activate() {
-		// Add to `wp_options` table.
-		update_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
+		// Check for existing options in the database
+		$options = get_option( Config::DB_OPTION );
+
+		// Present? Overwrite the default options
+		if ( $options ) {
+			$options = array_merge( Config::DEFAULT_OPTIONS, $options );
+		} else {
+			$options = Config::DEFAULT_OPTIONS;
+		}
+
+		// Update `wp_options` table
+		update_option( Config::DB_OPTION, $options );
 	}
 
 
