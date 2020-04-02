@@ -6,6 +6,8 @@
  * @since 1.0.0
  */
 
+use AkshitSethi\Plugins\WidgetsBundle\Config;
+
 ?>
 
 <div class="as-tile" id="about">
@@ -16,11 +18,11 @@
 			<div class="as-share">
 				<p><?php esc_html_e( 'Show me some love and connect with me via social channels.', 'widgets-bundle' ); ?></p>
 				<a href="https://twitter.com/akshitsethi" target="_blank">
-					<img src="<?php echo AkshitSethi\Plugins\WidgetsBundle\Config::$plugin_url; ?>assets/admin/images/twitter.png" alt="<?php esc_attr_e( 'Twitter', 'widgets-bundle' ); ?>" />
+					<img src="<?php echo Config::$plugin_url; ?>assets/admin/images/twitter.png" alt="<?php esc_attr_e( 'Twitter', 'widgets-bundle' ); ?>" />
 				</a>&nbsp;
 
 				<a href="https://www.facebook.com/akshitsethi" target="_blank">
-					<img src="<?php echo AkshitSethi\Plugins\WidgetsBundle\Config::$plugin_url; ?>assets/admin/images/facebook.png" alt="<?php esc_attr_e( 'Facebook', 'widgets-bundle' ); ?>" />
+					<img src="<?php echo Config::$plugin_url; ?>assets/admin/images/facebook.png" alt="<?php esc_attr_e( 'Facebook', 'widgets-bundle' ); ?>" />
 				</a>
 			</div><!-- .as-share -->
 		</div><!-- .as-section-content -->

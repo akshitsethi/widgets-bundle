@@ -6,6 +6,7 @@
  * @since 1.0.0
  */
 
+use AkshitSethi\Plugins\WidgetsBundle\Config;
 require_once 'header.php';
 
 ?>
@@ -14,7 +15,7 @@ require_once 'header.php';
 	<div class="as-float-left">
 		<div class="as-mobile-menu">
 			<a href="javascript:void;">
-				<img src="<?php echo AkshitSethi\Plugins\WidgetsBundle\Config::$plugin_url; ?>assets/admin/images/toggle.png" alt="<?php esc_attr_e( 'Menu', 'widgets-bundle' ); ?>" />
+				<img src="<?php echo Config::$plugin_url; ?>assets/admin/images/toggle.png" alt="<?php esc_attr_e( 'Menu', 'widgets-bundle' ); ?>" />
 			</a>
 		</div><!-- .as-mobile-menu -->
 

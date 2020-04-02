@@ -19,7 +19,7 @@ use AkshitSethi\Plugins\WidgetsBundle\Config;
 			<div class="as-section-content">
 				<div class="as-form-group">
 					<label for="<?php echo Config::PREFIX . 'support_email'; ?>" class="as-strong"><?php esc_html_e( 'Email Address', 'widgets-bundle' ); ?></label>
-					<input type="text" name="<?php echo Config::PREFIX . 'support_email'; ?>" id="<?php echo Config::PREFIX . 'support_email'; ?>" value="<?php echo esc_attr_e( $admin_email ); ?>" placeholder="<?php esc_html_e( 'Please provide your email address', 'widgets-bundle' ); ?>" class="as-form-control">
+					<input type="text" name="<?php echo Config::PREFIX . 'support_email'; ?>" id="<?php echo Config::PREFIX . 'support_email'; ?>" value="<?php echo esc_attr( $admin_email ); ?>" placeholder="<?php esc_html_e( 'Please provide your email address', 'widgets-bundle' ); ?>" class="as-form-control">
 
 					<p class="as-form-help-block"><?php esc_html_e( 'You will receive support response at this email address.', 'widgets-bundle' ); ?></p>
 				</div>
