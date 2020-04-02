@@ -7,6 +7,7 @@
 
 namespace AkshitSethi\Plugins\WidgetsBundle\Widgets;
 
+use Exception;
 use WP_Widget;
 use AkshitSethi\Plugins\WidgetsBundle\Config;
 use DrewM\MailChimp\MailChimp;
@@ -92,7 +93,7 @@ class Subscribe extends WP_Widget {
 								}
 							}
 						} catch ( Exception $e ) {
-							$response['text'] = $get->getMessage();
+							$response['text'] = $e->getMessage();
 						}
 					} else {
 						$response['text'] = esc_html__( 'Please provide a valid email address.', 'widgets-bundle' );
