@@ -90,6 +90,9 @@ class Admin {
 			'remove_text'        => esc_html__( 'Remove', 'widgets-bundle' ),
 			'image_preview_text' => esc_html__( 'Image preview will show over here.', 'widgets-bundle' ),
 			'ad_preview_text'    => esc_html__( 'Ad preview will show over here.', 'widgets-bundle' ),
+			'save_changes'       => esc_html__( 'Please save your changes first.', 'widgets-bundle' ),
+			'processing'         => esc_html__( 'Processing..' ),
+			'nonce'              => wp_create_nonce( Config::PREFIX . 'nonce' ),
 		);
 
 		wp_enqueue_style( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/css/widgets.css', false, Config::VERSION );
@@ -139,6 +142,12 @@ class Admin {
 			'response' => esc_html__( 'Options have been updated successfully.', 'widgets-bundle' ),
 		);
 
+		// Check for _nonce
+		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
+			$response['code']     = 'error';
+			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'widgets-bundle' );
+		}
+
 		// Filter and sanitize
 		$options['ads']       = isset( $_POST[ Config::PREFIX . 'ads' ] ) ? true : false;
 		$options['personal']  = isset( $_POST[ Config::PREFIX . 'personal' ] ) ? true : false;
@@ -177,7 +186,7 @@ class Admin {
 		if ( ! empty( $_POST[ Config::PREFIX . 'support_email' ] ) && ! empty( $_POST[ Config::PREFIX . 'support_issue' ] ) ) {
 			$admin_email = sanitize_text_field( $_POST[ Config::PREFIX . 'support_email' ] );
 			$issue       = htmlentities( $_POST[ Config::PREFIX . 'support_issue' ] );
-			$subject     = '[Widgets Bundle v' . Config::VERSION . '] by ' . $admin_email;
+			$subject     = '[' . Config::get_plugin_name() . ' v' . Config::VERSION . '] by ' . $admin_email;
 			$body        = "Email: $admin_email \r\nIssue: $issue";
 			$headers     = 'From: ' . $admin_email . "\r\n" . 'Reply-To: ' . $admin_email;
 

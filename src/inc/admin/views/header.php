@@ -19,6 +19,6 @@ use AkshitSethi\Plugins\WidgetsBundle\Config;
 		</p>
 
 		<div class="as-header-right">
-			<input type="submit" id="<?php echo Config::PREFIX . 'submit'; ?>" name="<?php echo Config::PREFIX . 'submit'; ?>" class="as-btn" value="<?php esc_html_e( 'Save Changes', 'widgets-bundle' ); ?>" data-tab="options">
+			<input type="submit" id="<?php echo Config::PREFIX . 'submit'; ?>" name="<?php echo Config::PREFIX . 'submit'; ?>" class="as-btn" value="<?php esc_html_e( 'Save Changes', 'widgets-bundle' ); ?>" data-tab="#options">
 		</div><!-- .as-header-right -->
 	</div><!-- .as-header -->
