@@ -1,6 +1,6 @@
 {
   "name": "widgets-bundle",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Plugin with a collection of useful Widgets for WordPress blog or website.",
   "scripts": {
     "lint": "eslint",
