@@ -41,6 +41,16 @@ class Config {
 		self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
 	}
 
+
+	/**
+	 * Get plugin name.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function get_plugin_name() {
+		return esc_html__( 'Widgets Bundle', 'widgets-bundle' );
+	}
+
 }
 
 new Config();

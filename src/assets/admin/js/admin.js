@@ -105,7 +105,7 @@ toastr.options = {
       e.preventDefault();
 
       // ID
-      var id 		= $(this).attr('data-tab').replace('#', '');
+      var id = $(this).attr('data-tab').replace('#', '');
 
       // Form data
       var data 	= new FormData($('#' + id + ' form')[0]);
@@ -122,7 +122,7 @@ toastr.options = {
         contentType: false,
         beforeSend: function() {
           $('#' + id).block({
-            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">Processing..</div>',
+            message: '<div class="as-strong" style="background: #ecf0f1; padding: 10px 6px; color: #000;">' + widgetsbundle_admin_l10n.processing + '</div>',
             css: {
               border: 'none',
               backgroundColor: 'none'
@@ -138,16 +138,11 @@ toastr.options = {
         // Unblock
         $('#' + id).unblock();
 
-        // Success
-        if (data.code == 'success') {
-          toastr.success('<strong>Hey!</strong> ' + data.response);
+        // Notification
+        toastr[data.code](data.response);
 
-          // Remove input class
-          $('input, textarea, select').removeClass('changed-input');
-        } else {
-          // Error
-          toastr.error('<strong>Oops!</strong> ' + data.response);
-        }
+        // Remove input class
+        $('input, textarea, select').removeClass('changed-input');
       });
     });
 
@@ -200,7 +195,7 @@ toastr.options = {
       var $tab      		= $selector.attr('href');
 
       if ($('.changed-input').length) {
-        toastr.error('<strong>Hey!</strong> You haven\'t saved your changes.');
+        toastr.error(widgetsbundle_admin_l10n.save_changes);
       } else {
         // Change menu selection
         $('.as-main-menu li a').removeClass('active');
