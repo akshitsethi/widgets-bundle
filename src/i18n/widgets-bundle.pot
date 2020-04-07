@@ -2,23 +2,24 @@
 # This file is distributed under the same license as the Widgets Bundle plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widgets Bundle 2.0.0\n"
+"Project-Id-Version: Widgets Bundle 2.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-03-28T16:38:41+05:30\n"
+"POT-Creation-Date: 2020-04-08T02:53:21+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: widgets-bundle\n"
 
 #. Plugin Name of the plugin
 #: inc/admin/views/header.php:15
 #: inc/admin/views/header.php:17
-#: inc/class-admin.php:34
-#: inc/class-admin.php:35
+#: inc/class-admin.php:39
+#: inc/class-admin.php:40
+#: inc/class-config.php:51
 msgid "Widgets Bundle"
 msgstr ""
 
@@ -43,30 +44,30 @@ msgid "Akshit Sethi"
 msgstr ""
 
 #: inc/admin/views/header.php:22
-#: inc/class-admin.php:58
+#: inc/class-admin.php:63
 msgid "Save Changes"
 msgstr ""
 
-#: inc/admin/views/settings-about.php:13
+#: inc/admin/views/settings-about.php:15
 msgid "ABOUT"
 msgstr ""
 
-#: inc/admin/views/settings-about.php:14
+#: inc/admin/views/settings-about.php:16
 msgid "Hola! I'm Akshit Sethi, Designer + Developer by profession & Entrepreneur by passion. In love with WWW and Spanish. Travel is life. When I am not coding, I am reading anything worth reading. I create premium WordPress themes & plugins."
 msgstr ""
 
-#: inc/admin/views/settings-about.php:17
+#: inc/admin/views/settings-about.php:19
 msgid "Show me some love and connect with me via social channels."
 msgstr ""
 
-#: inc/admin/views/settings-about.php:19
-#: inc/class-admin.php:117
+#: inc/admin/views/settings-about.php:21
+#: inc/class-admin.php:125
 #: inc/widgets/twitter.php:24
 msgid "Twitter"
 msgstr ""
 
-#: inc/admin/views/settings-about.php:23
-#: inc/class-admin.php:116
+#: inc/admin/views/settings-about.php:25
+#: inc/class-admin.php:124
 #: inc/widgets/facebook.php:18
 msgid "Facebook"
 msgstr ""
@@ -180,67 +181,75 @@ msgstr ""
 msgid "Please explain the issue you are facing with the plugin. Provide as much detail as possible."
 msgstr ""
 
-#: inc/admin/views/settings.php:17
+#: inc/admin/views/settings.php:18
 msgid "Menu"
 msgstr ""
 
-#: inc/admin/views/settings.php:22
+#: inc/admin/views/settings.php:23
 msgid "Options"
 msgstr ""
 
-#: inc/admin/views/settings.php:23
+#: inc/admin/views/settings.php:24
 msgid "Support"
 msgstr ""
 
-#: inc/admin/views/settings.php:24
+#: inc/admin/views/settings.php:25
 msgid "About"
 msgstr ""
 
-#: inc/class-admin.php:59
+#: inc/class-admin.php:64
 msgid "Ask for Support"
 msgstr ""
 
-#: inc/class-admin.php:82
+#: inc/class-admin.php:87
 msgid "Choose Personal Image"
 msgstr ""
 
-#: inc/class-admin.php:83
+#: inc/class-admin.php:88
 msgid "Choose Advertisement"
 msgstr ""
 
-#: inc/class-admin.php:84
+#: inc/class-admin.php:89
 msgid "Save"
 msgstr ""
 
-#: inc/class-admin.php:85
-#: inc/widgets/ads.php:140
-#: inc/widgets/personal.php:134
+#: inc/class-admin.php:90
+#: inc/widgets/ads.php:144
+#: inc/widgets/personal.php:138
 msgid "Remove"
 msgstr ""
 
-#: inc/class-admin.php:86
-#: inc/widgets/personal.php:125
+#: inc/class-admin.php:91
+#: inc/widgets/personal.php:129
 msgid "Image preview will show over here."
 msgstr ""
 
-#: inc/class-admin.php:87
-#: inc/widgets/ads.php:131
+#: inc/class-admin.php:92
+#: inc/widgets/ads.php:135
 msgid "Ad preview will show over here."
 msgstr ""
 
-#: inc/class-admin.php:134
+#: inc/class-admin.php:93
+msgid "Please save your changes first."
+msgstr ""
+
+#: inc/class-admin.php:142
 msgid "Options have been updated successfully."
 msgstr ""
 
-#: inc/class-admin.php:168
+#: inc/class-admin.php:148
+msgid "Request does not seem to be a valid one. Try again by refreshing the page."
+msgstr ""
+
+#: inc/class-admin.php:182
 msgid "Please fill in both the fields to create your support ticket."
 msgstr ""
 
-#: inc/class-admin.php:184
+#: inc/class-admin.php:198
 msgid "I have received your support ticket and will get back to you shortly!"
 msgstr ""
 
-#: inc/class-admin.php:190
+#: inc/class-admin.php:204
 msgid "There was an error creating the support ticket. You can try again later or send me an email directly at akshitsethi@gmail.com"
 msgstr ""
 
@@ -252,70 +261,70 @@ msgstr ""
 msgid "Widget for showing ads in 125 x 125 px format."
 msgstr ""
 
-#: inc/widgets/ads.php:122
+#: inc/widgets/ads.php:126
 #: inc/widgets/facebook.php:100
 #: inc/widgets/instagram.php:137
-#: inc/widgets/personal.php:116
-#: inc/widgets/posts.php:124
+#: inc/widgets/personal.php:120
+#: inc/widgets/posts.php:125
 #: inc/widgets/quote.php:97
-#: inc/widgets/subscribe.php:182
+#: inc/widgets/subscribe.php:203
 #: inc/widgets/twitter.php:179
 msgid "Title"
 msgstr ""
 
-#: inc/widgets/ads.php:136
-#: inc/widgets/personal.php:130
+#: inc/widgets/ads.php:140
+#: inc/widgets/personal.php:134
 msgid "Select Image"
 msgstr ""
 
-#: inc/widgets/ads.php:146
+#: inc/widgets/ads.php:150
 msgid "Link"
 msgstr ""
 
-#: inc/widgets/ads.php:151
+#: inc/widgets/ads.php:155
 #: inc/widgets/instagram.php:187
 msgid "Target"
 msgstr ""
 
-#: inc/widgets/ads.php:153
+#: inc/widgets/ads.php:157
 #: inc/widgets/instagram.php:189
-#: inc/widgets/social.php:196
+#: inc/widgets/social.php:198
 msgid "_self"
 msgstr ""
 
-#: inc/widgets/ads.php:153
+#: inc/widgets/ads.php:157
 #: inc/widgets/instagram.php:189
 msgid "Self"
 msgstr ""
 
-#: inc/widgets/ads.php:154
+#: inc/widgets/ads.php:158
 #: inc/widgets/instagram.php:190
-#: inc/widgets/social.php:197
+#: inc/widgets/social.php:199
 msgid "_blank"
 msgstr ""
 
-#: inc/widgets/ads.php:154
+#: inc/widgets/ads.php:158
 #: inc/widgets/instagram.php:190
-#: inc/widgets/social.php:197
+#: inc/widgets/social.php:199
 msgid "New Window"
 msgstr ""
 
-#: inc/widgets/ads.php:155
+#: inc/widgets/ads.php:159
 #: inc/widgets/instagram.php:191
 msgid "_parent"
 msgstr ""
 
-#: inc/widgets/ads.php:155
+#: inc/widgets/ads.php:159
 #: inc/widgets/instagram.php:191
 msgid "Parent"
 msgstr ""
 
-#: inc/widgets/ads.php:160
-#: inc/widgets/subscribe.php:187
+#: inc/widgets/ads.php:164
+#: inc/widgets/subscribe.php:208
 msgid "Text"
 msgstr ""
 
-#: inc/widgets/ads.php:174
+#: inc/widgets/ads.php:179
 msgid "Sponsored"
 msgstr ""
 
@@ -360,12 +369,12 @@ msgstr ""
 msgid "Height"
 msgstr ""
 
-#: inc/widgets/facebook.php:159
+#: inc/widgets/facebook.php:160
 msgid "Like Us On Facebook"
 msgstr ""
 
 #: inc/widgets/instagram.php:18
-#: inc/widgets/instagram.php:218
+#: inc/widgets/instagram.php:219
 msgid "Instagram"
 msgstr ""
 
@@ -482,20 +491,20 @@ msgstr ""
 msgid "Follow Text"
 msgstr ""
 
-#: inc/widgets/instagram.php:225
-#: inc/widgets/twitter.php:265
+#: inc/widgets/instagram.php:226
+#: inc/widgets/twitter.php:266
 msgid "Follow Me"
 msgstr ""
 
-#: inc/widgets/instagram.php:245
+#: inc/widgets/instagram.php:247
 msgid "Unable to communicate with Instagram."
 msgstr ""
 
-#: inc/widgets/instagram.php:275
+#: inc/widgets/instagram.php:277
 msgid "No images found"
 msgstr ""
 
-#: inc/widgets/instagram.php:307
+#: inc/widgets/instagram.php:309
 msgid "Instagram did not return a 200."
 msgstr ""
 
@@ -507,11 +516,11 @@ msgstr ""
 msgid "Widget for showing personal image along with a short bio."
 msgstr ""
 
-#: inc/widgets/personal.php:140
+#: inc/widgets/personal.php:144
 msgid "Bio"
 msgstr ""
 
-#: inc/widgets/personal.php:154
+#: inc/widgets/personal.php:159
 msgid "About Me"
 msgstr ""
 
@@ -523,27 +532,27 @@ msgstr ""
 msgid "Widget that displays your latest posts along with a featured image."
 msgstr ""
 
-#: inc/widgets/posts.php:75
+#: inc/widgets/posts.php:76
 msgid ", "
 msgstr ""
 
-#: inc/widgets/posts.php:129
+#: inc/widgets/posts.php:130
 msgid "Categories"
 msgstr ""
 
-#: inc/widgets/posts.php:131
+#: inc/widgets/posts.php:132
 msgid "all"
 msgstr ""
 
-#: inc/widgets/posts.php:131
+#: inc/widgets/posts.php:132
 msgid "All"
 msgstr ""
 
-#: inc/widgets/posts.php:140
+#: inc/widgets/posts.php:141
 msgid "Number of Posts"
 msgstr ""
 
-#: inc/widgets/posts.php:154
+#: inc/widgets/posts.php:156
 msgid "Recent"
 msgstr ""
 
@@ -560,7 +569,7 @@ msgstr ""
 msgid "Citation"
 msgstr ""
 
-#: inc/widgets/quote.php:121
+#: inc/widgets/quote.php:122
 msgid "Today's Quote"
 msgstr ""
 
@@ -572,18 +581,18 @@ msgstr ""
 msgid "Widget for showing Social Media profile links with icons."
 msgstr ""
 
-#: inc/widgets/social.php:190
+#: inc/widgets/social.php:192
 msgctxt "title"
 msgid "%1$s"
 msgstr ""
 
-#: inc/widgets/social.php:196
+#: inc/widgets/social.php:198
 msgid "Current Window"
 msgstr ""
 
 #: inc/widgets/subscribe.php:20
-#: inc/widgets/subscribe.php:127
-#: inc/widgets/subscribe.php:216
+#: inc/widgets/subscribe.php:146
+#: inc/widgets/subscribe.php:238
 msgid "Subscribe"
 msgstr ""
 
@@ -591,40 +600,48 @@ msgstr ""
 msgid "Widget for subscription form utilising the MailChimp API."
 msgstr ""
 
-#: inc/widgets/subscribe.php:54
+#: inc/widgets/subscribe.php:52
+msgid "There was an error processing your request."
+msgstr ""
+
+#: inc/widgets/subscribe.php:59
 msgid "Please provide your email address."
 msgstr ""
 
-#: inc/widgets/subscribe.php:74
-#: inc/widgets/subscribe.php:220
+#: inc/widgets/subscribe.php:85
+#: inc/widgets/subscribe.php:242
 msgid "Thank you! We'll be in touch!"
 msgstr ""
 
-#: inc/widgets/subscribe.php:82
+#: inc/widgets/subscribe.php:90
+msgid "You are already subscribed. We will reach you shortly."
+msgstr ""
+
+#: inc/widgets/subscribe.php:99
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: inc/widgets/subscribe.php:123
+#: inc/widgets/subscribe.php:142
 msgid "Enter your email address.."
 msgstr ""
 
-#: inc/widgets/subscribe.php:132
+#: inc/widgets/subscribe.php:151
 msgid "Please provide your API key and List ID for this widget to work properly."
 msgstr ""
 
-#: inc/widgets/subscribe.php:192
+#: inc/widgets/subscribe.php:213
 msgid "API Key"
 msgstr ""
 
-#: inc/widgets/subscribe.php:197
+#: inc/widgets/subscribe.php:218
 msgid "List ID"
 msgstr ""
 
-#: inc/widgets/subscribe.php:202
+#: inc/widgets/subscribe.php:223
 msgid "Success Message"
 msgstr ""
 
-#: inc/widgets/subscribe.php:217
+#: inc/widgets/subscribe.php:239
 msgid "We will reach your mailbox only twice a month. Don't worry, we hate spam too!"
 msgstr ""
 
