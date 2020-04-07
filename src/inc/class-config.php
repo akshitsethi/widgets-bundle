@@ -17,7 +17,7 @@ class Config {
 
 	const PLUGIN_SLUG = 'widgets-bundle';
 	const SHORT_SLUG  = 'as-wb';
-	const VERSION     = '2.0.2';
+	const VERSION     = '2.0.3';
 	const DB_OPTION   = 'as_widgetsbundle';
 	const PREFIX      = 'widgetsbundle_';
 

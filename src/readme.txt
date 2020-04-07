@@ -4,7 +4,7 @@ Donate link: https://akshitsethi.com/
 Tags: widgets, wordpress widgets, wp widgets, wp widgets plugin
 Requires at least: 4.8
 Tested up to: 5.3.2
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,6 +50,9 @@ Getting help is just a click away now. Report your issues using the support form
 
 
 == Changelog ==
+
+= 2.0.3 =
+* POT file has been updated
 
 = 2.0.2 =
 * Minor bug fixes
