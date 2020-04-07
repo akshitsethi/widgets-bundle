@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Widgets Bundle
  * Description: The Widgets Bundle plugin allows you to add powerful collection of beautifully crafted widgets to your website.
- * Version:     2.0.1
+ * Version:     2.0.2
  * Runtime:     5.6+
  * Author:      akshitsethi
  * Text Domain: widgets-bundle
