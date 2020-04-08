@@ -36,8 +36,8 @@ class Admin {
 	public function add_menu() {
 		if ( is_admin() && current_user_can( 'manage_options' ) ) {
 			$menu = add_options_page(
-				esc_html__( 'Widgets Bundle', 'widgets-bundle' ),
-				esc_html__( 'Widgets Bundle', 'widgets-bundle' ),
+				Config::get_plugin_name(),
+				Config::get_plugin_name(),
 				'manage_options',
 				Config::PREFIX . 'options',
 				array( $this, 'settings' )
@@ -62,6 +62,9 @@ class Admin {
 			'prefix'       => Config::PREFIX,
 			'save_text'    => esc_html__( 'Save Changes', 'widgets-bundle' ),
 			'support_text' => esc_html__( 'Ask for Support', 'widgets-bundle' ),
+			'save_changes' => esc_html__( 'Please save your changes first.', 'widgets-bundle' ),
+			'processing'   => esc_html__( 'Processing..', 'widgets-bundle' ),
+			'nonce'        => wp_create_nonce( Config::PREFIX . 'nonce' ),
 		);
 
 		wp_localize_script( Config::SHORT_SLUG . '-admin', Config::PREFIX . 'admin_l10n', $localize );
@@ -90,9 +93,6 @@ class Admin {
 			'remove_text'        => esc_html__( 'Remove', 'widgets-bundle' ),
 			'image_preview_text' => esc_html__( 'Image preview will show over here.', 'widgets-bundle' ),
 			'ad_preview_text'    => esc_html__( 'Ad preview will show over here.', 'widgets-bundle' ),
-			'save_changes'       => esc_html__( 'Please save your changes first.', 'widgets-bundle' ),
-			'processing'         => esc_html__( 'Processing..' ),
-			'nonce'              => wp_create_nonce( Config::PREFIX . 'nonce' ),
 		);
 
 		wp_enqueue_style( Config::SHORT_SLUG . '-widgets', Config::$plugin_url . 'assets/admin/css/widgets.css', false, Config::VERSION );
@@ -146,21 +146,21 @@ class Admin {
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
 			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'widgets-bundle' );
+		} else {
+			// Filter and sanitize
+			$options['ads']       = isset( $_POST[ Config::PREFIX . 'ads' ] ) ? true : false;
+			$options['personal']  = isset( $_POST[ Config::PREFIX . 'personal' ] ) ? true : false;
+			$options['posts']     = isset( $_POST[ Config::PREFIX . 'posts' ] ) ? true : false;
+			$options['quote']     = isset( $_POST[ Config::PREFIX . 'quote' ] ) ? true : false;
+			$options['social']    = isset( $_POST[ Config::PREFIX . 'social' ] ) ? true : false;
+			$options['subscribe'] = isset( $_POST[ Config::PREFIX . 'subscribe' ] ) ? true : false;
+			$options['instagram'] = isset( $_POST[ Config::PREFIX . 'instagram' ] ) ? true : false;
+			$options['facebook']  = isset( $_POST[ Config::PREFIX . 'facebook' ] ) ? true : false;
+			$options['twitter']   = isset( $_POST[ Config::PREFIX . 'twitter' ] ) ? true : false;
+
+			// Update options
+			update_option( Config::DB_OPTION, $options );
 		}
-
-		// Filter and sanitize
-		$options['ads']       = isset( $_POST[ Config::PREFIX . 'ads' ] ) ? true : false;
-		$options['personal']  = isset( $_POST[ Config::PREFIX . 'personal' ] ) ? true : false;
-		$options['posts']     = isset( $_POST[ Config::PREFIX . 'posts' ] ) ? true : false;
-		$options['quote']     = isset( $_POST[ Config::PREFIX . 'quote' ] ) ? true : false;
-		$options['social']    = isset( $_POST[ Config::PREFIX . 'social' ] ) ? true : false;
-		$options['subscribe'] = isset( $_POST[ Config::PREFIX . 'subscribe' ] ) ? true : false;
-		$options['instagram'] = isset( $_POST[ Config::PREFIX . 'instagram' ] ) ? true : false;
-		$options['facebook']  = isset( $_POST[ Config::PREFIX . 'facebook' ] ) ? true : false;
-		$options['twitter']   = isset( $_POST[ Config::PREFIX . 'twitter' ] ) ? true : false;
-
-		// Update options
-		update_option( Config::DB_OPTION, $options );
 
 		// Headers for JSON format
 		header( 'Content-Type: application/json' );

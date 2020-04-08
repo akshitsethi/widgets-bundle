@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Widgets Bundle plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widgets Bundle 2.0.3\n"
+"Project-Id-Version: Widgets Bundle 2.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-04-08T02:55:40+05:30\n"
+"POT-Creation-Date: 2020-04-08T05:44:10+05:30\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: widgets-bundle\n"
@@ -17,8 +17,6 @@ msgstr ""
 #. Plugin Name of the plugin
 #: inc/admin/views/header.php:15
 #: inc/admin/views/header.php:17
-#: inc/class-admin.php:39
-#: inc/class-admin.php:40
 #: inc/class-config.php:51
 msgid "Widgets Bundle"
 msgstr ""
@@ -201,36 +199,40 @@ msgstr ""
 msgid "Ask for Support"
 msgstr ""
 
-#: inc/class-admin.php:87
-msgid "Choose Personal Image"
+#: inc/class-admin.php:65
+msgid "Please save your changes first."
 msgstr ""
 
-#: inc/class-admin.php:88
-msgid "Choose Advertisement"
-msgstr ""
-
-#: inc/class-admin.php:89
-msgid "Save"
+#: inc/class-admin.php:66
+msgid "Processing.."
 msgstr ""
 
 #: inc/class-admin.php:90
+msgid "Choose Personal Image"
+msgstr ""
+
+#: inc/class-admin.php:91
+msgid "Choose Advertisement"
+msgstr ""
+
+#: inc/class-admin.php:92
+msgid "Save"
+msgstr ""
+
+#: inc/class-admin.php:93
 #: inc/widgets/ads.php:144
 #: inc/widgets/personal.php:138
 msgid "Remove"
 msgstr ""
 
-#: inc/class-admin.php:91
+#: inc/class-admin.php:94
 #: inc/widgets/personal.php:129
 msgid "Image preview will show over here."
 msgstr ""
 
-#: inc/class-admin.php:92
+#: inc/class-admin.php:95
 #: inc/widgets/ads.php:135
 msgid "Ad preview will show over here."
-msgstr ""
-
-#: inc/class-admin.php:93
-msgid "Please save your changes first."
 msgstr ""
 
 #: inc/class-admin.php:142

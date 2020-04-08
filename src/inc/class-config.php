@@ -16,10 +16,10 @@ class Config {
 	public static $plugin_path;
 
 	const PLUGIN_SLUG = 'widgets-bundle';
-	const SHORT_SLUG  = 'as-wb';
-	const VERSION     = '2.0.3';
-	const DB_OPTION   = 'as_widgetsbundle';
-	const PREFIX      = 'widgetsbundle_';
+	const SHORT_SLUG  = 'widgetsbundle';
+	const VERSION     = '2.0.4';
+	const DB_OPTION   = 'as_' . self::SHORT_SLUG;
+	const PREFIX      = self::SHORT_SLUG . '_';
 
 	const DEFAULT_OPTIONS = array(
 		'ads'       => true,
