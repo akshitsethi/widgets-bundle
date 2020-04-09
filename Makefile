@@ -1,4 +1,4 @@
-VERSION := 2.0.4
+VERSION := 2.0.5
 PLUGINSLUG := widgets-bundle
 SRCPATH := $(shell pwd)/src
 

@@ -17,7 +17,7 @@ class Config {
 
 	const PLUGIN_SLUG = 'widgets-bundle';
 	const SHORT_SLUG  = 'widgetsbundle';
-	const VERSION     = '2.0.4';
+	const VERSION     = '2.0.5';
 	const DB_OPTION   = 'as_' . self::SHORT_SLUG;
 	const PREFIX      = self::SHORT_SLUG . '_';
 
