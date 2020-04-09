@@ -112,6 +112,7 @@ toastr.options = {
 
       // Append action
       data.append('action', widgetsbundle_admin_l10n.prefix + id);
+      data.append('_nonce', widgetsbundle_admin_l10n.nonce);
 
       // AJAX
       $.ajax( {

@@ -5,7 +5,7 @@ Tags: widgets, wordpress widgets, wp widgets, wp widgets plugin
 Requires at least: 4.8
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,6 +51,9 @@ Getting help is just a click away now. Report your issues using the support form
 
 
 == Changelog ==
+
+= 2.0.5 =
+* JS issue fixed which prevents saving of plugin options
 
 = 2.0.4 =
 * Fixed bugs introduced by the previous update
